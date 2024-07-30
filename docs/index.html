@@ -49,12 +49,12 @@
 
         <div class="topstats">
             <div class="topstat" onclick="document.getElementsByClassName('tablinks')[2].click();window.location='#Explore'">
-                <div id="topstat-apr">-.--%</div>
-                <div>Yield APR</div>
+                <div id="topstat-apr">-.--% ⇢ -.--%</div>
+                <div>Base Yield ⇢ Boosted APR</div>
             </div>
             <div class="topstat">
                 <div id="topstat-tvl">$-.--</div>
-                <div>Total Value Locked</div>
+                <div>Total Value Wrapped</div>
             </div>
             <div class="topstat">
                 <div id="topstat-dom">-.--% of <span id="topstat-basename-1">_</span></div>
@@ -65,9 +65,9 @@
         <!-- Tab Navigation -->
         <div class="tab">
             <button class="tablinks" onclick="openTab(event, 'Mint')" id="tablinks_Mint">Mint</button>
-            <button class="tablinks" onclick="openTab(event, 'Stake')" id="tablinks_Stake" style="display:none">Stake</button>
-            <button class="tablinks" onclick="openTab(event, 'Claim')" id="tablinks_Claim" style="display:none">Claim</button>
-            <button class="tablinks" onclick="openTab(event, 'Unstake')" id="tablinks_Unstake" style="display:none">Unstake</button>
+            <button class="tablinks" onclick="openTab(event, 'Stake')" id="tablinks_Stake">Stake</button>
+            <button class="tablinks" onclick="openTab(event, 'Claim')" id="tablinks_Claim">Claim</button>
+            <button class="tablinks" onclick="openTab(event, 'Unstake')" id="tablinks_Unstake">Unstake</button>
             <button class="tablinks" onclick="openTab(event, 'Redeem')" id="tablinks_Redeem">Redeem</button>
         </div>
 
@@ -257,7 +257,7 @@
 
 		DEPOSITOR = "0x0A558D43bCcbC7586547Fc74e3a0E70467215b3C";
 
-		FARM = "0xCe780431BDa4020403427E3416fb407edBdb21F5";
+		FARM = "0x66d68e6a2abfabd88fcdd601cd3b30845ef48f90";
 		TEARNED = ["0xf43Cc235E686d7BC513F53Fbffb61F760c3a1882","0x3fd3a0c85b70754efc07ac9ac0cbbdce664865a6"];
 		TEARNED_LOGO = ["https://ftm.guru/icons/64.png","https://ftm.guru/icons/equal.png"];
 		TEARNED_NAME = ["ELITE","EQUAL"];
@@ -266,6 +266,8 @@
 
 		MARKET_NAME = "fMoney";
 		MARKET_LOGO = LOGOS + "0x1e2ea3f3209d66647f959cf00627107e079b870d".toLowerCase() + ".png";
+
+		CTOKEN = "0x2885d6eca9f12269a378c76ddeccf90d993cf6d5";
     </script>
 </body>
 </html>
