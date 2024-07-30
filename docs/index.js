@@ -214,10 +214,10 @@ DEPOSITOR_ABI = [{"anonymous":false,"inputs":[{"indexed":true,"internalType":"ad
 
 async function paintStatic() {
 	$("headline-props").innerHTML = `
-		<img src="${BASE_LOGO}.png">
+		<img src="${BASE_LOGO}">
 		${BASE_NAME}
 		⇢
-		<img src="${MARKET_LOGO}.png">
+		<img src="${MARKET_LOGO}">
 		${MARKET_NAME}
 	`;
 
