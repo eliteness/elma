@@ -271,7 +271,13 @@ async function dexstats() {
 	$("topstat-tvl").innerHTML = (Number(_ds[1])/1e18).toLocaleString(undefined,{maximumFractionDigits:2})
 	$("topstat-dom").innerHTML = (Number(_ds[1])/(Number(_ds[2])+Number(_ds[3]))*100).toLocaleString(undefined,{maximumFractionDigits:4}) + "%"
 
-	$("stake-tvl").innerHTML = "$" + (Number(_ds[4])/1e18).toLocaleString(undefined,{maximumFractionDigits:2}) + " in Total Deposits";
+	$("stake-tvl").innerHTML =
+		"$"
+		+ (Number(_ds[4])/1e18).toLocaleString(undefined,{maximumFractionDigits:2})
+		+ " in Total Deposits are earning at an APR of "
+		+ (Number(_ds[5])*100/1e18).toLocaleString(undefined,{maximumFractionDigits:2})
+		+ "%"
+	;
 
 	for(i=0;i<TEARNED.length;i++) {
 		$("claim-info").innerHTML += `
@@ -521,7 +527,8 @@ async function stake(ismax) {
 			Please grant ${WRAP_NAME} allowance.<br><br>
 			<h4><u><i>Confirm this transaction in your wallet!</i></u></h4>
 		`);
-		let _tr = await _WRAP.approve(FARM,_oamt);
+		//let _tr = await _WRAP.approve(FARM,_oamt);
+		let _tr = await _WRAP.approve(FARM, ethers.constants.MaxUint256);
 		console.log(_tr);
 		notice(`
 			<h3>Submitting Approval Transaction!</h3>
@@ -585,7 +592,7 @@ async function unstake(ismax) {
 
 	notice(`
 		<h3>Order Summary</h3>
-		<b>Redeeming ${WRAP_NAME}</b><br>
+		<b>Withdrawing ${WRAP_NAME}</b><br>
 
 		<img style='height:20px;position:relative;top:4px' src="${WRAP_LOGO}"> ${WRAP_NAME} to Redeem: <b>${fornum5(_oamt,18)}</b><br>
 		<img style='height:20px;position:relative;top:4px' src="${BASE_LOGO}"> ${BASE_NAME} Expected: <b>${fornum5(_oamt,18)}</b><br>
