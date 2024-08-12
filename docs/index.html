@@ -49,155 +49,36 @@
 
         <div class="topstats">
             <div class="topstat" onclick="document.getElementsByClassName('tablinks')[2].click();window.location='#Explore'">
-                <div id="topstat-apr">-.--% ⇢ -.--%</div>
-                <div>Base Yield ⇢ Boosted APR</div>
+                <div id="topstat-partners">2</div>
+                <div>Partner Protocols</div>
+            </div>
+            <div class="topstat">
+                <div id="topstat-pools">2</div>
+                <div>Total Lending Pools</div>
             </div>
             <div class="topstat">
                 <div id="topstat-tvl">$-.--</div>
-                <div>Total <span id="topstat-basename-1">_</span> Wrapped</div>
-            </div>
-            <div class="topstat">
-                <div id="topstat-dom">-.--% of <span id="topstat-basename-2">_</span></div>
-                <div>Dominance</div>
+                <div>Total Deposits</div>
             </div>
         </div>
 
-        <!-- Tab Navigation -->
-        <div class="tab">
-            <button class="tablinks" onclick="openTab(event, 'Mint')" id="tablinks_Mint">Mint</button>
-            <button class="tablinks" onclick="openTab(event, 'Stake')" id="tablinks_Stake">Stake</button>
-            <button class="tablinks" onclick="openTab(event, 'Claim')" id="tablinks_Claim">Claim</button>
-            <button class="tablinks" onclick="openTab(event, 'Unstake')" id="tablinks_Unstake">Unstake</button>
-            <button class="tablinks" onclick="openTab(event, 'Redeem')" id="tablinks_Redeem">Redeem</button>
+        <div class="c2a c2a90" align="center">
+        	<br>
+        	Select a pool to explore boosted lending
+        	<br>
+        	<br>
+        	<div class="c2a90-table" id="mainstage" align="center">
+				<div class="c2a90-row">
+					<div>Pool</div>
+					<div>Market</div>
+					<div>TVL</div>
+					<div>APR</div>
+				</div>
+        	</div>
         </div>
+        	<br>
+        	<br>
 
-        <!-- Tab content -->
-        <div id="Mint" class="tabcontent">
-            <div class="c2a">
-                <form>
-                    <h2>Mint <span id="deposit-wrapname-1">_</span></h2>
-					<span id="deposit-wrapname-2">_</span> is always minted 1:1 with <span id="deposit-basename-3">_</span>.
-					<br><br><br><br>
-                    <div class="form-item-container">
-                        <label for="">1. Acquire some <span id="deposit-basename-4">_</span></label>
-                        <div class="hint">Check out a DEX to grab some!</div>
-                    </div>
-                    <br><br>
-                    <div class="form-item-container">
-                        <label for="">2. Enter <span id="deposit-basename-5">_</span> amount to Deposit</label>
-                        <div class="hint" id="mint-bal">Balance: -.-- <span id="deposit-basename-6">_</span></div>
-                        <input required class="in-box" id="mint-amt" type="number" placeholder="1337" step="1" min="1">
-                    </div>
-                    <div type="submit" class="c2a-1 submit equal-gradient c2abtn" onclick="mint(false)">Mint</div>
-                    <div type="submit" class="c2a-1 submit equal-gradient c2abtn" onclick="mint(true)">Mint Max</div>
-                    <br><br><br>
-                    <div class="form-item-container">
-                        <label for="">3. Use <span id="deposit-wrapname-7">_</span> to start Earning!</label>
-                        <div class="hint" onclick="openTab(event,'Stake');">Switch to Stake tab.<br>Or use <span id="deposit-wrapname-8">_</span> elsewhere!</div>
-                    </div>
-                    <br><br>
-                </form>
-            </div>
-        </div>
-        <!-- Tab content -->
-        <div id="Stake" class="tabcontent">
-            <div class="c2a">
-                <form>
-                    <h2>Stake <span id="stake-wrapname-1">_</span></h2>
-					Deposit into Gauge Farm to Earn Rewards!
-					<div class="hint" id="stake-tvl">TVL: $-.--</div>
-					<br><br>
-                    <div class="form-item-container">
-                        <label for="">1. Mint</label>
-                        <div class="hint" onclick="openTab(event,'Mint');">Switch to Mint tab.</div>
-                    </div>
-                    <br><br>
-                    <div class="form-item-container">
-                        <label for="">2. Enter amount to Stake</label>
-                        <div class="hint" id="stake-bal">Balance: -.-- <span id="stake-wrapname-2">_</span></div>
-                        <input required class="in-box" id="stake-amt" type="number" placeholder="1337" step="1" min="1">
-                    </div>
-                    <div type="submit" class="c2a-1 submit equal-gradient c2abtn" onclick="stake(false)">Stake</div>
-                    <div type="submit" class="c2a-1 submit equal-gradient c2abtn" onclick="stake(true)">Stake Max</div>
-                    <br><br><br>
-                    <div class="form-item-container">
-                        <label for="">3. View & Claim Rewards!</label>
-                        <div class="hint" onclick="openTab(event,'Claim');">Switch to Claim tab.</div>
-                    </div>
-                    <br><br>
-                </form>
-            </div>
-        </div>
-        <!-- Tab content -->
-        <div id="Claim" class="tabcontent">
-            <div class="c2a">
-                <form>
-                    <h2>Your Rewards</h2>
-					View and Claim all Your Earnings!
-					<br><br><br><br>
-                    <div class="form-item-container" id="claim-info">
-                    </div>
-                    <div type="submit" class="c2a-1 submit equal-gradient c2abtn" onclick="claim()">Claim Rewards</div>
-                    <br><br>
-                </form>
-            </div>
-        </div>
-        <!-- Tab content -->
-        <div id="Unstake" class="tabcontent">
-            <div class="c2a">
-                <form>
-                    <h2>Un-Stake <span id="unstake-wrapname-1">_</span></h2>
-					Withdraw tokens from Staking Gauge
-					<br><br><br><br>
-                    <div class="form-item-container">
-                        <label for="">1. Unstake</label>
-                        <div class="hint" onclick="openTab(event,'Mint');">Switch to Unstake tab.</div>
-                    </div>
-                    <br><br>
-                    <div class="form-item-container">
-                        <label for="">2. Enter amount to Withdraw</label>
-                        <div class="hint" id="unstake-bal">Balance: -.-- <span id="unstake-wrapname-2">_</span></div>
-                        <input required class="in-box" id="unstake-amt" type="number" placeholder="1337" step="1" min="1">
-                    </div>
-                    <div type="submit" class="c2a-1 submit equal-gradient c2abtn" onclick="unstake(false)">Unstake</div>
-                    <div type="submit" class="c2a-1 submit equal-gradient c2abtn" onclick="unstake(true)">Unstake Max</div>
-                    <br><br>
-                    <div class="form-item-container">
-                        <label for="">3. Withdraw</label>
-                        <div class="hint" onclick="openTab(event,'Redeem');">Switch to Withdraw tab.<br>Or use <span id="unstake-wrapname-3">_</span> elsewhere!</div>
-                    </div>
-                    <br><br>
-                </form>
-            </div>
-        </div>
-        <!-- Tab content -->
-        <div id="Redeem" class="tabcontent">
-            <div class="c2a">
-                <form>
-                    <h2>Redeem <span id="redeem-wrapname-1">_</span></h2>
-					Unwrap 1:1 to <span id="redeem-basename-2">_</span> at anytime!
-					<br><br><br><br>
-                    <div class="form-item-container">
-                        <label for="">1. Unstake</label>
-                        <div class="hint" onclick="openTab(event,'Mint');">Switch to Unstake tab.</a></div>
-                    </div>
-                    <br><br>
-                    <div class="form-item-container">
-                        <label for="">2. Enter amount to unwrap</label>
-                        <div class="hint" id="redeem-bal">Balance: -.-- <span id="redeem-wrapname-3">_</span></div>
-                        <input required class="in-box" id="redeem-amt" type="number" placeholder="1337" step="1" min="1">
-                    </div>
-                    <div type="submit" class="c2a-1 submit equal-gradient c2abtn" onclick="redeem(false)">Redeem</div>
-                    <div type="submit" class="c2a-1 submit equal-gradient c2abtn" onclick="redeem(true)">Redeem Max</div>
-                    <br><br>
-                    <div class="form-item-container">
-                        <label for="">3. Well Done!</label>
-                        <div class="hint">Your <span id="redeem-basename-4">_</span> is back in your wallet!</div>
-                    </div>
-                    <br><br>
-                </form>
-            </div>
-        </div>
 
         <footer>
         	<h2>Powered by Guru Network</h2>
@@ -247,27 +128,32 @@
         NATIVE_LOGO = "https://ftm.guru/icons/ftm.svg";
         LOGOS = "https://cdn.jsdelivr.net/gh/unified-defi/equalizer-tokens@latest/fantom/tokens/128x128/";
 
-		BASE = "0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83";
-		BASE_NAME = "WFTM";
-		BASE_LOGO = LOGOS + BASE.toLowerCase() + ".png";
-
-		WRAP = "0x85fb1081a0354f8e80a2743f74399bfaf5df328a";
-		WRAP_NAME = "eliteFmoneyWFTM";
-		WRAP_LOGO = BASE_LOGO;
-
-		DEPOSITOR = "0x0A558D43bCcbC7586547Fc74e3a0E70467215b3C";
-
-		FARM = "0x66d68e6a2abfabd88fcdd601cd3b30845ef48f90";
-		TEARNED = ["0xf43Cc235E686d7BC513F53Fbffb61F760c3a1882","0x3fd3a0c85b70754efc07ac9ac0cbbdce664865a6"];
-		TEARNED_LOGO = ["https://ftm.guru/icons/64.png","https://ftm.guru/icons/equal.png"];
-		TEARNED_NAME = ["ELITE","EQUAL"];
-
 		VOTER = "0xE3D1A117dF7DCaC2eB0AC8219341bAd92f18dAC1";
 
-		MARKET_NAME = "fMoney";
-		MARKET_LOGO = LOGOS + "0x1e2ea3f3209d66647f959cf00627107e079b870d".toLowerCase() + ".png";
-
-		CTOKEN = "0x2885d6eca9f12269a378c76ddeccf90d993cf6d5";
+		POOLS = [
+			{
+				wrapname: "eliteFmoneyWFTM",
+				basename: "WFTM",
+				marketname: "fMoney",
+				marketlogo: "0x1e2ea3f3209d66647f959cf00627107e079b870d",
+				wrapaddr: "0x85fb1081a0354f8e80a2743f74399bfaf5df328a",
+				baseaddr: "0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83",
+				ctokeaddr: "0x2885d6eca9f12269a378c76ddeccf90d993cf6d5",
+				depositoraddr: "0x0A558D43bCcbC7586547Fc74e3a0E70467215b3C",
+				farmaddr: "0x66d68e6a2abfabd88fcdd601cd3b30845ef48f90",
+			},
+			{
+				wrapname: "eliteFmoneyAxlUSDC",
+				basename: "axlUSDC",
+				marketname: "fMoney",
+				marketlogo: "0x1e2ea3f3209d66647f959cf00627107e079b870d",
+				wrapaddr: "0x85fb1081a0354f8e80a2743f74399bfaf5df328a",
+				baseaddr: "0x1b6382dbdea11d97f24495c9a90b7c88469134a4",
+				ctokeaddr: "0x2885d6eca9f12269a378c76ddeccf90d993cf6d5",
+				depositoraddr: "0x0A558D43bCcbC7586547Fc74e3a0E70467215b3C",
+				farmaddr: "0x66d68e6a2abfabd88fcdd601cd3b30845ef48f90",
+			},
+		]
     </script>
 </body>
 </html>

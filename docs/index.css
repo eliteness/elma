@@ -299,6 +299,44 @@ footer{
 
 .c2a90 {
     width:  90% !important;
+    overflow: auto;
+}
+
+.c2a90-row {
+	display: grid;
+	grid-template-columns: 150px 150px 150px 150px;
+    max-width: -moz-max-content;
+    margin: 15px auto;
+}
+
+.c2a90-row:hover{
+	cursor: pointer;
+	box-shadow: 0px 0px 5px 5px #0ff7;
+	background: #0ff4;
+}
+
+.c2a90-table .c2a90-row:first-child:hover {
+    background: inherit;
+    box-shadow: inherit;
+    cursor: inherit;
+}
+.c2a90-row img {
+	width: 20px;
+	vertical-align: middle;
+}
+
+.c2a90-table .c2a90-row:first-child div{
+    font-size: 2em;
+    font-family: bold !important;
+    margin-bottom:20px;
+}
+
+.c2a90-row div:nth-child(1), .c2a90-row div:nth-child(2) {
+    text-align: left;
+}
+
+.c2a90-row div:nth-child(3), .c2a90-row div:nth-child(4) {
+    text-align: right;
 }
 
 .collection, .explorer {
