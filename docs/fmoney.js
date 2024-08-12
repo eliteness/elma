@@ -269,9 +269,9 @@ async function dexstats() {
 	$("topstat-apr").innerHTML =
 		(Number(_ds[0])*100/1e18).toLocaleString(undefined,{maximumFractionDigits:2}) + "%"
 		+ " ⇢ "
-		+ (Number(_ds[5])*100/1e18).toLocaleString(undefined,{maximumFractionDigits:2}) + "%";
+		+ (Number(_ds[5])/1e18).toLocaleString(undefined,{maximumFractionDigits:2}) + "%";
 	$("topstat-tvl").innerHTML = (Number(_ds[1])/1e18).toLocaleString(undefined,{maximumFractionDigits:2})
-	$("topstat-dom").innerHTML = (Number(_ds[1])/(Number(_ds[2])+Number(_ds[3]))*100).toLocaleString(undefined,{maximumFractionDigits:4}) + "%"
+	$("topstat-dom").innerHTML = (Number(_ds[1])/(Number(_ds[2])+Number(_ds[3]))).toLocaleString(undefined,{maximumFractionDigits:4}) + "%"
 
 	$("stake-tvl").innerHTML =
 		"$"
