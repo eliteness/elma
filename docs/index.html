@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>ELENDER - Lending Market Aggregator</title>
+	<title>ELMA - Elite Lending Market Aggregator</title>
 	<meta name="description" content="Turbocharge your Lending Market Yields by separating your Prinicipal Tokens (PT) from its Lending Yield (virtual YT) and tapping into the Earnings Flywheel with Guru Network DAO!">
 	<meta name="keywords" content="Guru Network, Decentralized Finance, Fantom, ELITE, 1337, defi, farming, FTM1337">
     <link rel="shortcut icon" href="https://ftm.guru/icons/64.png">
@@ -36,8 +36,8 @@
 
     <div id="main-area">
         <div class="headline">
-            <div class="headline-keyword">ELENDER</div>
-			<div>Lending Market Aggregation for Turbocharged Yields!</div>
+            <div class="headline-keyword">ELMA</div>
+			<div>Elite Lending Market Aggregation for Turbocharged Yields!</div>
 			<br>
             <div class="headline-props" id="headline-props"> ⇢ </div>
         </div>
@@ -130,6 +130,10 @@
 
 		VOTER = "0xE3D1A117dF7DCaC2eB0AC8219341bAd92f18dAC1";
 
+		COMPTROLLER_FMONEY = "0xB911d8064c0AA338241f349eD802Ad4bae6ec034";
+
+		SENTINEL_FMONEY = "0xFcb442B641CcdeA1A904EAA4cCA1B4d18510C7C6";
+
 		POOLS = [
 			{
 				wrapname: "eliteFmoneyWFTM",
@@ -143,15 +147,37 @@
 				farmaddr: "0x66d68e6a2abfabd88fcdd601cd3b30845ef48f90",
 			},
 			{
+				wrapname: "eliteFmoneySFTMX",
+				basename: "SFTMX",
+				marketname: "fMoney",
+				marketlogo: "0x1e2ea3f3209d66647f959cf00627107e079b870d",
+				wrapaddr: "0xe391719869890aD91Ee6076565111fBE942c3073",
+				baseaddr: "0xd7028092c830b5C8FcE061Af2E593413EbbC1fc1",
+				ctokeaddr: "0xb36c7855FC4285795e89A88aD44393aB2e65101D",
+				depositoraddr: "0x35402cdc3bcffb904116bdc720afc75c2921de08",
+				farmaddr: "0xAa933e0a431d00647F0AE646D3Bd3d65D95Ec0dE",
+			},
+			{
+				wrapname: "eliteFmoneyWormUSDC.e",
+				basename: "wormUSDC.e",
+				marketname: "fMoney",
+				marketlogo: "0x1e2ea3f3209d66647f959cf00627107e079b870d",
+				wrapaddr: "0xED49B19afd8D2EEfD183691AedBA3b9ef8eB5f4E",
+				baseaddr: "0x2F733095B80A04b38b0D10cC884524a3d09b836a",
+				ctokeaddr: "0xb36c7855FC4285795e89A88aD44393aB2e65101D",
+				depositoraddr: "0x87e2a2a268590eff58e681671c75f8c8467a7887",
+				farmaddr: "0x530a4f8D9C41adBC10E31652Fc5cC8e3ABdb9114",
+			},
+			{
 				wrapname: "eliteFmoneyAxlUSDC",
 				basename: "axlUSDC",
 				marketname: "fMoney",
 				marketlogo: "0x1e2ea3f3209d66647f959cf00627107e079b870d",
-				wrapaddr: "0x85fb1081a0354f8e80a2743f74399bfaf5df328a",
+				wrapaddr: "0x37109a61CDa9bfE6d49F19E4911080b250cc52e0",
 				baseaddr: "0x1b6382dbdea11d97f24495c9a90b7c88469134a4",
-				ctokeaddr: "0x2885d6eca9f12269a378c76ddeccf90d993cf6d5",
-				depositoraddr: "0x0A558D43bCcbC7586547Fc74e3a0E70467215b3C",
-				farmaddr: "0x66d68e6a2abfabd88fcdd601cd3b30845ef48f90",
+				ctokeaddr: "0x5089E1940d8b394D61534eEf65592EF966785c26",
+				depositoraddr: "0xfaa22e721924fa57d042f6e2c793997aa9287b27",
+				farmaddr: "0x03b659F7301A4215Aa41CeBF3e06f81F701BBE54",
 			},
 		]
     </script>
