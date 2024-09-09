@@ -307,6 +307,9 @@ footer{
 	grid-template-columns: 150px 150px 150px 150px;
     max-width: -moz-max-content;
     margin: 15px auto;
+	padding: 0 15px;
+	border-radius: 5px;
+	align-content: ;
 }
 
 .c2a90-row:hover{
@@ -321,7 +324,7 @@ footer{
     cursor: inherit;
 }
 .c2a90-row img {
-	width: 20px;
+	width: 28px;
 	vertical-align: middle;
 }
 
