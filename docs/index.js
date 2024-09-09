@@ -263,10 +263,10 @@ async function gubs() {
 		_FARM.earned(TEARNED[1], window.ethereum.selectedAddress),
 		_FARM.earnings(window.ethereum.selectedAddress, TEARNED[1]),
 	]);
-	$("mint-bal").innerHTML		=	"Balance: " + (Number(_ubs[0])/1e18).toLocaleString(undefined,{maximumFractionDigits:18});
-	$("redeem-bal").innerHTML	=	"Balance: " + (Number(_ubs[1])/1e18).toLocaleString(undefined,{maximumFractionDigits:18});
-	$("stake-bal").innerHTML	=	"Balance: " + (Number(_ubs[1])/1e18).toLocaleString(undefined,{maximumFractionDigits:18});
-	$("unstake-bal").innerHTML	=	"Balance: " + (Number(_ubs[2])/1e18).toLocaleString(undefined,{maximumFractionDigits:18});
+	$("mint-bal").innerHTML		=	"Balance: " + (Number(_ubs[0])/10**DECIMALS).toLocaleString(undefined,{maximumFractionDigits:DECIMALS});
+	$("redeem-bal").innerHTML	=	"Balance: " + (Number(_ubs[1])/10**DECIMALS).toLocaleString(undefined,{maximumFractionDigits:DECIMALS});
+	$("stake-bal").innerHTML	=	"Balance: " + (Number(_ubs[1])/10**DECIMALS).toLocaleString(undefined,{maximumFractionDigits:DECIMALS});
+	$("unstake-bal").innerHTML	=	"Balance: " + (Number(_ubs[2])/10**DECIMALS).toLocaleString(undefined,{maximumFractionDigits:DECIMALS});
 
 	$("claim-0-old").innerHTML	=	"Claimed: " +	(Number(_ubs[4])/1e18).toLocaleString(undefined,{maximumFractionDigits:18});
 	$("claim-0-pen").innerHTML	=	"Pending: " +	(Number(_ubs[3])/1e18).toLocaleString(undefined,{maximumFractionDigits:18});
