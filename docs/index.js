@@ -250,32 +250,6 @@ async function arf(){
 }
 async function gubs() {
 
-	_BASE = new ethers.Contract(BASE, LPABI, signer);
-	_WRAP = new ethers.Contract(WRAP, LPABI, signer);
-	_FARM = new ethers.Contract(FARM, LPABI, signer);
-
-	_ubs = await Promise.all([
-		_BASE.balanceOf(window.ethereum.selectedAddress),
-		_WRAP.balanceOf(window.ethereum.selectedAddress),
-		_FARM.balanceOf(window.ethereum.selectedAddress),
-		_FARM.earned(TEARNED[0], window.ethereum.selectedAddress),
-		_FARM.earnings(window.ethereum.selectedAddress, TEARNED[0]),
-		_FARM.earned(TEARNED[1], window.ethereum.selectedAddress),
-		_FARM.earnings(window.ethereum.selectedAddress, TEARNED[1]),
-	]);
-	$("mint-bal").innerHTML		=	"Balance: " + (Number(_ubs[0])/10**DECIMAL).toLocaleString(undefined,{maximumFractionDigits:DECIMAL});
-	$("redeem-bal").innerHTML	=	"Balance: " + (Number(_ubs[1])/10**DECIMAL).toLocaleString(undefined,{maximumFractionDigits:DECIMAL});
-	$("stake-bal").innerHTML	=	"Balance: " + (Number(_ubs[1])/10**DECIMAL).toLocaleString(undefined,{maximumFractionDigits:DECIMAL});
-	$("unstake-bal").innerHTML	=	"Balance: " + (Number(_ubs[2])/10**DECIMAL).toLocaleString(undefined,{maximumFractionDigits:DECIMAL});
-
-	$("claim-0-old").innerHTML	=	"Claimed: " +	(Number(_ubs[4])/1e18).toLocaleString(undefined,{maximumFractionDigits:18});
-	$("claim-0-pen").innerHTML	=	"Pending: " +	(Number(_ubs[3])/1e18).toLocaleString(undefined,{maximumFractionDigits:18});
-	$("claim-0-tot").innerHTML	=	"Total: " +		(Number(_ubs[3])/1e18+Number(_ubs[4])/1e18).toLocaleString(undefined,{maximumFractionDigits:18});
-
-	$("claim-1-old").innerHTML	=	"Claimed: " +	(Number(_ubs[6])/1e18).toLocaleString(undefined,{maximumFractionDigits:18});
-	$("claim-1-pen").innerHTML	=	"Pending: " +	(Number(_ubs[5])/1e18).toLocaleString(undefined,{maximumFractionDigits:18});
-	$("claim-1-tot").innerHTML	=	"Total: " +		(Number(_ubs[5])/1e18+Number(_ubs[6])/1e18).toLocaleString(undefined,{maximumFractionDigits:18});
-
 	return;
 }
 

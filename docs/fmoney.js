@@ -264,13 +264,27 @@ async function dexstats() {
 		_CTOKEN.totalBorrows(),
 		_FARM.tvl(),
 		_FARM.apr(),
+		_FARM.totalSupply(),
 	]);
+
+	ds_farmtvl = (Number(_ds[4])/1e18);
+	ds_farmts = (Number(_ds[6])) * (1e18 / 10**DECIMAL);
+	ds_wrapts = (Number(_ds[1])) * (1e18 / 10**DECIMAL);
+	ds_wrapprice = ds_farmtvl / ds_farmts;
+	ds_cash = (Number(_ds[2])) * (1e18 / 10**DECIMAL);
+	ds_borrowed = (Number(_ds[3])) * (1e18 / 10**DECIMAL);
+
+	$("topstat-tvl").innerHTML = "$" + (ds_wrapprice * ds_wrapts).toLocaleString(undefined,{maximumFractionDigits:0})
+	$("topstat-staked").innerHTML = "$" + (ds_wrapprice * ds_farmts).toLocaleString(undefined,{maximumFractionDigits:0})
+	$("topstat-cash").innerHTML = "$" + (ds_wrapprice * ds_cash).toLocaleString(undefined,{maximumFractionDigits:0})
+	$("topstat-borrowed").innerHTML = "$" + (ds_wrapprice * ds_borrowed).toLocaleString(undefined,{maximumFractionDigits:0})
+
 
 	$("topstat-apr").innerHTML =
 		(Number(_ds[0])*100/1e18).toLocaleString(undefined,{maximumFractionDigits:2}) + "%"
 		+ " ⇢ "
 		+ (Number(_ds[5])/1e18).toLocaleString(undefined,{maximumFractionDigits:2}) + "%";
-	$("topstat-tvl").innerHTML = (Number(_ds[1])/(10**DECIMAL)).toLocaleString(undefined,{maximumFractionDigits:2})
+	//$("topstat-tvl").innerHTML = (Number(_ds[1])/(10**DECIMAL)).toLocaleString(undefined,{maximumFractionDigits:2})
 	$("topstat-dom").innerHTML = (Number(_ds[1])/(Number(_ds[2])+Number(_ds[3]))*100).toLocaleString(undefined,{maximumFractionDigits:4}) + "%"
 
 	$("stake-tvl").innerHTML =
@@ -368,7 +382,7 @@ async function mint(ismax) {
 		_oamt = BigInt(Math.floor(_oamt * (10**DECIMAL)))
 	}
 
-	if(Number(_oamt)>Number(al[1])) {notice(`<h2>Insufficient Balance!</h2><h3>Desired Amount:</h3>${_oamt/(10**DECIMAL)}<br><h3>Actual Balance:</h3>${al[1]/(10**DECIMAL)}<br><br><b>Please reduce the amount and retry again, or accumulate some more ${BASE_NAME}.`);return;}
+	if(Number(_oamt)>Number(al[1])) {notice(`<h2>Insufficient Balance!</h2><h3>Desired Amount:</h3>${Number(_oamt)/(10**DECIMAL)}<br><h3>Actual Balance:</h3>${Number(al[1])/(10**DECIMAL)}<br><br><b>Please reduce the amount and retry again, or accumulate some more ${BASE_NAME}.`);return;}
 
 	if(Number(_oamt)>Number(al[0])){
 		notice(`
@@ -521,7 +535,7 @@ async function stake(ismax) {
 	}
 
 
-	if(Number(_oamt)>Number(al[1])) {notice(`<h2>Insufficient Balance!</h2><h3>Desired Amount:</h3>${_oamt/(10**DECIMAL)}<br><h3>Actual Balance:</h3>${al[1]/(10**DECIMAL)}<br><br><b>Please reduce the amount and retry again, or accumulate some more ${WRAP_NAME}.`);return}
+	if(Number(_oamt)>Number(al[1])) {notice(`<h2>Insufficient Balance!</h2><h3>Desired Amount:</h3>${Number(_oamt)/(10**DECIMAL)}<br><h3>Actual Balance:</h3>${Number(al[1])/(10**DECIMAL)}<br><br><b>Please reduce the amount and retry again, or accumulate some more ${WRAP_NAME}.`);return}
 
 	if(Number(_oamt)>Number(al[0])){
 		notice(`
