@@ -197,7 +197,6 @@ footer{
     padding: 15px;
     max-width: 90%;
     margin: auto auto;
-    width: 1250px;
 }
 
 .headline {
@@ -300,13 +299,14 @@ footer{
 }
 
 .c2a90 {
-    width:  90% !important;
+    width:  100% !important;
     overflow: auto;
 }
 
 .c2a90-row {
 	display: grid;
-	grid-template-columns: 150px 150px 150px 150px 150px 150px 150px;
+	grid-template-columns: 150px 120px 120px 36px 120px 120px 120px 120px 120px 36px 120px 120px;
+	grid-gap-columns:5px;[]]]
     max-width: -moz-max-content;
     margin: 15px auto;
 	padding: 0 15px;
@@ -325,8 +325,14 @@ footer{
     box-shadow: inherit;
     cursor: inherit;
 }
+
 .c2a90-row img {
 	width: 28px;
+	vertical-align: middle;
+}
+
+.c2a90-row .drawPie {
+	width: 20px;
 	vertical-align: middle;
 }
 
@@ -336,12 +342,23 @@ footer{
     margin-bottom:20px;
 }
 
-.c2a90-row div:nth-child(1), .c2a90-row div:nth-child(2) {
+.c2a90-row div {
+    text-align: center;
+}
+
+.c2a90-row div:nth-child(1),
+.c2a90-row div:nth-child(2),
+.c2a90-row div:nth-child(5),
+.c2a90-row div:nth-child(11) {
     text-align: left;
 }
 
-.c2a90-row div:nth-child(3), .c2a90-row div:nth-child(4) {
-    text-align: ;
+.c2a90-row div:nth-child(4), .c2a90-row div:nth-child(10) {
+    text-align: center;
+}
+
+.c2a90-row div:nth-child(3), .c2a90-row div:nth-child(9) {
+    text-align: right;
 }
 
 .collection, .explorer {
