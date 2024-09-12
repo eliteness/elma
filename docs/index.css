@@ -314,6 +314,9 @@ footer{
 	align-content: ;
 }
 
+.c2a90-row-port {
+	grid-template-columns: repeat(8, 150px);
+}
 .c2a90-row:hover{
 	cursor: pointer;
 	box-shadow: 0px 0px 5px 5px #0ff7;
@@ -345,6 +348,9 @@ footer{
 .c2a90-row div {
     text-align: center;
 }
+.c2a90-row.c2a90-row-port div:nth-child(n+3) {
+    text-align: right;
+}
 
 .c2a90-row div:nth-child(1),
 .c2a90-row div:nth-child(2),
@@ -359,6 +365,11 @@ footer{
 
 .c2a90-row div:nth-child(3), .c2a90-row div:nth-child(9) {
     text-align: right;
+}
+
+.port-amt {
+    font-family: light_italic;
+    font-size: 0.8em
 }
 
 .collection, .explorer {

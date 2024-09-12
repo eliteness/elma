@@ -60,7 +60,8 @@ async function basetrip()
 	}
 
 	if(
-		(Number(window.ethereum.chainId) != null )
+		window.ethereum.chainId
+		&& (Number(window.ethereum.chainId) != null )
 		&& (window.ethereum.chainId != CHAINID)
 	) {
 		await window.ethereum.request({
@@ -218,6 +219,7 @@ CTOKEN_ABI = [{"inputs":[{"internalType":"address","name":"underlying_","type":"
 
 EL_27_ABI = [{"inputs": [],"name": "LA","outputs": [{"internalType": "contract ILA","name": "","type": "address"}],"stateMutability": "view","type": "function"},{"inputs": [{"internalType": "contract IP","name": "p","type": "address"}],"name": "bucketList","outputs": [{"internalType": "uint24[]","name": "","type": "uint24[]"}],"stateMutability": "view","type": "function"},{"inputs": [{"internalType": "uint24[]","name": "inp","type": "uint24[]"}],"name": "cast_24_256","outputs": [{"internalType": "uint256[]","name": "","type": "uint256[]"}],"stateMutability": "pure","type": "function"},{"inputs": [{"internalType": "address","name": "","type": "address"}],"name": "farmType","outputs": [{"internalType": "uint256","name": "","type": "uint256"}],"stateMutability": "view","type": "function"},{"inputs": [{"internalType": "contract IFarmland","name": "farm","type": "address"},{"internalType": "address","name": "user","type": "address"},{"internalType": "address","name": "guard","type": "address"}],"name": "getClset","outputs": [{"internalType": "uint256[13]","name": "ret","type": "uint256[13]"}],"stateMutability": "view","type": "function"},{"inputs": [{"internalType": "address[3][]","name": "_id","type": "address[3][]"}],"name": "getClsets","outputs": [{"internalType": "uint256[13][]","name": "","type": "uint256[13][]"}],"stateMutability": "view","type": "function"},{"inputs": [{"internalType": "contract IFarmland","name": "farm","type": "address"},{"internalType": "contract IELM","name": "elm","type": "address"},{"internalType": "address","name": "user","type": "address"}],"name": "getElmaCompoundFarm","outputs": [{"internalType": "uint256[18]","name": "ret","type": "uint256[18]"}],"stateMutability": "view","type": "function"},{"inputs": [{"internalType": "contract IFarmland[]","name": "_farms","type": "address[]"},{"internalType": "contract IELM[]","name": "_elm","type": "address[]"},{"internalType": "address","name": "_user","type": "address"}],"name": "getElmaCompoundFarms","outputs": [{"internalType": "uint256[18][]","name": "","type": "uint256[18][]"}],"stateMutability": "view","type": "function"},{"inputs": [{"internalType": "contract IFarmland","name": "farm","type": "address"},{"internalType": "address","name": "user","type": "address"}],"name": "getSimpleFarm","outputs": [{"internalType": "uint256[7]","name": "ret","type": "uint256[7]"}],"stateMutability": "view","type": "function"},{"inputs": [{"internalType": "contract IFarmland[]","name": "_farms","type": "address[]"},{"internalType": "address","name": "_user","type": "address"}],"name": "getSimpleFarms","outputs": [{"internalType": "uint256[7][]","name": "","type": "uint256[7][]"}],"stateMutability": "view","type": "function"},{"inputs": [{"internalType": "address","name": "_user","type": "address"},{"internalType": "address","name": "_pool","type": "address"}],"name": "getTotalPosition","outputs": [{"internalType": "uint256","name": "x","type": "uint256"},{"internalType": "uint256","name": "y","type": "uint256"}],"stateMutability": "view","type": "function"},{"inputs": [{"internalType": "contract ILA","name": "_la","type": "address"}],"name": "initializer","outputs": [],"stateMutability": "nonpayable","type": "function"},{"inputs": [],"name": "owner","outputs": [{"internalType": "address","name": "","type": "address"}],"stateMutability": "view","type": "function"},{"inputs": [{"internalType": "address","name": "user","type": "address"},{"internalType": "address","name": "_pair","type": "address"}],"name": "positionOf","outputs": [{"internalType": "uint256[]","name": "bIds","type": "uint256[]"},{"internalType": "uint256[]","name": "amountsX","type": "uint256[]"},{"internalType": "uint256[]","name": "amountsY","type": "uint256[]"},{"internalType": "uint256[]","name": "liquidities","type": "uint256[]"}],"stateMutability": "view","type": "function"},{"inputs": [{"internalType": "address","name": "_f","type": "address"},{"internalType": "uint256","name": "_t","type": "uint256"}],"name": "setFarmType","outputs": [],"stateMutability": "nonpayable","type": "function"},{"inputs": [{"internalType": "address","name": "_wrapper","type": "address"},{"internalType": "address","name": "_vault","type": "address"},{"internalType": "address","name": "_vaultPool","type": "address"}],"name": "setVaultPools","outputs": [],"stateMutability": "nonpayable","type": "function"},{"inputs": [{"internalType": "address","name": "","type": "address"}],"name": "vaultPools","outputs": [{"internalType": "address","name": "","type": "address"}],"stateMutability": "view","type": "function"},{"inputs": [{"internalType": "address","name": "","type": "address"}],"name": "vaults","outputs": [{"internalType": "address","name": "","type": "address"}],"stateMutability": "view","type": "function"}]
 
+EL_30_ABI = [{"inputs": [{"internalType": "contract IFarmland","name": "farm","type": "address"},{"internalType": "contract IELM","name": "elm","type": "address"},{"internalType": "address","name": "user","type": "address"}],"name": "getElmaCompoundFarm","outputs": [{"internalType": "uint256[18]","name": "ret","type": "uint256[18]"},{"components": [{"internalType": "uint256[]","name": "unclaimed","type": "uint256[]"},{"internalType": "uint256[]","name": "claimed","type": "uint256[]"}],"internalType": "struct Equalens_30_elma.Earnings","name": "earn","type": "tuple"}],"stateMutability": "view","type": "function"},{"inputs": [{"internalType": "contract IFarmland[]","name": "_farms","type": "address[]"},{"internalType": "contract IELM[]","name": "_elm","type": "address[]"},{"internalType": "address","name": "_user","type": "address"}],"name": "getElmaCompoundFarms","outputs": [{"internalType": "uint256[18][]","name": "","type": "uint256[18][]"},{"components": [{"internalType": "uint256[]","name": "unclaimed","type": "uint256[]"},{"internalType": "uint256[]","name": "claimed","type": "uint256[]"}],"internalType": "struct Equalens_30_elma.Earnings[]","name": "","type": "tuple[]"}],"stateMutability": "view","type": "function"},{"inputs": [{"internalType": "contract IFarmland","name": "farm","type": "address"},{"internalType": "address","name": "user","type": "address"}],"name": "getSimpleFarm","outputs": [{"internalType": "uint256[7]","name": "ret","type": "uint256[7]"}],"stateMutability": "view","type": "function"},{"inputs": [{"internalType": "contract IFarmland[]","name": "_farms","type": "address[]"},{"internalType": "address","name": "_user","type": "address"}],"name": "getSimpleFarms","outputs": [{"internalType": "uint256[7][]","name": "","type": "uint256[7][]"}],"stateMutability": "view","type": "function"}]
 
 
 async function paintStatic() {
@@ -226,8 +228,12 @@ async function paintStatic() {
 
 async function dexstats() {
 
-	_EL_27 = new ethers.Contract("0x1b1c9a41a96dE931c7508BD2C653C57C63cD32a4", EL_27_ABI, provider);
-	_ds = await _EL_27.getElmaCompoundFarms( POOLS.map(i=>i.farmaddr) , POOLS.map(i=>i.depositor) , "0x0000000000000000000000000000000000001234" );
+	//_EL_27 = new ethers.Contract("0x1b1c9a41a96dE931c7508BD2C653C57C63cD32a4", EL_27_ABI, provider);
+	//_ds = await _EL_27.getElmaCompoundFarms( POOLS.map(i=>i.farmaddr) , POOLS.map(i=>i.depositor) , "0x0000000000000000000000000000000000001234" );
+	_EL_30 = new ethers.Contract("0x8C1C50fFa373f8C2b82A4Fc591c2c710e2982f01", EL_30_ABI, provider);
+	_user = window.ethereum?.selectedAddress ? window.ethereum?.selectedAddress : "0x0000000000000000000000000000000000001234"
+	_dsd = await _EL_30.getElmaCompoundFarms( POOLS.map(i=>i.farmaddr) , POOLS.map(i=>i.depositor) , _user );
+	_ds = _dsd[0];
 	/*
 		ret[0] = base.totalSupply();
 		ret[1] = ctoken.totalSupply();
@@ -296,6 +302,22 @@ async function dexstats() {
 		</div>
 	`;
 
+	if(Number(_user)>0x1234) {
+		$("portfolio-area").style.display="";
+		$("portfolio").innerHTML = `
+			<div class="c2a90-row c2a90-row-port">
+				<div>Underlying</div>
+				<div>Market</div>
+				<div>UT in wallet</div>
+				<div>UT in LM</div>
+				<div>PT in Wallet</div>
+				<div>PT Staked</div>
+				<div>Unclaimed</div>
+				<div>Total Earned</div>
+			</div>
+		`;
+	}
+
 	ds_totalwrapmktcap =0;
 	ds_totaltxs =0;
 	for(i=0;i<POOLS.length;i++) {
@@ -303,12 +325,14 @@ async function dexstats() {
 		ds_farmtvl = (Number(_ds[i][4])/1e18);
 		ds_farmapr = (Number(_ds[i][5])/1e18);
 		ds_ctokenapr = (Number(_ds[i][6])/1e18);
-		ds_farmts = (Number(_ds[i][3])) / (10**POOLS[i].basedeci);
+		ds_ctokts = (Number(_ds[i][1])) / (10 ** 8);
 		ds_wrapts = (Number(_ds[i][2])) / (10**POOLS[i].basedeci);
+		ds_farmts = (Number(_ds[i][3])) / (10**POOLS[i].basedeci);
 		ds_wrapprice = ds_farmtvl / ds_farmts;
 		ds_wrapmktcap = (ds_wrapts * ds_wrapprice )
 		ds_cash = (Number(_ds[i][8])) / 10**POOLS[i].basedeci;
 		ds_borrowed = (Number(_ds[i][9])) / 10**POOLS[i].basedeci;
+		ds_ctokprice = (ds_cash + ds_borrowed) * ds_wrapprice / ds_ctokts;
 
 		ds_totalwrapmktcap += ds_wrapmktcap;
 		ds_totaltxs += Number(_ds[i][7]);
@@ -335,6 +359,32 @@ async function dexstats() {
 				<div>$${ fornum6((ds_cash+ds_borrowed), 0) }</div>
 			</div>
 		`;
+
+
+		if(Number(_user)>0x1234) {
+			dsu_base = (Number(_ds[i][11])) / (10**POOLS[i].basedeci);
+			dsu_ctok = (Number(_ds[i][12])) / (10 ** 8);
+			dsu_wrap = (Number(_ds[i][13])) / (10**POOLS[i].basedeci);
+			dsu_farm = (Number(_ds[i][14])) / (10**POOLS[i].basedeci);
+
+			dsu_rew0 = (Number(_dsd[1][i][0][0])) / (10**18);
+			dsu_tre0 = (Number(_dsd[1][i][1][0])) / (10**18);
+
+			$("portfolio").innerHTML += `
+				<div class="c2a90-row c2a90-row-port" onclick="window.location='${POOLS[i].wrapname}'">
+					<div><img src="${LOGOS + POOLS[i].baseaddr.toLowerCase()}.png"> ${ POOLS[i].basename }</div>
+					<div><img src="${LOGOS + POOLS[i].marketlogo.toLowerCase()}.png"> ${ POOLS[i].marketname }</div>
+					<div>$${ fornum6(ds_wrapprice * dsu_base, 2) }<br><span class="port-amt">${ fornum6(dsu_base, 2) }</span></div>
+					<div>$${ fornum6(ds_wrapprice * dsu_ctok, 2) }<br><span class="port-amt">${ fornum6(dsu_ctok, 2) }</span></div>
+					<div>$${ fornum6(ds_ctokprice * dsu_wrap, 2) }<br><span class="port-amt">${ fornum6(dsu_wrap, 2) }</span></div>
+					<div>$${ fornum6(ds_wrapprice * dsu_farm, 2) }<br><span class="port-amt">${ fornum6(dsu_farm, 2) }</span></div>
+					<div>$-.--                                    <br><span class="port-amt">${ fornum6(dsu_rew0, 2) }</span></div>
+					<div>$-.--                                    <br><span class="port-amt">${ fornum6(dsu_tre0, 2) }</span></div>
+				</div>
+			`;
+		}
+
+
 	}
 
 	$("topstat-pools").innerHTML= POOLS.length;
@@ -390,7 +440,7 @@ function drawPie(_pievals, _piecolors) {
     const cx = 50;
     const cy = 50;
 
-    let startAngle = 0;
+    let startAngle = -Math.PI/2;
     const paths = _pievals.map((value, index) => {
         const endAngle = startAngle + (value / total) * 2 * Math.PI;
         const path = describeArc(cx, cy, radius, startAngle, endAngle);
