@@ -227,7 +227,7 @@ async function paintStatic() {
 }
 
 async function dexstats() {
-
+	ds_equalprice = Number(await (new ethers.Contract("0xA480DfB5c15BbF4FA74aC55397a53b3ae38c19E2",LPABI,provider)).getAssetPrice("0x3fd3a0c85b70754efc07ac9ac0cbbdce664865a6"))/10**18;
 	//_EL_27 = new ethers.Contract("0x1b1c9a41a96dE931c7508BD2C653C57C63cD32a4", EL_27_ABI, provider);
 	//_ds = await _EL_27.getElmaCompoundFarms( POOLS.map(i=>i.farmaddr) , POOLS.map(i=>i.depositor) , "0x0000000000000000000000000000000000001234" );
 	_EL_30 = new ethers.Contract("0x8C1C50fFa373f8C2b82A4Fc591c2c710e2982f01", EL_30_ABI, provider);
@@ -312,7 +312,7 @@ async function dexstats() {
 				<div>UT in LM</div>
 				<div>PT in Wallet</div>
 				<div>PT Staked</div>
-				<div>Unclaimed</div>
+				<div>Claimable</div>
 				<div>Total Earned</div>
 			</div>
 		`;
@@ -368,7 +368,7 @@ async function dexstats() {
 			dsu_farm = (Number(_ds[i][14])) / (10**POOLS[i].basedeci);
 
 			dsu_rew0 = (Number(_dsd[1][i][0][0])) / (10**18);
-			dsu_tre0 = (Number(_dsd[1][i][1][0])) / (10**18);
+			dsu_tre0 = ( (Number(_dsd[1][i][0][0])) + (Number(_dsd[1][i][1][0])) ) / (10**18);
 
 			$("portfolio").innerHTML += `
 				<div class="c2a90-row c2a90-row-port" onclick="window.location='${POOLS[i].wrapname}'">
@@ -378,8 +378,8 @@ async function dexstats() {
 					<div>$${ fornum6(ds_wrapprice * dsu_ctok, 2) }<br><span class="port-amt">${ fornum6(dsu_ctok, 2) }</span></div>
 					<div>$${ fornum6(ds_ctokprice * dsu_wrap, 2) }<br><span class="port-amt">${ fornum6(dsu_wrap, 2) }</span></div>
 					<div>$${ fornum6(ds_wrapprice * dsu_farm, 2) }<br><span class="port-amt">${ fornum6(dsu_farm, 2) }</span></div>
-					<div>$-.--                                    <br><span class="port-amt">${ fornum6(dsu_rew0, 2) }</span></div>
-					<div>$-.--                                    <br><span class="port-amt">${ fornum6(dsu_tre0, 2) }</span></div>
+					<div>$${ fornum6(ds_equalprice * dsu_rew0, 2) }<br><span class="port-amt">${ fornum6(dsu_rew0, 2) } <img src="${LOGOS+TEARNED[1].toLowerCase()}.png"></span></div>
+					<div>$${ fornum6(ds_equalprice * dsu_tre0, 2) }<br><span class="port-amt">${ fornum6(dsu_tre0, 2) } <img src="${LOGOS+TEARNED[1].toLowerCase()}.png"></span></div>
 				</div>
 			`;
 		}

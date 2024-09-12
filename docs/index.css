@@ -372,6 +372,10 @@ footer{
     font-size: 0.8em
 }
 
+.port-amt img {
+    width:  16px
+}
+
 .collection, .explorer {
     margin-bottom: 20px;
 }
