@@ -299,14 +299,16 @@ async function dexstats() {
 		+ "%"
 	;
 
-	for(i=0;i<TEARNED.length;i++) {
-		$("claim-info").innerHTML += `
-			<div><img height="20px" src="${LOGOS+TEARNED[i].toLowerCase()}.png" style="vertical-align:middle;"/> ${TEARNED_NAME[i]}</div>
-            <div class="hint"id="claim-${i}-old">Claimed: 0.000000000000000000</div>
-            <div class="hint"id="claim-${i}-pen">Pending: 0.000000000000000000</div>
-            <div class="hint"id="claim-${i}-tot">Total: 0.000000000000000000</div>
-            <br><br>
-		`;
+	if( $("claim-info").innerHTML == "" ) {
+		for(i=0;i<TEARNED.length;i++) {
+			$("claim-info").innerHTML += `
+				<div><img height="20px" src="${LOGOS+TEARNED[i].toLowerCase()}.png" style="vertical-align:middle;"/> ${TEARNED_NAME[i]}</div>
+            	<div class="hint"id="claim-${i}-old">Claimed: 0.000000000000000000</div>
+            	<div class="hint"id="claim-${i}-pen">Pending: 0.000000000000000000</div>
+            	<div class="hint"id="claim-${i}-tot">Total: 0.000000000000000000</div>
+            	<br><br>
+			`;
+		}
 	}
 	return;
 }
@@ -352,7 +354,6 @@ async function gubs() {
 	$("claim-1-pen").innerHTML	=	"Pending: " +	(Number(_ubs[5])/1e18).toLocaleString(undefined,{maximumFractionDigits:18});
 	$("claim-1-tot").innerHTML	=	"Total: " +		(Number(_ubs[5])/1e18+Number(_ubs[6])/1e18).toLocaleString(undefined,{maximumFractionDigits:18});
 
-	dexstats();
 
 	return;
 }
