@@ -268,7 +268,7 @@ footer{
     font-size: 1em;
 }
 
-.c2a{
+.c2a {
 	/*! max-width:500px; */
 	margin:auto auto;
     background: rgba(0, 0, 0, 0.5);
@@ -307,7 +307,7 @@ footer{
 }
 
 .c2a90 {
-    width:  100% !important;
+	width: calc(100% - 40px) !important;
     overflow: auto;
 }
 
