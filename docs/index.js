@@ -320,6 +320,15 @@ async function dexstats() {
 
 	ds_totalwrapmktcap =0;
 	ds_totaltxs =0;
+
+	dsu_totalbase =0;
+	dsu_totalctok =0;
+	dsu_totalwrap =0;
+	dsu_totalfarm =0;
+	dsu_totalrew0 =0;
+	dsu_totaltre0 =0;
+
+
 	for(i=0;i<POOLS.length;i++) {
 
 		ds_farmtvl = (Number(_ds[i][4])/1e18);
@@ -351,8 +360,8 @@ async function dexstats() {
 				<div>$${ fornum6(ds_wrapmktcap, 0) }</div>
 				<div>${ drawPie([ds_farmtvl,ds_wrapmktcap-ds_farmtvl],['#45e7e8','#6d05d7']) }</div>
 				<div>$${ fornum6(ds_farmtvl,0) }</div>
-				<div>${ fornum6(ds_farmapr, ds_farmapr>10?2:4)}%</div>
-				<div>${ fornum6(ds_ctokenapr, ds_ctokenapr>10?2:4)}%</div>
+				<div>${ fornum6(ds_farmapr, ds_farmapr>1?2:4)}%</div>
+				<div>${ fornum6(ds_ctokenapr, ds_ctokenapr>1?2:4)}%</div>
 				<div>$${ fornum6(ds_cash, 0) }</div>
 				<div>$${ fornum6(ds_borrowed, 0) }</div>
 				<div>${ drawPie([ds_borrowed,ds_cash],['#f0890b','#15c66b']  ) }</div>
@@ -375,13 +384,21 @@ async function dexstats() {
 					<div><img src="${LOGOS + POOLS[i].baseaddr.toLowerCase()}.png"> ${ POOLS[i].basename }</div>
 					<div><img src="${LOGOS + POOLS[i].marketlogo.toLowerCase()}.png"> ${ POOLS[i].marketname }</div>
 					<div>$${ fornum6(ds_wrapprice * dsu_base, 2) }<br><span class="port-amt">${ fornum6(dsu_base, 2) }</span></div>
-					<div>$${ fornum6(ds_wrapprice * dsu_ctok, 2) }<br><span class="port-amt">${ fornum6(dsu_ctok, 2) }</span></div>
-					<div>$${ fornum6(ds_ctokprice * dsu_wrap, 2) }<br><span class="port-amt">${ fornum6(dsu_wrap, 2) }</span></div>
+					<div>$${ fornum6(ds_ctokprice * dsu_ctok, 2) }<br><span class="port-amt">${ fornum6(dsu_ctok, 2) }</span></div>
+					<div>$${ fornum6(ds_wrapprice * dsu_wrap, 2) }<br><span class="port-amt">${ fornum6(dsu_wrap, 2) }</span></div>
 					<div>$${ fornum6(ds_wrapprice * dsu_farm, 2) }<br><span class="port-amt">${ fornum6(dsu_farm, 2) }</span></div>
 					<div>$${ fornum6(ds_equalprice * dsu_rew0, 2) }<br><span class="port-amt">${ fornum6(dsu_rew0, 2) } <img src="${LOGOS+TEARNED[1].toLowerCase()}.png"></span></div>
 					<div>$${ fornum6(ds_equalprice * dsu_tre0, 2) }<br><span class="port-amt">${ fornum6(dsu_tre0, 2) } <img src="${LOGOS+TEARNED[1].toLowerCase()}.png"></span></div>
 				</div>
 			`;
+
+
+			dsu_totalbase += ds_wrapprice * dsu_base;
+			dsu_totalctok += ds_ctokprice * dsu_ctok;
+			dsu_totalwrap += ds_wrapprice * dsu_wrap;
+			dsu_totalfarm += ds_wrapprice * dsu_farm;
+			dsu_totalrew0 += ds_equalprice * dsu_rew0;
+			dsu_totaltre0 += ds_equalprice * dsu_tre0;
 		}
 
 
@@ -390,6 +407,22 @@ async function dexstats() {
 	$("topstat-pools").innerHTML= POOLS.length;
 	$("topstat-tvl").innerHTML= "$"+fornum6(ds_totalwrapmktcap,0);
 	$("topstat-txs").innerHTML= fornum6(ds_totaltxs,0);
+
+	if(Number(_user)>0x1234) {
+		$("portfolio").innerHTML += `
+			<div class="hhr"></div>
+			<div class="c2a90-row c2a90-row-port"">
+				<div><button class="submit" style="width:300px" onclick="claimAllRewards()">Claim All Rewards</div>
+				<div></div>
+				<div><br>$${ fornum6(ds_wrapprice * dsu_totalbase, 2) }</div>
+				<div><br>$${ fornum6(ds_ctokprice * dsu_totalctok, 2) }</div>
+				<div><br>$${ fornum6(ds_wrapprice * dsu_totalwrap, 2) }</div>
+				<div><br>$${ fornum6(ds_wrapprice * dsu_totalfarm, 2) }</div>
+				<div><br>$${ fornum6(ds_equalprice * dsu_totalrew0, 2) }</div>
+				<div><br>$${ fornum6(ds_equalprice * dsu_totaltre0, 2) }</div>
+			</div>
+		`;
+	}
 	return;
 }
 
@@ -473,4 +506,42 @@ function getRandomDarkColor() {
     else [r, g, b] = [c, 0, x];
 
     return `rgb(${(r + m) * 255 | 0}, ${(g + m) * 255 | 0}, ${(b + m) * 255 | 0})`;
+}
+
+
+
+async function claim() {
+	_FARM = new ethers.Contract(FARM, LPABI,signer);
+	_VOTER = new ethers.Contract(VOTER, ["function claimRewards(address[],address[][])"],signer);
+
+	_earned = [dsu_totalrew0, 0];
+
+	if( _earned.reduce((a,b)=>a+b) == 0 ) {notice(`<h3>You dont have any pending rewards!</h3> Stake some ${WRAP_NAME} to earn more!`); return;}
+
+	notice(`
+		<h3>Order Summary</h3>
+		<b>Claiming ${TEARNED_NAME.join("+")} rewards</b>
+		<br><img style='height:20px;position:relative;top:4px' src="${TEARNED_LOGO[0]}"> <b>$${fornum5(_earned[0],18)}</b> ${TEARNED_NAME[0]}
+		<br><img style='height:20px;position:relative;top:4px' src="${TEARNED_LOGO[1]}"> <b>$${fornum5(_earned[1],18)}</b> ${TEARNED_NAME[1]}
+		<h4><u><i>Please Confirm this transaction in your wallet!</i></u></h4>
+	`);
+	let _tr = await _VOTER.claimRewards([FARM],[TEARNED],{gasLimit:BigInt(1_500_000)});
+	console.log(_tr);
+	notice(`
+		<h3>Order Submitted!</h3>
+		<b>Claiming ${TEARNED_NAME.join("+")} rewards</b>
+		<br><img style='height:20px;position:relative;top:4px' src="${TEARNED_LOGO[0]}"> <b>${fornum5(_earned[0],18)}</b> ${TEARNED_NAME[0]}
+		<br><img style='height:20px;position:relative;top:4px' src="${TEARNED_LOGO[1]}"> <b>${fornum5(_earned[1],18)}</b> ${TEARNED_NAME[1]}
+		<h4><a target="_blank" href="${EXPLORE}/tx/${_tr.hash}">View on Explorer</a></h4>
+	`);
+	_tw = await _tr.wait();
+	console.log(_tw)
+	notice(`
+		<h3>Order Completed!</h3>
+		<b>Claiming ${TEARNED_NAME.join("+")} rewards</b>
+		<br><img style='height:20px;position:relative;top:4px' src="${TEARNED_LOGO[0]}"> <b>${fornum5(_earned[0],18)}</b> ${TEARNED_NAME[0]}
+		<br><img style='height:20px;position:relative;top:4px' src="${TEARNED_LOGO[1]}"> <b>${fornum5(_earned[1],18)}</b> ${TEARNED_NAME[1]}
+		<h4><a target="_blank" href="${EXPLORE}/tx/${_tr.hash}">View on Explorer</a></h4>
+	`);
+	gubs();
 }

@@ -20,7 +20,14 @@
 	background: -webkit-linear-gradient(135deg, #07f, #7ea) !important;
 	color: black !important;
 }
-
+.hhr{
+  border:none;
+  background: -webkit-linear-gradient(0deg, #0564d7, #28edec);
+  background: -moz-linear-gradient(0deg, #0564d7 0, #28edec 100%);
+  background: linear-gradient(90eg, #0564d7, #28edec);
+  height: 2px;
+  width: calc(8*150px)
+}
 /* index.css */
 
 .search-btn{
