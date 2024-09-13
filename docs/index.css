@@ -5,6 +5,7 @@
 @font-face{ font-family:regular;src: url(https://eliteness.network/fonts/neue-haas-grotesk/NeueHaasDisplayRoman.ttf);}
 @font-face{ font-family:carving-regular;src: url(https://eliteness.network/fonts/Carving/Regular.otf);}
 @font-face{ font-family:carving-bold;src: url(https://eliteness.network/fonts/Carving/Black.otf);}
+@font-face{ font-family:carving-light;src: url(https://eliteness.network/fonts/Carving/Light.otf);}
 *{
 	font-family:regular;
 	scroll-behavior: smooth !important;
@@ -503,7 +504,8 @@ button:disabled, .c2abtn:disabled {
     margin-top: 20px;
 }
 .faq-detail {
-    font-family: carving-regular;
+    font-family: carving-light;
+    font-size: 0.9em;
 }
 
 @media (max-width: 700px) {

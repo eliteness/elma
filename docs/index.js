@@ -387,8 +387,8 @@ async function dexstats() {
 					<div>$${ fornum6(ds_ctokprice * dsu_ctok, 2) }<br><span class="port-amt">${ fornum6(dsu_ctok, 2) }</span></div>
 					<div>$${ fornum6(ds_wrapprice * dsu_wrap, 2) }<br><span class="port-amt">${ fornum6(dsu_wrap, 2) }</span></div>
 					<div>$${ fornum6(ds_wrapprice * dsu_farm, 2) }<br><span class="port-amt">${ fornum6(dsu_farm, 2) }</span></div>
-					<div>$${ fornum6(ds_equalprice * dsu_rew0, 2) }<br><span class="port-amt">${ fornum6(dsu_rew0, 2) } <img src="${LOGOS+TEARNED[1].toLowerCase()}.png"></span></div>
-					<div>$${ fornum6(ds_equalprice * dsu_tre0, 2) }<br><span class="port-amt">${ fornum6(dsu_tre0, 2) } <img src="${LOGOS+TEARNED[1].toLowerCase()}.png"></span></div>
+					<div>$${ fornum6(ds_equalprice * dsu_rew0, 2) }<br><span class="port-amt">${ fornum6(dsu_rew0, 2) } <img src="${LOGOS+TEARNED[0].toLowerCase()}.png"></span></div>
+					<div>$${ fornum6(ds_equalprice * dsu_tre0, 2) }<br><span class="port-amt">${ fornum6(dsu_tre0, 2) } <img src="${LOGOS+TEARNED[0].toLowerCase()}.png"></span></div>
 				</div>
 			`;
 
@@ -510,8 +510,8 @@ function getRandomDarkColor() {
 
 
 
-async function claim() {
-	_FARM = new ethers.Contract(FARM, LPABI,signer);
+async function claimAllRewards() {
+	///_FARM = new ethers.Contract(FARM, LPABI,signer);
 	_VOTER = new ethers.Contract(VOTER, ["function claimRewards(address[],address[][])"],signer);
 
 	_earned = [dsu_totalrew0, 0];
@@ -525,7 +525,7 @@ async function claim() {
 		<br><img style='height:20px;position:relative;top:4px' src="${TEARNED_LOGO[1]}"> <b>$${fornum5(_earned[1],18)}</b> ${TEARNED_NAME[1]}
 		<h4><u><i>Please Confirm this transaction in your wallet!</i></u></h4>
 	`);
-	let _tr = await _VOTER.claimRewards([FARM],[TEARNED],{gasLimit:BigInt(1_500_000)});
+	let _tr = await _VOTER.claimRewards( POOLS.map(i=>i.farmaddr), POOLS.map(i=>TEARNED), {gasLimit:BigInt( POOLS.length * 1_337_000 )});
 	console.log(_tr);
 	notice(`
 		<h3>Order Submitted!</h3>
