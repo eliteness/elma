@@ -327,6 +327,8 @@ async function dexstats() {
 	dsu_totalfarm =0;
 	dsu_totalrew0 =0;
 	dsu_totaltre0 =0;
+	dsu_totalport =0;
+	dsu_annualrew =0;
 
 
 	for(i=0;i<POOLS.length;i++) {
@@ -399,6 +401,9 @@ async function dexstats() {
 			dsu_totalfarm += ds_wrapprice * dsu_farm;
 			dsu_totalrew0 += ds_equalprice * dsu_rew0;
 			dsu_totaltre0 += ds_equalprice * dsu_tre0;
+			dsu_totalport += dsu_totalbase + dsu_totalctok + dsu_totalwrap + dsu_totalfarm;
+			dsu_annualrew += ds_wrapprice * dsu_farm * ds_farmapr / 100 ;
+
 		}
 
 
@@ -411,17 +416,22 @@ async function dexstats() {
 	if(Number(_user)>0x1234) {
 		$("portfolio").innerHTML += `
 			<div class="hhr"></div>
-			<div class="c2a90-row c2a90-row-port"">
-				<div><button class="submit" style="width:300px" onclick="claimAllRewards()">Claim All Rewards</div>
+			<div class="c2a90-row c2a90-row-port port-total">
+				<div><button class="submit" style="width:300px;z-index:1" onclick="claimAllRewards()">Claim All Rewards</div>
 				<div></div>
-				<div><br>$${ fornum6(ds_wrapprice * dsu_totalbase, 2) }</div>
-				<div><br>$${ fornum6(ds_ctokprice * dsu_totalctok, 2) }</div>
-				<div><br>$${ fornum6(ds_wrapprice * dsu_totalwrap, 2) }</div>
-				<div><br>$${ fornum6(ds_wrapprice * dsu_totalfarm, 2) }</div>
-				<div><br>$${ fornum6(ds_equalprice * dsu_totalrew0, 2) }</div>
-				<div><br>$${ fornum6(ds_equalprice * dsu_totaltre0, 2) }</div>
+				<div><br>$${ fornum6(dsu_totalbase, 2) }</div>
+				<div><br>$${ fornum6(dsu_totalctok, 2) }</div>
+				<div><br>$${ fornum6(dsu_totalwrap, 2) }</div>
+				<div><br>$${ fornum6(dsu_totalfarm, 2) }</div>
+				<div><br>$${ fornum6(dsu_totalrew0, 2) }</div>
+				<div><br>$${ fornum6(dsu_totaltre0, 2) }</div>
 			</div>
 		`;
+
+		$("portstat-total").innerHTML = "$"+ fornum6( dsu_totalport, 2);
+		$("portstat-staked").innerHTML = "$"+ fornum6( dsu_totalfarm, 2);
+		$("portstat-netapr").innerHTML = fornum6( dsu_annualrew / dsu_totalfarm * 100, 2) + "%";
+		$("portstat-earnings").innerHTML = "$"+ fornum6( dsu_totaltre0, 2);
 	}
 	return;
 }
@@ -514,7 +524,7 @@ async function claimAllRewards() {
 	///_FARM = new ethers.Contract(FARM, LPABI,signer);
 	_VOTER = new ethers.Contract(VOTER, ["function claimRewards(address[],address[][])"],signer);
 
-	_earned = [dsu_totalrew0, 0];
+	_earned = [dsu_totalrew0 * 1e18, 0];
 
 	if( _earned.reduce((a,b)=>a+b) == 0 ) {notice(`<h3>You dont have any pending rewards!</h3> Stake some ${WRAP_NAME} to earn more!`); return;}
 
@@ -525,7 +535,7 @@ async function claimAllRewards() {
 		<br><img style='height:20px;position:relative;top:4px' src="${TEARNED_LOGO[1]}"> <b>$${fornum5(_earned[1],18)}</b> ${TEARNED_NAME[1]}
 		<h4><u><i>Please Confirm this transaction in your wallet!</i></u></h4>
 	`);
-	let _tr = await _VOTER.claimRewards( POOLS.map(i=>i.farmaddr), POOLS.map(i=>TEARNED), {gasLimit:BigInt( POOLS.length * 1_337_000 )});
+	let _tr = await _VOTER.claimRewards( POOLS.map(i=>i.farmaddr), POOLS.map(i=>TEARNED), {gasLimit:BigInt( POOLS.length * 800_000 )});
 	console.log(_tr);
 	notice(`
 		<h3>Order Submitted!</h3>
