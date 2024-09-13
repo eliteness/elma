@@ -280,10 +280,15 @@ async function dexstats() {
 
 
 	$("topstat-apr").innerHTML =
-		+ fornum6(ds_ctokenapr, ds_ctokenapr>10?2:4) + "%";
+		fornum6(ds_ctokenapr, ds_ctokenapr>10?2:4)
+		+ "%"
 		+ " ⇢ "
-		+ fornum6(ds_farmapr, ds_farmapr>10?2:4) + "%"
+		+ fornum6(ds_farmapr, ds_farmapr>10?2:4)
+		+ "%"
+	;
+
 	//$("topstat-tvl").innerHTML = (Number(_ds[1])/(10**DECIMAL)).toLocaleString(undefined,{maximumFractionDigits:2})
+
 	$("topstat-dom").innerHTML = fornum6(ds_farmtvl/(ds_cash+ds_borrowed)*100, 4) + "%"
 
 	$("stake-tvl").innerHTML =
