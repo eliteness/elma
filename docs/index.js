@@ -290,15 +290,15 @@ async function dexstats() {
 		<div class="c2a90-row">
 			<div>Underlying</div>
 			<div>Market</div>
-			<div>PT Minted</div>
+			<div>PT Supply</div>
 			<div></div>
 			<div>PT Staked</div>
 			<div>PT APR</div>
-			<div>YT APR</div>
 			<div>LM Cash</div>
-			<div>LM Loans</div>
-			<div></div>
 			<div>LM Size</div>
+			<div></div>
+			<div>LM Loans</div>
+			<div>YT APR</div>
 		</div>
 	`;
 
@@ -361,13 +361,13 @@ async function dexstats() {
 				<div><img src="${LOGOS + POOLS[i].marketlogo.toLowerCase()}.png"> ${ POOLS[i].marketname }</div>
 				<div>$${ fornum6(ds_wrapmktcap, 0) }</div>
 				<div>${ drawPie([ds_farmtvl,ds_wrapmktcap-ds_farmtvl],['#45e7e8','#6d05d7']) }</div>
-				<div>$${ fornum6(ds_farmtvl,0) }</div>
-				<div>${ fornum6(ds_farmapr, ds_farmapr>1?2:4)}%</div>
-				<div>${ fornum6(ds_ctokenapr, ds_ctokenapr>1?2:4)}%</div>
+				<div class="main-amt">$${ fornum6(ds_farmtvl,0) }</div>
+				<div class="main-amt">${ fornum6(ds_farmapr, ds_farmapr>1?2:4)}%</div>
 				<div>$${ fornum6(ds_cash, 0) }</div>
-				<div>$${ fornum6(ds_borrowed, 0) }</div>
-				<div>${ drawPie([ds_borrowed,ds_cash],['#f0890b','#15c66b']  ) }</div>
 				<div>$${ fornum6((ds_cash+ds_borrowed), 0) }</div>
+				<div>${ drawPie([ds_borrowed,ds_cash],['#f0890b','#15c66b']  ) }</div>
+				<div>$${ fornum6(ds_borrowed, 0) }</div>
+				<div>${ fornum6(ds_ctokenapr, ds_ctokenapr>1?2:4)}%</div>
 			</div>
 		`;
 
