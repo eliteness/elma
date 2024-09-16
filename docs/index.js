@@ -288,17 +288,17 @@ async function dexstats() {
 
 	$("mainstage").innerHTML = `
 		<div class="c2a90-row">
-			<div>Underlying</div>
-			<div>Market</div>
-			<div>PT Supply</div>
+			<div>Underlying		<br><span class="c2a90-row-byline">Base Asset</span></div>
+			<div>LM				<br><span class="c2a90-row-byline">Lending Market</span></div>
+			<div>PT Supply		<br><span class="c2a90-row-byline">Total Wrapped</span></div>
 			<div></div>
-			<div>PT Staked</div>
-			<div>PT APR</div>
-			<div>LM Cash</div>
-			<div>LM Size</div>
+			<div>PT Staked		<br><span class="c2a90-row-byline">In Elma Gauge</span></div>
+			<div>PT APR			<br><span class="c2a90-row-byline">Boosted APR</span></div>
+			<div>LM Cash		<br><span class="c2a90-row-byline">Exit Liquidity</span></div>
+			<div>LM Size		<br><span class="c2a90-row-byline">Underlying LM pool</span></div>
 			<div></div>
-			<div>LM Loans</div>
-			<div>YT APR</div>
+			<div>LM Loans		<br><span class="c2a90-row-byline">Borrowed from LM</span></div>
+			<div>YT APR			<br><span class="c2a90-row-byline">LM Interest APR</span></div>
 		</div>
 	`;
 
@@ -362,7 +362,7 @@ async function dexstats() {
 				<div>$${ fornum6(ds_wrapmktcap, 0) }</div>
 				<div>${ drawPie([ds_farmtvl,ds_wrapmktcap-ds_farmtvl],['#45e7e8','#6d05d7']) }</div>
 				<div class="main-amt">$${ fornum6(ds_farmtvl,0) }</div>
-				<div class="main-amt">${ fornum6(ds_farmapr, ds_farmapr>1?2:4)}%</div>
+				<div class="main-amt">${ fornum6(ds_farmapr, ds_farmapr>1?2:4)}% 🔥</div>
 				<div>$${ fornum6(ds_cash, 0) }</div>
 				<div>$${ fornum6((ds_cash+ds_borrowed), 0) }</div>
 				<div>${ drawPie([ds_borrowed,ds_cash],['#f0890b','#15c66b']  ) }</div>
@@ -401,7 +401,6 @@ async function dexstats() {
 			dsu_totalfarm += ds_wrapprice * dsu_farm;
 			dsu_totalrew0 += ds_equalprice * dsu_rew0;
 			dsu_totaltre0 += ds_equalprice * dsu_tre0;
-			dsu_totalport += dsu_totalbase + dsu_totalctok + dsu_totalwrap + dsu_totalfarm;
 			dsu_annualrew += ds_wrapprice * dsu_farm * ds_farmapr / 100 ;
 
 		}
@@ -409,6 +408,7 @@ async function dexstats() {
 
 	}
 
+	dsu_totalport = dsu_totalbase + dsu_totalctok + dsu_totalwrap + dsu_totalfarm;
 	$("topstat-pools").innerHTML= POOLS.length;
 	$("topstat-tvl").innerHTML= "$"+fornum6(ds_totalwrapmktcap,0);
 	$("topstat-txs").innerHTML= fornum6(ds_totaltxs,0);
@@ -417,7 +417,7 @@ async function dexstats() {
 		$("portfolio").innerHTML += `
 			<div class="hhr"></div>
 			<div class="c2a90-row c2a90-row-port port-total">
-				<div><button class="submit" style="width:300px;z-index:1" onclick="claimAllRewards()">Claim All Rewards</div>
+				<div><button class="submit" style="width:250px;z-index:1;" onclick="claimAllRewards()">Claim All Rewards</div>
 				<div></div>
 				<div><br>$${ fornum6(dsu_totalbase, 2) }</div>
 				<div><br>$${ fornum6(dsu_totalctok, 2) }</div>
