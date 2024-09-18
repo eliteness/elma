@@ -319,7 +319,10 @@ async function arf(){
 	var xfr = setInterval(
 		async function(){
 			console.log("refreshing farm stats", new Date(), c );
-			try { if( ethers.utils.isAddress(window?.ethereum?.selectedAddress) ) {gubs();} }
+			try {
+				if( ethers?.utils?.isAddress(window?.ethereum?.selectedAddress) ) { gubs();}
+				dexstats()
+			}
 			catch(e) { console.log('hmm..'); }
 			c++;
 		},

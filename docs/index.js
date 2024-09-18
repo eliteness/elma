@@ -20,11 +20,11 @@ document.addEventListener('DOMContentLoaded', function() {
 function openTab(evt, tabName) {
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontent");
-    for (i = 0; i < tabcontent.length; i++) {
+    for(let i = 0; i < tabcontent.length; i++) {
         tabcontent[i].style.display = "none";
     }
     tablinks = document.getElementsByClassName("tablinks");
-    for (i = 0; i < tablinks.length; i++) {
+    for(let i = 0; i < tablinks.length; i++) {
         tablinks[i].className = tablinks[i].className.replace(" active", "");
     }
     document.getElementById("tablinks_"+tabName).className+=" active";
@@ -121,7 +121,7 @@ function fornum5(n,d) {
 	return (Number(n)/10**Number(d)).toLocaleString(undefined,{maximumFractionDigits:d}) ;
 }
 function fornum6(n,f) {
-	return (Number(n)).toLocaleString(undefined,{maximumFractionDigits:f}) ;
+	return (Number(n)).toLocaleString(undefined,{minimumFractionDigits:f,maximumFractionDigits:f}) ;
 }
 
 async function cw() {
@@ -288,17 +288,17 @@ async function dexstats() {
 
 	$("mainstage").innerHTML = `
 		<div class="c2a90-row">
-			<div>Underlying		<br><span class="c2a90-row-byline">Base Asset</span></div>
-			<div>LM				<br><span class="c2a90-row-byline">Lending Market</span></div>
-			<div>PT Supply		<br><span class="c2a90-row-byline">Total Wrapped</span></div>
-			<div></div>
-			<div>PT Staked		<br><span class="c2a90-row-byline">In Elma Gauge</span></div>
-			<div>PT APR			<br><span class="c2a90-row-byline">Boosted APR</span></div>
-			<div>LM Cash		<br><span class="c2a90-row-byline">Exit Liquidity</span></div>
-			<div>LM Size		<br><span class="c2a90-row-byline">Underlying LM pool</span></div>
-			<div></div>
-			<div>LM Loans		<br><span class="c2a90-row-byline">Borrowed from LM</span></div>
-			<div>YT APR			<br><span class="c2a90-row-byline">LM Interest APR</span></div>
+			<div onclick="sortit(0, 'mainstage', 'c2a90-row', 1, 'c2a90-row-item')">Underlying		<br><span class="c2a90-row-byline">Base Asset</span></div>
+			<div onclick="sortit(1, 'mainstage', 'c2a90-row', 1, 'c2a90-row-item')">LM				<br><span class="c2a90-row-byline">Lending Market</span></div>
+			<div onclick="sortit(2, 'mainstage', 'c2a90-row', 1, 'c2a90-row-item')">PT Supply		<br><span class="c2a90-row-byline">Total Wrapped</span></div>
+			<div onclick="sortit(3, 'mainstage', 'c2a90-row', 1, 'c2a90-row-item')"></div>
+			<div onclick="sortit(4, 'mainstage', 'c2a90-row', 1, 'c2a90-row-item')">PT Staked		<br><span class="c2a90-row-byline">In Elma Gauge</span></div>
+			<div onclick="sortit(5, 'mainstage', 'c2a90-row', 1, 'c2a90-row-item')">PT APR			<br><span class="c2a90-row-byline">Boosted APR</span></div>
+			<div onclick="sortit(6, 'mainstage', 'c2a90-row', 1, 'c2a90-row-item')">LM Cash		<br><span class="c2a90-row-byline">Exit Liquidity</span></div>
+			<div onclick="sortit(7, 'mainstage', 'c2a90-row', 1, 'c2a90-row-item')">LM Size		<br><span class="c2a90-row-byline">Underlying LM pool</span></div>
+			<div onclick="sortit(8, 'mainstage', 'c2a90-row', 1, 'c2a90-row-item')"></div>
+			<div onclick="sortit(9, 'mainstage', 'c2a90-row', 1, 'c2a90-row-item')">LM Loans		<br><span class="c2a90-row-byline">Borrowed from LM</span></div>
+			<div onclick="sortit(10,'mainstage', 'c2a90-row', 1, 'c2a90-row-item')">YT APR			<br><span class="c2a90-row-byline">LM Interest APR</span></div>
 		</div>
 	`;
 
@@ -331,7 +331,7 @@ async function dexstats() {
 	dsu_annualrew =0;
 
 
-	for(i=0;i<POOLS.length;i++) {
+	for(let i=0;i<POOLS.length;i++) {
 
 		ds_farmtvl = (Number(_ds[i][4])/1e18);
 		ds_farmapr = (Number(_ds[i][5])/1e18);
@@ -357,17 +357,17 @@ async function dexstats() {
 
 		$("mainstage").innerHTML += `
 			<div class="c2a90-row" onclick="window.location='${POOLS[i].wrapname}'">
-				<div><img src="${LOGOS + POOLS[i].baseaddr.toLowerCase()}.png"> ${ POOLS[i].basename }</div>
-				<div><img src="${LOGOS + POOLS[i].marketlogo.toLowerCase()}.png"> ${ POOLS[i].marketname }</div>
-				<div>$${ fornum6(ds_wrapmktcap, 0) }</div>
-				<div>${ drawPie([ds_farmtvl,ds_wrapmktcap-ds_farmtvl],['#45e7e8','#6d05d7']) }</div>
-				<div class="main-amt">$${ fornum6(ds_farmtvl,0) }</div>
-				<div class="main-amt">${ fornum6(ds_farmapr, ds_farmapr>1?2:4)}% 🔥</div>
-				<div>$${ fornum6(ds_cash, 0) }</div>
-				<div>$${ fornum6((ds_cash+ds_borrowed), 0) }</div>
-				<div>${ drawPie([ds_borrowed,ds_cash],['#f0890b','#15c66b']  ) }</div>
-				<div>$${ fornum6(ds_borrowed, 0) }</div>
-				<div>${ fornum6(ds_ctokenapr, ds_ctokenapr>1?2:4)}%</div>
+				<div class="c2a90-row-item"><img src="${LOGOS + POOLS[i].baseaddr.toLowerCase()}.png"> ${ POOLS[i].basename }</div>
+				<div class="c2a90-row-item"><img src="${LOGOS + POOLS[i].marketlogo.toLowerCase()}.png"> ${ POOLS[i].marketname }</div>
+				<div class="c2a90-row-item">$${ fornum6(ds_wrapmktcap, 0) }</div>
+				<div class="c2a90-row-item">${ drawPie([ds_farmtvl,ds_wrapmktcap-ds_farmtvl],['#45e7e8','#6d05d7']) }</div>
+				<div class="c2a90-row-item main-amt">$${ fornum6(ds_farmtvl,0) }</div>
+				<div class="c2a90-row-item main-amt">${ fornum6(ds_farmapr, ds_farmapr>1?2:4)}% 🔥</div>
+				<div class="c2a90-row-item">$${ fornum6(ds_cash, 0) }</div>
+				<div class="c2a90-row-item">$${ fornum6((ds_cash+ds_borrowed), 0) }</div>
+				<div class="c2a90-row-item">${ drawPie([ds_borrowed,ds_cash],['#f0890b','#15c66b']  ) }</div>
+				<div class="c2a90-row-item">$${ fornum6(ds_borrowed, 0) }</div>
+				<div class="c2a90-row-item">${ fornum6(ds_ctokenapr, ds_ctokenapr>1?2:4)}%</div>
 			</div>
 		`;
 
@@ -433,6 +433,9 @@ async function dexstats() {
 		$("portstat-netapr").innerHTML = fornum6( dsu_annualrew / dsu_totalfarm * 100, 2) + "%";
 		$("portstat-earnings").innerHTML = "$"+ fornum6( dsu_totaltre0, 2);
 	}
+
+	sortit(5, 'mainstage', 'c2a90-row', 1, 'c2a90-row-item', "d");
+
 	return;
 }
 
@@ -554,4 +557,46 @@ async function claimAllRewards() {
 		<h4><a target="_blank" href="${EXPLORE}/tx/${_tr.hash}">View on Explorer</a></h4>
 	`);
 	gubs();
+}
+
+
+
+function sortit(n,_maintable,_trName,_firstRow,_tdName,_dir) {
+  var t, r, z, i, x, y, v, b, c = 0;
+  t = document.getElementById(_maintable);//.getElementsByTagName("tbody")[0];
+  z = true;
+  b = _dir?_dir:"a";
+  while (z) {
+    z = false;
+    r = t.getElementsByClassName(_trName);
+    for (i = _firstRow; i < (r.length - 1); i++) {
+      v = false;
+      x = (r[i].getElementsByClassName(_tdName)[n].textContent).replaceAll(/,| |\.|\$|%|🔥/g,'');
+      if(isFinite(x)){x=Number(x)}else{x=x.toLowerCase()}
+      y = (r[i + 1].getElementsByClassName(_tdName)[n].textContent).replaceAll(/,| |\.|\$|%|🔥/g,'');
+      if(isFinite(y)){y=Number(y)}else{y=y.toLowerCase()}
+      if (b == "a") {
+        if ((x) > (y)) {
+          v= true;
+          break;
+        }
+      } else if (b == "d") {
+        if ((x) < (y)) {
+          v = true;
+          break;
+        }
+      }
+    }
+    if (v) {
+      r[i].parentNode.insertBefore(r[i + 1], r[i]);
+      z = true;
+      c ++;
+    } else {
+      if (c == 0 && b == "a") {
+        b = "d";
+        z = true;
+      }
+    }
+  }
+    var t, r, z, i, x, y, v, b, c = 0;
 }
