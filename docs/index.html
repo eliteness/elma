@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>ELENDER - Lending Market Aggregator</title>
+	<title>ELMA - Elite Lending Market Aggregator</title>
 	<meta name="description" content="Turbocharge your Lending Market Yields by separating your Prinicipal Tokens (PT) from its Lending Yield (virtual YT) and tapping into the Earnings Flywheel with Guru Network DAO!">
 	<meta name="keywords" content="Guru Network, Decentralized Finance, Fantom, ELITE, 1337, defi, farming, FTM1337">
     <link rel="shortcut icon" href="https://ftm.guru/icons/64.png">
@@ -22,7 +22,7 @@
 
     <div class="topnav">
         <div class="topnav-left">
-            <a href="https://eliteness.network/elocks">
+            <a href="https://eliteness.network/elma">
                 <img src="https://ftm.guru/icons/64.png" alt="Logo" height="48px">
             </a>
             <a href="https://eliteness.network">ELITENESS<br>NETWORK</a>
@@ -36,50 +36,132 @@
 
     <div id="main-area">
         <div class="headline">
-            <div class="headline-keyword">ELENDER</div>
-			<div>Lending Market Aggregation for Turbocharged Yields!</div>
+            <div class="headline-keyword">ELMA</div>
+			<div>Elite Lending Market Aggregation for Turbocharged Yields!</div>
+			<!--
 			<br>
-            <div class="headline-props" id="headline-props"> ⇢ </div>
+            <div class="headline-props" id="headline-props"> ⇢ sadasf a sdfas a</div>
+            -->
         </div>
         <!-- <div class="page-heading">
             <img src="https://ftm.guru/icons/lock.svg" alt="Lock Icon">
-            <a href="https://eliteness.network/elocks">eLOCKS</a>
+            <a href="https://eliteness.network/elma">eLOCKS</a>
             ≻ <a>Overview</a>
         </div> -->
 
         <div class="topstats">
-            <div class="topstat" onclick="document.getElementsByClassName('tablinks')[2].click();window.location='#Explore'">
-                <div id="topstat-partners">2</div>
-                <div>Partner Protocols</div>
-            </div>
             <div class="topstat">
-                <div id="topstat-pools">2</div>
-                <div>Total Lending Pools</div>
+                <div id="topstat-pools"> ?x </div>
+                <div>Markets</div>
             </div>
             <div class="topstat">
                 <div id="topstat-tvl">$-.--</div>
-                <div>Total Deposits</div>
+                <div>Book Value</div>
+            </div>
+            <div class="topstat" onclick="document.getElementsByClassName('tablinks')[2].click();window.location='#Explore'">
+                <div id="topstat-txs"> -,--- </div>
+                <div>Loans Transacted</div>
             </div>
         </div>
 
-        <div class="c2a c2a90" align="center">
+        <br>
+        <div align="center">Tap into a pool below & explore boosted lending!</div>
+        <br>
+
+        <div class="c2a c2a90" align="center" style="margin:auto">
         	<br>
-        	Select a pool to explore boosted lending
         	<br>
-        	<br>
-        	<div class="c2a90-table" id="mainstage" align="center">
-				<div class="c2a90-row">
-					<div>Pool</div>
-					<div>Market</div>
-					<div>TVL</div>
-					<div>APR</div>
-				</div>
+        	<div class="c2a90-table" id="mainstage" align="center" style="display:grid;">
+        		<div style="font-family:italic">Dialing  Elma, please wait ...</div>
         	</div>
         </div>
-        	<br>
-        	<br>
 
 
+        <br>
+        <br>
+
+
+
+        <div id="portfolio-area" style="margin:auto;display:none">
+
+        	<br>
+        	<br>
+        	<div style="font-family:bold;font-size:1.25em" align="center">Overview of Portfolio</div>
+        	<br>
+        	<br>
+        	<div class="topstats">
+            	<div class="topstat">
+                	<div id="portstat-total"> ?x </div>
+                	<div>Portfolio Net Worth</div>
+            	</div>
+            	<div class="topstat">
+                	<div id="portstat-staked"> ?x </div>
+                	<div>Staked Assets</div>
+            	</div>
+            	<div class="topstat">
+                	<div id="portstat-netapr"> ?x </div>
+                	<div>Current Net APR</div>
+            	</div>
+            	<div class="topstat">
+                	<div id="portstat-earnings"> ?x </div>
+                	<div>Lifetime Earnings</div>
+            	</div>
+        	</div>
+
+        	<div class="c2a c2a90" align="center" style="margin:auto;">
+        		<br>
+        		<br>
+        		<div class="c2a90-table" id="portfolio" align="center" style="display:grid;">
+        			<div style="font-family:italic">Dialing  Elma, please wait ...</div>
+        		</div>
+        	</div>
+
+        </div>
+
+
+
+        <br>
+        <br>
+
+        <div class="faq">
+        	<h2>How it works?</h2>
+        	<div class="faq-title">Underlying Assets (UT)</div>
+        	<div class="faq-detail">The base-level Assets accepted by a certain pool are called UT, or Underlying Tokens. Depositing 1 UT on ELMA generates 1 PT + 1 YT. Redeeming 1 PT + 1 YT gives you 1 UT back.</div>
+
+        	<div class="faq-title">Underlying Markets (LM)</div>
+        	<div class="faq-detail">Lending Market where the Underlying Assets are Rehypothecated to. The LM in ELMA stands for these Lending Markets. Example: in the eliteAaveUSDC market, USDC is the UT, while Aave is the LM.</div>
+
+        	<div class="faq-title">Principal Tokens (PT)</div>
+        	<div class="faq-detail">Depositing 1 unit of an Underlying token on ELMA results in 1 unit of PT (Principal Tokens), which is sent to the Depositor as a receipt of the 1 Underlying Asset deposited. PT can be redeemed back to the UT anytime, subject to availability of Cash in Reserves. Example: eliteAaveUSDC is the PT derived from USDC (UT) of Aave (LM).</div>
+
+        	<div class="faq-title">Yield Tokens (YT)</div>
+        	<div class="faq-detail">Depositing 1 unit of an Underlying token on ELMA also results in 1 unit of YT (Yield Tokens) besides the PT. Holding these YT pays the bearer all the "Yield" earned by Rehypothecating the UT (underlying token) into a LM (lending market). However, unlike PT, these YT are virtual and not delivered to the Depositor, and are instead rented, along with their Yield rights, to the ELMA Protocol.</div>
+
+        	<div class="faq-title">Minted PT</div>
+        	<div class="faq-detail">Market Capitalization of a PT (in USD), or simply the total USD value of Assets deposited by Lenders via ELMA. These are further rehyp'd into the corresponding LM.</div>
+
+        	<div class="faq-title">Staking</div>
+        	<div class="faq-detail">PT can be staked into their corresponding gauge to earn rewards from ELMA Protocol for Lending your underlying tokens (UT).</div>
+
+        	<div class="faq-title">Cash Reserves</div>
+        	<div class="faq-detail">Cash (in USD) is the amount of UT unused & available in the underlying market to redeem PT. Borrowers on the LM reduce Cash, while Lenders (ELMA included) increase it.</div>
+
+        	<div class="faq-title">Open Loans</div>
+        	<div class="faq-detail">Total amount (in USD) of UT that is owed to the LM by borrowers, yet to be repaid. Borrowers pay interest on these loans, which constitue the YT APR for Lenders, in this case, ELMA Protocol.</div>
+
+        	<div class="faq-title">YT APR</div>
+        	<div class="faq-detail">Yield Token (YT) APR is the Yield earned by depositing PT's underlying Asset in the underlying Market. ELMA depositors dont earn this, but ELMA (the protocol) does. To earn this, you can deposit directly at the underlying market.</div>
+
+        	<div class="faq-title">PT APR</div>
+        	<div class="faq-detail">Principal Token (YT) APR is the Yield earned by Staking PT on the ELMA Protocol Gauges directly. Users may choose to stake PT on ELMA or use their PT elsewhere outside ELMA.</div>
+
+        	<div class="faq-title">Earnings</div>
+        	<div class="faq-detail">These are your PT staking rewards. Rewards available for claims are Claimable Rewards and your lifetime total Earnings are shown in the portfolio section, visible when connected to Elma with your wallet.</div>
+
+        </div>
+
+        <br>
+        <br>
         <footer>
         	<h2>Powered by Guru Network</h2>
         	<div class="social">
@@ -130,30 +212,63 @@
 
 		VOTER = "0xE3D1A117dF7DCaC2eB0AC8219341bAd92f18dAC1";
 
+		COMPTROLLER_FMONEY = "0xB911d8064c0AA338241f349eD802Ad4bae6ec034";
+
+		SENTINEL_FMONEY = "0xFcb442B641CcdeA1A904EAA4cCA1B4d18510C7C6";
+
 		POOLS = [
 			{
 				wrapname: "eliteFmoneyWFTM",
 				basename: "WFTM",
+				basedeci: 18,
 				marketname: "fMoney",
 				marketlogo: "0x1e2ea3f3209d66647f959cf00627107e079b870d",
 				wrapaddr: "0x85fb1081a0354f8e80a2743f74399bfaf5df328a",
 				baseaddr: "0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83",
 				ctokeaddr: "0x2885d6eca9f12269a378c76ddeccf90d993cf6d5",
-				depositoraddr: "0x0A558D43bCcbC7586547Fc74e3a0E70467215b3C",
-				farmaddr: "0x66d68e6a2abfabd88fcdd601cd3b30845ef48f90",
+				depositor: "0x0A558D43bCcbC7586547Fc74e3a0E70467215b3C",
+				farmaddr: "0xA480DfB5c15BbF4FA74aC55397a53b3ae38c19E2",
 			},
 			{
-				wrapname: "eliteFmoneyAxlUSDC",
-				basename: "axlUSDC",
+				wrapname: "eliteFmoneySFTMX",
+				basename: "SFTMX",
+				basedeci: 18,
 				marketname: "fMoney",
 				marketlogo: "0x1e2ea3f3209d66647f959cf00627107e079b870d",
-				wrapaddr: "0x85fb1081a0354f8e80a2743f74399bfaf5df328a",
+				wrapaddr: "0xe391719869890aD91Ee6076565111fBE942c3073",
+				baseaddr: "0xd7028092c830b5C8FcE061Af2E593413EbbC1fc1",
+				ctokeaddr: "0xb36c7855FC4285795e89A88aD44393aB2e65101D",
+				depositor: "0x35402cdc3bcffb904116bdc720afc75c2921de08",
+				farmaddr: "0x9e2127003Ef476a8DD37E7Cf6F1c8304c54F9Eea",
+			},
+			{
+				wrapname: "eliteFmoneyWormholeUSDC.e",
+				basename: "wormUSDC.e",
+				basedeci: 6,
+				marketname: "fMoney",
+				marketlogo: "0x1e2ea3f3209d66647f959cf00627107e079b870d",
+				wrapaddr: "0xED49B19afd8D2EEfD183691AedBA3b9ef8eB5f4E",
+				baseaddr: "0x2F733095B80A04b38b0D10cC884524a3d09b836a",
+				ctokeaddr: "0x3219727f8a08269ae182bba0210c975f4e9568ec",
+				depositor: "0xB6633c351a3aF289ed6bbF4A78c682FA16656B1E",
+				farmaddr: "0xC8be6b182357eB7aF21f45250bff108c5a61F441",
+			},
+			{
+				wrapname: "eliteFmoneyAxelarUSDC",
+				basename: "axlUSDC",
+				basedeci: 6,
+				marketname: "fMoney",
+				marketlogo: "0x1e2ea3f3209d66647f959cf00627107e079b870d",
+				wrapaddr: "0x37109a61CDa9bfE6d49F19E4911080b250cc52e0",
 				baseaddr: "0x1b6382dbdea11d97f24495c9a90b7c88469134a4",
-				ctokeaddr: "0x2885d6eca9f12269a378c76ddeccf90d993cf6d5",
-				depositoraddr: "0x0A558D43bCcbC7586547Fc74e3a0E70467215b3C",
-				farmaddr: "0x66d68e6a2abfabd88fcdd601cd3b30845ef48f90",
+				ctokeaddr: "0x5089E1940d8b394D61534eEf65592EF966785c26",
+				depositor: "0xfaa22e721924fa57d042f6e2c793997aa9287b27",
+				farmaddr: "0x6f5A708ac53Af703dcd66998de5E27700BF1d6c1",
 			},
 		]
+		TEARNED = ["0x3fd3a0c85b70754efc07ac9ac0cbbdce664865a6","0xf43Cc235E686d7BC513F53Fbffb61F760c3a1882",];
+		TEARNED_LOGO = TEARNED.map(i=>LOGOS+i.toLowerCase()+".png");
+		TEARNED_NAME = ["EQUAL","ELITE",];
     </script>
 </body>
-</html>
+</html>​

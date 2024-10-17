@@ -119,6 +119,9 @@ function fornum(n,d) {
 function fornum5(n,d) {
 	return (Number(n)/10**Number(d)).toLocaleString(undefined,{maximumFractionDigits:d}) ;
 }
+function fornum6(n,f) {
+	return (Number(n)).toLocaleString(undefined,{maximumFractionDigits:f}) ;
+}
 
 async function cw() {
 	let cs = await cw2(); cs?console.log("Good to Transact"):cw2();
@@ -207,11 +210,14 @@ async function sleep(ms) {
 
 const timeFormat = (timestamp) => {const seconds = Math.floor((Date.now() - timestamp) / 1000);const prefix = seconds < 0 ? "For the next " : "Expired ";const absSeconds = Math.abs(seconds);return prefix + (absSeconds < 60 ? absSeconds + " seconds" : absSeconds < 3600 ? Math.floor(absSeconds / 60) + " minutes" : absSeconds < 86400 ? Math.floor(absSeconds / 3600) + " hours" : absSeconds < 2592000 ? Math.floor(absSeconds / 86400) + " days" : absSeconds < 31536000 ? Math.floor(absSeconds / 2592000) + " months" : Math.floor(absSeconds / 31536000) + " years") + (seconds < 0 ? "" : " ago");};
 
-LPABI = ["function balanceOf(address) public view returns(uint)","function metadata() public view returns(uint,uint,uint,uint,bool,address,address)","function getAssetPrice(address) public view returns(uint)","function approve(address,uint)","function allowance(address,address) public view returns(uint)","function earned(address,address) public view returns(uint)","function earnings(address,address) public view returns(uint)","function name() public view returns(string)","function symbol() public view returns(string)","function tvl() public view returns(uint)","function apr() public view returns(uint)","function totalSupply() public view returns(uint)","function deposit(uint)","function withdraw(uint)","function depositAll()","function withdrawAll()","function mint(uint)","function redeem(uint)","function mintAll()","function redeemAll()"]
+LPABI = ["function balanceOf(address) public view returns(uint)","function metadata() public view returns(uint,uint,uint,uint,bool,address,address)","function getAssetPrice(address) public view returns(uint)","function approve(address,uint)","function allowance(address,address) public view returns(uint)","function earned(address,address) public view returns(uint)","function earnings(address,address) public view returns(uint)","function name() public view returns(string)","function symbol() public view returns(string)","function tvl() public view returns(uint)","function tvlDeposits() public view returns(uint)","function apr() public view returns(uint)","function totalSupply() public view returns(uint)","function deposit(uint)","function withdraw(uint)","function depositAll()","function withdrawAll()","function mint(uint)","function redeem(uint)","function mintAll()","function redeemAll()"]
 
 DEPOSITOR_ABI = [{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"token","type":"address"},{"indexed":true,"internalType":"address","name":"bribe","type":"address"},{"indexed":true,"internalType":"bool","name":"active","type":"bool"}],"name":"BribeTokenSet","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"initiator","type":"address"},{"indexed":true,"internalType":"address","name":"beneficiary","type":"address"},{"indexed":true,"internalType":"address","name":"token","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"ClaimFees","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"token","type":"address"},{"indexed":true,"internalType":"address","name":"user","type":"address"},{"indexed":false,"internalType":"uint256","name":"reward","type":"uint256"}],"name":"ClaimRewards","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"user","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"aum","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"interest","type":"uint256"}],"name":"Minted","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"initiator","type":"address"},{"indexed":true,"internalType":"address","name":"taker","type":"address"},{"indexed":true,"internalType":"address","name":"token","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"ProtocolFees","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"user","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"aum","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"interest","type":"uint256"}],"name":"Redeemed","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint256","name":"baseAPR","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"aum","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"aum2","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"lastAccrual","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"timestamp","type":"uint256"}],"name":"Yield","type":"event"},{"inputs":[],"name":"BASE","outputs":[{"internalType":"contract IERC20","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"BRIBE","outputs":[{"internalType":"contract IBribe","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"COMPOUND_CTOKEN","outputs":[{"internalType":"contract ICompoundCToken","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"COMPOUND_UNITROLLER","outputs":[{"internalType":"contract ICompoundUnitroller","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"SENTINEL","outputs":[{"internalType":"contract ISentinel","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"WRAP","outputs":[{"internalType":"contract IERC20","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"contract IERC20","name":"","type":"address"}],"name":"acceptAirdrops","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_t","type":"address"}],"name":"addBribeToken","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address[]","name":"_tks","type":"address[]"}],"name":"addBribeTokens","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"alwaysClaimFees","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"baseAPR","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"baseAUM","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"baseAccrualTimestamp","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"bribeTokens","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"bribesListLength","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"claimFees","outputs":[{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"feeTaker","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"interactions","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"contract IERC20","name":"base","type":"address"},{"internalType":"contract IERC20","name":"wrap","type":"address"},{"internalType":"contract ICompoundUnitroller","name":"u","type":"address"},{"internalType":"contract ICompoundCToken","name":"ct","type":"address"},{"internalType":"contract ISentinel","name":"s","type":"address"},{"internalType":"contract IBribe","name":"b","type":"address"},{"internalType":"address[]","name":"btoks","type":"address[]"}],"name":"intialize","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"isBribeToken","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"manager","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"mint","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"paused","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"redeem","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_t","type":"address"}],"name":"removeBribeToken","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address[]","name":"_tks","type":"address[]"}],"name":"removeBribeTokens","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"contract IERC20[]","name":"_tks","type":"address[]"},{"internalType":"bool[]","name":"_aa","type":"bool[]"}],"name":"setAcceptAirdrops","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"setAlwaysdClaimFees","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_b","type":"address"}],"name":"setBribe","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_ft","type":"address"}],"name":"setFeeTaker","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_m","type":"address"}],"name":"setManager","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"bool","name":"_b","type":"bool"}],"name":"setPaused","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"setPaused","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"totalFeesPayouts","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}]
 
 CTOKEN_ABI = [{"inputs":[{"internalType":"address","name":"underlying_","type":"address"},{"internalType":"contract ComptrollerInterface","name":"comptroller_","type":"address"},{"internalType":"contract InterestRateModel","name":"interestRateModel_","type":"address"},{"internalType":"uint256","name":"initialExchangeRateMantissa_","type":"uint256"},{"internalType":"string","name":"name_","type":"string"},{"internalType":"string","name":"symbol_","type":"string"},{"internalType":"uint8","name":"decimals_","type":"uint8"},{"internalType":"address payable","name":"admin_","type":"address"}],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[],"name":"AcceptAdminPendingAdminCheck","type":"error"},{"inputs":[{"internalType":"uint256","name":"actualAddAmount","type":"uint256"}],"name":"AddReservesFactorFreshCheck","type":"error"},{"inputs":[],"name":"BorrowCashNotAvailable","type":"error"},{"inputs":[{"internalType":"uint256","name":"errorCode","type":"uint256"}],"name":"BorrowComptrollerRejection","type":"error"},{"inputs":[],"name":"BorrowFreshnessCheck","type":"error"},{"inputs":[{"internalType":"uint256","name":"errorCode","type":"uint256"}],"name":"LiquidateAccrueBorrowInterestFailed","type":"error"},{"inputs":[{"internalType":"uint256","name":"errorCode","type":"uint256"}],"name":"LiquidateAccrueCollateralInterestFailed","type":"error"},{"inputs":[],"name":"LiquidateCloseAmountIsUintMax","type":"error"},{"inputs":[],"name":"LiquidateCloseAmountIsZero","type":"error"},{"inputs":[],"name":"LiquidateCollateralFreshnessCheck","type":"error"},{"inputs":[{"internalType":"uint256","name":"errorCode","type":"uint256"}],"name":"LiquidateComptrollerRejection","type":"error"},{"inputs":[],"name":"LiquidateFreshnessCheck","type":"error"},{"inputs":[],"name":"LiquidateLiquidatorIsBorrower","type":"error"},{"inputs":[{"internalType":"uint256","name":"errorCode","type":"uint256"}],"name":"LiquidateRepayBorrowFreshFailed","type":"error"},{"inputs":[{"internalType":"uint256","name":"errorCode","type":"uint256"}],"name":"LiquidateSeizeComptrollerRejection","type":"error"},{"inputs":[],"name":"LiquidateSeizeLiquidatorIsBorrower","type":"error"},{"inputs":[{"internalType":"uint256","name":"errorCode","type":"uint256"}],"name":"MintComptrollerRejection","type":"error"},{"inputs":[],"name":"MintFreshnessCheck","type":"error"},{"inputs":[{"internalType":"uint256","name":"errorCode","type":"uint256"}],"name":"RedeemComptrollerRejection","type":"error"},{"inputs":[],"name":"RedeemFreshnessCheck","type":"error"},{"inputs":[],"name":"RedeemTransferOutNotPossible","type":"error"},{"inputs":[],"name":"ReduceReservesAdminCheck","type":"error"},{"inputs":[],"name":"ReduceReservesCashNotAvailable","type":"error"},{"inputs":[],"name":"ReduceReservesCashValidation","type":"error"},{"inputs":[],"name":"ReduceReservesFreshCheck","type":"error"},{"inputs":[{"internalType":"uint256","name":"errorCode","type":"uint256"}],"name":"RepayBorrowComptrollerRejection","type":"error"},{"inputs":[],"name":"RepayBorrowFreshnessCheck","type":"error"},{"inputs":[],"name":"SetComptrollerOwnerCheck","type":"error"},{"inputs":[],"name":"SetInterestRateModelFreshCheck","type":"error"},{"inputs":[],"name":"SetInterestRateModelOwnerCheck","type":"error"},{"inputs":[],"name":"SetPendingAdminOwnerCheck","type":"error"},{"inputs":[],"name":"SetReserveFactorAdminCheck","type":"error"},{"inputs":[],"name":"SetReserveFactorBoundsCheck","type":"error"},{"inputs":[],"name":"SetReserveFactorFreshCheck","type":"error"},{"inputs":[{"internalType":"uint256","name":"errorCode","type":"uint256"}],"name":"TransferComptrollerRejection","type":"error"},{"inputs":[],"name":"TransferNotAllowed","type":"error"},{"inputs":[],"name":"TransferNotEnough","type":"error"},{"inputs":[],"name":"TransferTooMuch","type":"error"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint256","name":"cashPrior","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"interestAccumulated","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"borrowIndex","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"totalBorrows","type":"uint256"}],"name":"AccrueInterest","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"spender","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"borrower","type":"address"},{"indexed":false,"internalType":"uint256","name":"borrowAmount","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"accountBorrows","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"totalBorrows","type":"uint256"}],"name":"Borrow","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"liquidator","type":"address"},{"indexed":false,"internalType":"address","name":"borrower","type":"address"},{"indexed":false,"internalType":"uint256","name":"repayAmount","type":"uint256"},{"indexed":false,"internalType":"address","name":"cTokenCollateral","type":"address"},{"indexed":false,"internalType":"uint256","name":"seizeTokens","type":"uint256"}],"name":"LiquidateBorrow","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"minter","type":"address"},{"indexed":false,"internalType":"uint256","name":"mintAmount","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"mintTokens","type":"uint256"}],"name":"Mint","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"oldAdmin","type":"address"},{"indexed":false,"internalType":"address","name":"newAdmin","type":"address"}],"name":"NewAdmin","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"contract ComptrollerInterface","name":"oldComptroller","type":"address"},{"indexed":false,"internalType":"contract ComptrollerInterface","name":"newComptroller","type":"address"}],"name":"NewComptroller","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"contract InterestRateModel","name":"oldInterestRateModel","type":"address"},{"indexed":false,"internalType":"contract InterestRateModel","name":"newInterestRateModel","type":"address"}],"name":"NewMarketInterestRateModel","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"oldPendingAdmin","type":"address"},{"indexed":false,"internalType":"address","name":"newPendingAdmin","type":"address"}],"name":"NewPendingAdmin","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint256","name":"oldReserveFactorMantissa","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"newReserveFactorMantissa","type":"uint256"}],"name":"NewReserveFactor","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"redeemer","type":"address"},{"indexed":false,"internalType":"uint256","name":"redeemAmount","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"redeemTokens","type":"uint256"}],"name":"Redeem","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"payer","type":"address"},{"indexed":false,"internalType":"address","name":"borrower","type":"address"},{"indexed":false,"internalType":"uint256","name":"repayAmount","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"accountBorrows","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"totalBorrows","type":"uint256"}],"name":"RepayBorrow","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"benefactor","type":"address"},{"indexed":false,"internalType":"uint256","name":"addAmount","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"newTotalReserves","type":"uint256"}],"name":"ReservesAdded","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"admin","type":"address"},{"indexed":false,"internalType":"uint256","name":"reduceAmount","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"newTotalReserves","type":"uint256"}],"name":"ReservesReduced","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"Transfer","type":"event"},{"inputs":[],"name":"NO_ERROR","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_acceptAdmin","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"addAmount","type":"uint256"}],"name":"_addReserves","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"compLikeDelegatee","type":"address"}],"name":"_delegateCompLikeTo","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"reduceAmount","type":"uint256"}],"name":"_reduceReserves","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"contract ComptrollerInterface","name":"newComptroller","type":"address"}],"name":"_setComptroller","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"contract InterestRateModel","name":"newInterestRateModel","type":"address"}],"name":"_setInterestRateModel","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address payable","name":"newPendingAdmin","type":"address"}],"name":"_setPendingAdmin","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"newReserveFactorMantissa","type":"uint256"}],"name":"_setReserveFactor","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"accrualBlockNumber","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"accrueInterest","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"admin","outputs":[{"internalType":"address payable","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"address","name":"spender","type":"address"}],"name":"allowance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"approve","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"}],"name":"balanceOfUnderlying","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"borrowAmount","type":"uint256"}],"name":"borrow","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"borrowBalanceCurrent","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"borrowBalanceStored","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"borrowIndex","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"borrowRatePerBlock","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"comptroller","outputs":[{"internalType":"contract ComptrollerInterface","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"decimals","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"exchangeRateCurrent","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"exchangeRateStored","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"getAccountSnapshot","outputs":[{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getCash","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"underlying_","type":"address"},{"internalType":"contract ComptrollerInterface","name":"comptroller_","type":"address"},{"internalType":"contract InterestRateModel","name":"interestRateModel_","type":"address"},{"internalType":"uint256","name":"initialExchangeRateMantissa_","type":"uint256"},{"internalType":"string","name":"name_","type":"string"},{"internalType":"string","name":"symbol_","type":"string"},{"internalType":"uint8","name":"decimals_","type":"uint8"}],"name":"initialize","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"contract ComptrollerInterface","name":"comptroller_","type":"address"},{"internalType":"contract InterestRateModel","name":"interestRateModel_","type":"address"},{"internalType":"uint256","name":"initialExchangeRateMantissa_","type":"uint256"},{"internalType":"string","name":"name_","type":"string"},{"internalType":"string","name":"symbol_","type":"string"},{"internalType":"uint8","name":"decimals_","type":"uint8"}],"name":"initialize","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"interestRateModel","outputs":[{"internalType":"contract InterestRateModel","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"isCToken","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"borrower","type":"address"},{"internalType":"uint256","name":"repayAmount","type":"uint256"},{"internalType":"contract CTokenInterface","name":"cTokenCollateral","type":"address"}],"name":"liquidateBorrow","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"mintAmount","type":"uint256"}],"name":"mint","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"pendingAdmin","outputs":[{"internalType":"address payable","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"protocolSeizeShareMantissa","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"redeemTokens","type":"uint256"}],"name":"redeem","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"redeemAmount","type":"uint256"}],"name":"redeemUnderlying","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"repayAmount","type":"uint256"}],"name":"repayBorrow","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"borrower","type":"address"},{"internalType":"uint256","name":"repayAmount","type":"uint256"}],"name":"repayBorrowBehalf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"reserveFactorMantissa","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"liquidator","type":"address"},{"internalType":"address","name":"borrower","type":"address"},{"internalType":"uint256","name":"seizeTokens","type":"uint256"}],"name":"seize","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"supplyRatePerBlock","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"contract EIP20NonStandardInterface","name":"token","type":"address"}],"name":"sweepToken","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalBorrows","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalBorrowsCurrent","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"totalReserves","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"dst","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transfer","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"src","type":"address"},{"internalType":"address","name":"dst","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transferFrom","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"underlying","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"}]
+
+EL_27_ABI = [{"inputs": [],"name": "LA","outputs": [{"internalType": "contract ILA","name": "","type": "address"}],"stateMutability": "view","type": "function"},{"inputs": [{"internalType": "contract IP","name": "p","type": "address"}],"name": "bucketList","outputs": [{"internalType": "uint24[]","name": "","type": "uint24[]"}],"stateMutability": "view","type": "function"},{"inputs": [{"internalType": "uint24[]","name": "inp","type": "uint24[]"}],"name": "cast_24_256","outputs": [{"internalType": "uint256[]","name": "","type": "uint256[]"}],"stateMutability": "pure","type": "function"},{"inputs": [{"internalType": "address","name": "","type": "address"}],"name": "farmType","outputs": [{"internalType": "uint256","name": "","type": "uint256"}],"stateMutability": "view","type": "function"},{"inputs": [{"internalType": "contract IFarmland","name": "farm","type": "address"},{"internalType": "address","name": "user","type": "address"},{"internalType": "address","name": "guard","type": "address"}],"name": "getClset","outputs": [{"internalType": "uint256[13]","name": "ret","type": "uint256[13]"}],"stateMutability": "view","type": "function"},{"inputs": [{"internalType": "address[3][]","name": "_id","type": "address[3][]"}],"name": "getClsets","outputs": [{"internalType": "uint256[13][]","name": "","type": "uint256[13][]"}],"stateMutability": "view","type": "function"},{"inputs": [{"internalType": "contract IFarmland","name": "farm","type": "address"},{"internalType": "contract IELM","name": "elm","type": "address"},{"internalType": "address","name": "user","type": "address"}],"name": "getElmaCompoundFarm","outputs": [{"internalType": "uint256[18]","name": "ret","type": "uint256[18]"}],"stateMutability": "view","type": "function"},{"inputs": [{"internalType": "contract IFarmland[]","name": "_farms","type": "address[]"},{"internalType": "contract IELM[]","name": "_elm","type": "address[]"},{"internalType": "address","name": "_user","type": "address"}],"name": "getElmaCompoundFarms","outputs": [{"internalType": "uint256[18][]","name": "","type": "uint256[18][]"}],"stateMutability": "view","type": "function"},{"inputs": [{"internalType": "contract IFarmland","name": "farm","type": "address"},{"internalType": "address","name": "user","type": "address"}],"name": "getSimpleFarm","outputs": [{"internalType": "uint256[7]","name": "ret","type": "uint256[7]"}],"stateMutability": "view","type": "function"},{"inputs": [{"internalType": "contract IFarmland[]","name": "_farms","type": "address[]"},{"internalType": "address","name": "_user","type": "address"}],"name": "getSimpleFarms","outputs": [{"internalType": "uint256[7][]","name": "","type": "uint256[7][]"}],"stateMutability": "view","type": "function"},{"inputs": [{"internalType": "address","name": "_user","type": "address"},{"internalType": "address","name": "_pool","type": "address"}],"name": "getTotalPosition","outputs": [{"internalType": "uint256","name": "x","type": "uint256"},{"internalType": "uint256","name": "y","type": "uint256"}],"stateMutability": "view","type": "function"},{"inputs": [{"internalType": "contract ILA","name": "_la","type": "address"}],"name": "initializer","outputs": [],"stateMutability": "nonpayable","type": "function"},{"inputs": [],"name": "owner","outputs": [{"internalType": "address","name": "","type": "address"}],"stateMutability": "view","type": "function"},{"inputs": [{"internalType": "address","name": "user","type": "address"},{"internalType": "address","name": "_pair","type": "address"}],"name": "positionOf","outputs": [{"internalType": "uint256[]","name": "bIds","type": "uint256[]"},{"internalType": "uint256[]","name": "amountsX","type": "uint256[]"},{"internalType": "uint256[]","name": "amountsY","type": "uint256[]"},{"internalType": "uint256[]","name": "liquidities","type": "uint256[]"}],"stateMutability": "view","type": "function"},{"inputs": [{"internalType": "address","name": "_f","type": "address"},{"internalType": "uint256","name": "_t","type": "uint256"}],"name": "setFarmType","outputs": [],"stateMutability": "nonpayable","type": "function"},{"inputs": [{"internalType": "address","name": "_wrapper","type": "address"},{"internalType": "address","name": "_vault","type": "address"},{"internalType": "address","name": "_vaultPool","type": "address"}],"name": "setVaultPools","outputs": [],"stateMutability": "nonpayable","type": "function"},{"inputs": [{"internalType": "address","name": "","type": "address"}],"name": "vaultPools","outputs": [{"internalType": "address","name": "","type": "address"}],"stateMutability": "view","type": "function"},{"inputs": [{"internalType": "address","name": "","type": "address"}],"name": "vaults","outputs": [{"internalType": "address","name": "","type": "address"}],"stateMutability": "view","type": "function"}]
+
 
 async function paintStatic() {
 
@@ -252,43 +258,57 @@ async function paintStatic() {
 }
 
 async function dexstats() {
-	_WRAP = new ethers.Contract(WRAP, LPABI, provider);
-	_FARM = new ethers.Contract(FARM, LPABI, provider);
-	_CTOKEN = new ethers.Contract(CTOKEN, CTOKEN_ABI, provider);
-	_DEPOSITOR = new ethers.Contract(DEPOSITOR, DEPOSITOR_ABI, provider);
 
-	_ds = await Promise.all([
-		_DEPOSITOR.baseAPR(),
-		_WRAP.totalSupply(),
-		_CTOKEN.getCash(),
-		_CTOKEN.totalBorrows(),
-		_FARM.tvl(),
-		_FARM.apr(),
-	]);
+	_EL_27 = new ethers.Contract("0x1b1c9a41a96dE931c7508BD2C653C57C63cD32a4", EL_27_ABI, provider);
+	_ds = await _EL_27.getElmaCompoundFarm( FARM , DEPOSITOR , "0x0000000000000000000000000000000000001234" );
+
+	ds_farmtvl = (Number(_ds[4])/1e18);
+	ds_farmapr = (Number(_ds[5])/1e18);
+	ds_ctokenapr = (Number(_ds[6])/1e18) * 100;
+	ds_farmts = (Number(_ds[3])) / (10**DECIMAL);
+	ds_wrapts = (Number(_ds[2])) / (10**DECIMAL);
+	ds_wrapprice = ds_farmtvl / ds_farmts;
+	ds_wrapmktcap = (ds_wrapts * ds_wrapprice )
+	ds_cash = (Number(_ds[8])) / 10**DECIMAL;
+	ds_borrowed = (Number(_ds[9])) / 10**DECIMAL;
+	ds_txs = Number(_ds[7]);
+
+	$("topstat-tvl").innerHTML = "$" + fornum6(ds_wrapmktcap, 0)
+	$("topstat-staked").innerHTML = "$" + fornum6(ds_farmtvl,0)
+	$("topstat-cash").innerHTML = "$" + fornum6(ds_cash, 0)
+	$("topstat-borrowed").innerHTML = "$" + fornum6(ds_borrowed, 0)
+
 
 	$("topstat-apr").innerHTML =
-		(Number(_ds[0])*100/1e18).toLocaleString(undefined,{maximumFractionDigits:2}) + "%"
+		fornum6(ds_ctokenapr, ds_ctokenapr>10?2:4)
+		+ "%"
 		+ " ⇢ "
-		+ (Number(_ds[5])/1e18).toLocaleString(undefined,{maximumFractionDigits:2}) + "%";
-	$("topstat-tvl").innerHTML = (Number(_ds[1])/1e18).toLocaleString(undefined,{maximumFractionDigits:2})
-	$("topstat-dom").innerHTML = (Number(_ds[1])/(Number(_ds[2])+Number(_ds[3]))*100).toLocaleString(undefined,{maximumFractionDigits:4}) + "%"
-
-	$("stake-tvl").innerHTML =
-		"$"
-		+ (Number(_ds[4])/1e18).toLocaleString(undefined,{maximumFractionDigits:2})
-		+ " in Total Deposits are earning at an APR of "
-		+ (Number(_ds[5])/1e18).toLocaleString(undefined,{maximumFractionDigits:2})
+		+ fornum6(ds_farmapr, ds_farmapr>10?2:4)
 		+ "%"
 	;
 
-	for(i=0;i<TEARNED.length;i++) {
-		$("claim-info").innerHTML += `
-			<div><img height="20px" src="${LOGOS+TEARNED[i].toLowerCase()}.png" style="vertical-align:middle;"/> ${TEARNED_NAME[i]}</div>
-            <div class="hint"id="claim-${i}-old">Claimed: 0.000000000000000000</div>
-            <div class="hint"id="claim-${i}-pen">Pending: 0.000000000000000000</div>
-            <div class="hint"id="claim-${i}-tot">Total: 0.000000000000000000</div>
-            <br><br>
-		`;
+	//$("topstat-tvl").innerHTML = (Number(_ds[1])/(10**DECIMAL)).toLocaleString(undefined,{maximumFractionDigits:2})
+
+	$("topstat-dom").innerHTML = fornum6(ds_farmtvl/(ds_cash+ds_borrowed)*100, 4) + "%"
+
+	$("stake-tvl").innerHTML =
+		"$"
+		+ fornum6(ds_farmtvl,2)
+		+ " in Total Deposits are earning at an APR of "
+		+ fornum6(ds_farmapr, ds_farmapr>10?2:4)
+		+ "%"
+	;
+
+	if( $("claim-info").innerHTML == "" ) {
+		for(i=0;i<TEARNED.length;i++) {
+			$("claim-info").innerHTML += `
+				<div><img height="20px" src="${LOGOS+TEARNED[i].toLowerCase()}.png" style="vertical-align:middle;"/> ${TEARNED_NAME[i]}</div>
+            	<div class="hint"id="claim-${i}-old">Claimed: 0.000000000000000000</div>
+            	<div class="hint"id="claim-${i}-pen">Pending: 0.000000000000000000</div>
+            	<div class="hint"id="claim-${i}-tot">Total: 0.000000000000000000</div>
+            	<br><br>
+			`;
+		}
 	}
 	return;
 }
@@ -299,7 +319,10 @@ async function arf(){
 	var xfr = setInterval(
 		async function(){
 			console.log("refreshing farm stats", new Date(), c );
-			try { if( ethers.utils.isAddress(window?.ethereum?.selectedAddress) ) {gubs();} }
+			try {
+				if( ethers?.utils?.isAddress(window?.ethereum?.selectedAddress) ) { gubs();}
+				dexstats()
+			}
 			catch(e) { console.log('hmm..'); }
 			c++;
 		},
@@ -321,10 +344,10 @@ async function gubs() {
 		_FARM.earned(TEARNED[1], window.ethereum.selectedAddress),
 		_FARM.earnings(window.ethereum.selectedAddress, TEARNED[1]),
 	]);
-	$("mint-bal").innerHTML		=	"Balance: " + (Number(_ubs[0])/1e18).toLocaleString(undefined,{maximumFractionDigits:18});
-	$("redeem-bal").innerHTML	=	"Balance: " + (Number(_ubs[1])/1e18).toLocaleString(undefined,{maximumFractionDigits:18});
-	$("stake-bal").innerHTML	=	"Balance: " + (Number(_ubs[1])/1e18).toLocaleString(undefined,{maximumFractionDigits:18});
-	$("unstake-bal").innerHTML	=	"Balance: " + (Number(_ubs[2])/1e18).toLocaleString(undefined,{maximumFractionDigits:18});
+	$("mint-bal").innerHTML		=	"Balance: " + (Number(_ubs[0])/10**DECIMAL).toLocaleString(undefined,{maximumFractionDigits:DECIMAL});
+	$("redeem-bal").innerHTML	=	"Balance: " + (Number(_ubs[1])/10**DECIMAL).toLocaleString(undefined,{maximumFractionDigits:DECIMAL});
+	$("stake-bal").innerHTML	=	"Balance: " + (Number(_ubs[1])/10**DECIMAL).toLocaleString(undefined,{maximumFractionDigits:DECIMAL});
+	$("unstake-bal").innerHTML	=	"Balance: " + (Number(_ubs[2])/10**DECIMAL).toLocaleString(undefined,{maximumFractionDigits:DECIMAL});
 
 	$("claim-0-old").innerHTML	=	"Claimed: " +	(Number(_ubs[4])/1e18).toLocaleString(undefined,{maximumFractionDigits:18});
 	$("claim-0-pen").innerHTML	=	"Pending: " +	(Number(_ubs[3])/1e18).toLocaleString(undefined,{maximumFractionDigits:18});
@@ -333,6 +356,7 @@ async function gubs() {
 	$("claim-1-old").innerHTML	=	"Claimed: " +	(Number(_ubs[6])/1e18).toLocaleString(undefined,{maximumFractionDigits:18});
 	$("claim-1-pen").innerHTML	=	"Pending: " +	(Number(_ubs[5])/1e18).toLocaleString(undefined,{maximumFractionDigits:18});
 	$("claim-1-tot").innerHTML	=	"Total: " +		(Number(_ubs[5])/1e18+Number(_ubs[6])/1e18).toLocaleString(undefined,{maximumFractionDigits:18});
+
 
 	return;
 }
@@ -364,11 +388,11 @@ async function mint(ismax) {
 
 	else {
 		_oamt = $("mint-amt").value;
-		if(!isFinite(_oamt) || _oamt<1/1e18){notice(`Invalid ${BASE_NAME} amount!`); return;}
-		_oamt = BigInt(Math.floor(_oamt * 1e18))
+		if(!isFinite(_oamt) || _oamt<1/(10**DECIMAL)){notice(`Invalid ${BASE_NAME} amount!`); return;}
+		_oamt = BigInt(Math.floor(_oamt * (10**DECIMAL)))
 	}
 
-	if(Number(_oamt)>Number(al[1])) {notice(`<h2>Insufficient Balance!</h2><h3>Desired Amount:</h3>${_oamt/1e18}<br><h3>Actual Balance:</h3>${al[1]/1e18}<br><br><b>Please reduce the amount and retry again, or accumulate some more ${BASE_NAME}.`);return;}
+	if(Number(_oamt)>Number(al[1])) {notice(`<h2>Insufficient Balance!</h2><h3>Desired Amount:</h3>${Number(_oamt)/(10**DECIMAL)}<br><h3>Actual Balance:</h3>${Number(al[1])/(10**DECIMAL)}<br><br><b>Please reduce the amount and retry again, or accumulate some more ${BASE_NAME}.`);return;}
 
 	if(Number(_oamt)>Number(al[0])){
 		notice(`
@@ -386,7 +410,7 @@ async function mint(ismax) {
 		console.log(_tw)
 		notice(`
 			<h3>Approval Completed!</h3>
-			<br>Spending rights of ${Number(_oamt)/1e18} ${BASE_NAME} granted.<br>
+			<br>Spending rights of ${Number(_oamt)/(10**DECIMAL)} ${BASE_NAME} granted.<br>
 			<h4><a target="_blank" href="${EXPLORE}/tx/${_tr.hash}">View on Explorer</a></h4>
 			<br><br>
 			Please confirm the next step with your wallet provider now.
@@ -397,8 +421,8 @@ async function mint(ismax) {
 		<h3>Order Summary</h3>
 		<b>Minting ${WRAP_NAME}</b><br>
 
-		<img style='height:20px;position:relative;top:4px' src="${BASE_LOGO}"> ${BASE_NAME} to Deposit: <b>${fornum5(_oamt,18)}</b><br>
-		<img style='height:20px;position:relative;top:4px' src="${WRAP_LOGO}"> ${WRAP_NAME} Expected: <b>${fornum5(_oamt,18)}</b><br>
+		<img style='height:20px;position:relative;top:4px' src="${BASE_LOGO}"> ${BASE_NAME} to Deposit: <b>${fornum5(_oamt,DECIMAL)}</b><br>
+		<img style='height:20px;position:relative;top:4px' src="${WRAP_LOGO}"> ${WRAP_NAME} Expected: <b>${fornum5(_oamt,DECIMAL)}</b><br>
 
 		<h4><u><i>Please Confirm this transaction in your wallet!</i></u></h4>
 	`);
@@ -407,16 +431,16 @@ async function mint(ismax) {
 	notice(`
 		<h3>Order Submitted!</h3>
 		<h4>Minting ${WRAP_NAME}</h4>
-		<img style='height:20px;position:relative;top:4px' src="${BASE_LOGO}"> ${BASE_NAME} Depositing: <b>${fornum5(_oamt,18)}</b><br>
-		<img style='height:20px;position:relative;top:4px' src="${WRAP_LOGO}"> ${WRAP_NAME} Expecting: <b>${fornum5(_oamt,18)}</b><br>
+		<img style='height:20px;position:relative;top:4px' src="${BASE_LOGO}"> ${BASE_NAME} Depositing: <b>${fornum5(_oamt,DECIMAL)}</b><br>
+		<img style='height:20px;position:relative;top:4px' src="${WRAP_LOGO}"> ${WRAP_NAME} Expecting: <b>${fornum5(_oamt,DECIMAL)}</b><br>
 		<h4><a target="_blank" href="${EXPLORE}/tx/${_tr.hash}">View on Explorer</a></h4>
 	`);
 	_tw = await _tr.wait();
 	console.log(_tw)
 	notice(`
 		<h3>Order Completed!</h3>
-		<img style='height:20px;position:relative;top:4px' src="${BASE_LOGO}"> ${BASE_NAME} Deposited: <b>${fornum5(_oamt,18)}</b><br>
-		<img style='height:20px;position:relative;top:4px' src="${WRAP_LOGO}"> ${WRAP_NAME} Received: <b>${fornum5(_oamt,18)}</b><br>
+		<img style='height:20px;position:relative;top:4px' src="${BASE_LOGO}"> ${BASE_NAME} Deposited: <b>${fornum5(_oamt,DECIMAL)}</b><br>
+		<img style='height:20px;position:relative;top:4px' src="${WRAP_LOGO}"> ${WRAP_NAME} Received: <b>${fornum5(_oamt,DECIMAL)}</b><br>
 		<br><br>
 		<h4><a target="_blank" href="${EXPLORE}/tx/${_tr.hash}">View on Explorer</a></h4>
 	`);
@@ -440,10 +464,10 @@ async function redeem(ismax) {
 	else {
 		_oamt = $("redeem-amt").value;
 		if(!isFinite(_oamt)){notice(`Invalid ${WRAP_NAME} amount!`); return;}
-		_oamt = BigInt(Math.floor(_oamt * 1e18))
+		_oamt = BigInt(Math.floor(_oamt * (10**DECIMAL)))
 	}
 
-	if(Number(_oamt)>Number(al[1])) {notice(`<h2>Insufficient Balance!</h2><h3>Desired Amount:</h3>${Number(_oamt)/1e18}<br><h3>Actual Balance:</h3>${al[1]/1e18}<br><br><b>Please reduce the amount and retry again, or accumulate some more ${WRAP_NAME}.`);return;}
+	if(Number(_oamt)>Number(al[1])) {notice(`<h2>Insufficient Balance!</h2><h3>Desired Amount:</h3>${Number(_oamt)/(10**DECIMAL)}<br><h3>Actual Balance:</h3>${al[1]/(10**DECIMAL)}<br><br><b>Please reduce the amount and retry again, or accumulate some more ${WRAP_NAME}.`);return;}
 
 	if(Number(_oamt)>Number(al[0])){
 		notice(`
@@ -461,7 +485,7 @@ async function redeem(ismax) {
 		console.log(_tw)
 		notice(`
 			<h3>Approval Completed!</h3>
-			<br>Spending rights of ${Number(_oamt)/1e18} ${WRAP_NAME} granted.<br>
+			<br>Spending rights of ${Number(_oamt)/(10**DECIMAL)} ${WRAP_NAME} granted.<br>
 			<h4><a target="_blank" href="${EXPLORE}/tx/${_tr.hash}">View on Explorer</a></h4>
 			<br><br>
 			Please confirm the next step with your wallet provider now.
@@ -472,8 +496,8 @@ async function redeem(ismax) {
 		<h3>Order Summary</h3>
 		<b>Redeeming ${WRAP_NAME}</b><br>
 
-		<img style='height:20px;position:relative;top:4px' src="${WRAP_LOGO}"> ${WRAP_NAME} to Redeem: <b>${fornum5(_oamt,18)}</b><br>
-		<img style='height:20px;position:relative;top:4px' src="${BASE_LOGO}"> ${BASE_NAME} Expected: <b>${fornum5(_oamt,18)}</b><br>
+		<img style='height:20px;position:relative;top:4px' src="${WRAP_LOGO}"> ${WRAP_NAME} to Redeem: <b>${fornum5(_oamt,DECIMAL)}</b><br>
+		<img style='height:20px;position:relative;top:4px' src="${BASE_LOGO}"> ${BASE_NAME} Expected: <b>${fornum5(_oamt,DECIMAL)}</b><br>
 
 		<h4><u><i>Please Confirm this transaction in your wallet!</i></u></h4>
 	`);
@@ -482,16 +506,16 @@ async function redeem(ismax) {
 	notice(`
 		<h3>Order Submitted!</h3>
 		<h4>Redeeming ${WRAP_NAME}</h4>
-		<img style='height:20px;position:relative;top:4px' src="${WRAP_LOGO}"> ${WRAP_NAME} Redeeming: <b>${fornum5(_oamt,18)}</b><br>
-		<img style='height:20px;position:relative;top:4px' src="${BASE_LOGO}"> ${BASE_NAME} Expecting: <b>${fornum5(_oamt,18)}</b><br>
+		<img style='height:20px;position:relative;top:4px' src="${WRAP_LOGO}"> ${WRAP_NAME} Redeeming: <b>${fornum5(_oamt,DECIMAL)}</b><br>
+		<img style='height:20px;position:relative;top:4px' src="${BASE_LOGO}"> ${BASE_NAME} Expecting: <b>${fornum5(_oamt,DECIMAL)}</b><br>
 		<h4><a target="_blank" href="${EXPLORE}/tx/${_tr.hash}">View on Explorer</a></h4>
 	`);
 	_tw = await _tr.wait();
 	console.log(_tw)
 	notice(`
 		<h3>Order Completed!</h3>
-		<img style='height:20px;position:relative;top:4px' src="${WRAP_LOGO}"> ${WRAP_NAME} Redeemed: <b>${fornum5(_oamt,18)}</b><br>
-		<img style='height:20px;position:relative;top:4px' src="${BASE_LOGO}"> ${BASE_NAME} Received: <b>${fornum5(_oamt,18)}</b><br>
+		<img style='height:20px;position:relative;top:4px' src="${WRAP_LOGO}"> ${WRAP_NAME} Redeemed: <b>${fornum5(_oamt,DECIMAL)}</b><br>
+		<img style='height:20px;position:relative;top:4px' src="${BASE_LOGO}"> ${BASE_NAME} Received: <b>${fornum5(_oamt,DECIMAL)}</b><br>
 		<br><br>
 		<h4><a target="_blank" href="${EXPLORE}/tx/${_tr.hash}">View on Explorer</a></h4>
 	`);
@@ -516,12 +540,12 @@ async function stake(ismax) {
 
 	else {
 		_oamt = $("stake-amt").value;
-		if(!isFinite(_oamt) || _oamt<1/1e18){notice(`Invalid ${BASE_NAME} amount!`); return;}
-		_oamt = BigInt(Math.floor(_oamt * 1e18))
+		if(!isFinite(_oamt) || _oamt<1/(10**DECIMAL)){notice(`Invalid ${BASE_NAME} amount!`); return;}
+		_oamt = BigInt(Math.floor(_oamt * (10**DECIMAL)))
 	}
 
 
-	if(Number(_oamt)>Number(al[1])) {notice(`<h2>Insufficient Balance!</h2><h3>Desired Amount:</h3>${_oamt/1e18}<br><h3>Actual Balance:</h3>${al[1]/1e18}<br><br><b>Please reduce the amount and retry again, or accumulate some more ${WRAP_NAME}.`);return}
+	if(Number(_oamt)>Number(al[1])) {notice(`<h2>Insufficient Balance!</h2><h3>Desired Amount:</h3>${Number(_oamt)/(10**DECIMAL)}<br><h3>Actual Balance:</h3>${Number(al[1])/(10**DECIMAL)}<br><br><b>Please reduce the amount and retry again, or accumulate some more ${WRAP_NAME}.`);return}
 
 	if(Number(_oamt)>Number(al[0])){
 		notice(`
@@ -540,7 +564,7 @@ async function stake(ismax) {
 		console.log(_tw)
 		notice(`
 			<h3>Approval Completed!</h3>
-			<br>Spending rights of ${Number(_oamt)/1e18} ${WRAP_NAME} granted.<br>
+			<br>Spending rights of ${Number(_oamt)/(10**DECIMAL)} ${WRAP_NAME} granted.<br>
 			<h4><a target="_blank" href="${EXPLORE}/tx/${_tr.hash}">View on Explorer</a></h4>
 			<br><br>
 			Please confirm the next step with your wallet provider now.
@@ -550,7 +574,7 @@ async function stake(ismax) {
 	notice(`
 		<h3>Order Summary</h3>
 		<b>Staking ${WRAP_NAME}</b><br>
-		<img style='height:20px;position:relative;top:4px' src="${WRAP_LOGO}"> ${WRAP_NAME} to Stake: <b>${fornum5(_oamt,18)}</b><br>
+		<img style='height:20px;position:relative;top:4px' src="${WRAP_LOGO}"> ${WRAP_NAME} to Stake: <b>${fornum5(_oamt,DECIMAL)}</b><br>
 		<h4><u><i>Please Confirm this transaction in your wallet!</i></u></h4>
 	`);
 	let _tr = await (ismax ? _FARM.depositAll() : _FARM.deposit(_oamt));
@@ -558,14 +582,14 @@ async function stake(ismax) {
 	notice(`
 		<h3>Order Submitted!</h3>
 		<h4>Staking ${WRAP_NAME}</h4>
-		<img style='height:20px;position:relative;top:4px' src="${WRAP_LOGO}"> ${WRAP_NAME} Staking: <b>${fornum5(_oamt,18)}</b><br>
+		<img style='height:20px;position:relative;top:4px' src="${WRAP_LOGO}"> ${WRAP_NAME} Staking: <b>${fornum5(_oamt,DECIMAL)}</b><br>
 		<h4><a target="_blank" href="${EXPLORE}/tx/${_tr.hash}">View on Explorer</a></h4>
 	`);
 	_tw = await _tr.wait();
 	console.log(_tw)
 	notice(`
 		<h3>Order Completed!</h3>
-		<img style='height:20px;position:relative;top:4px' src="${BASE_LOGO}"> ${WRAP_NAME} Staked: <b>${fornum5(_oamt,18)}</b><br>
+		<img style='height:20px;position:relative;top:4px' src="${BASE_LOGO}"> ${WRAP_NAME} Staked: <b>${fornum5(_oamt,DECIMAL)}</b><br>
 		<br><br>
 		<h4><a target="_blank" href="${EXPLORE}/tx/${_tr.hash}">View on Explorer</a></h4>
 	`);
@@ -587,17 +611,17 @@ async function unstake(ismax) {
 	else {
 		_oamt = $("unstake-amt").value;
 		if(!isFinite(_oamt)){notice(`Invalid ${WRAP_NAME} amount!`); return;}
-		_oamt = BigInt(Math.floor(_oamt * 1e18));
+		_oamt = BigInt(Math.floor(_oamt * (10**DECIMAL)));
 	}
 
-	if(Number(_oamt)>Number(al[1])) {notice(`<h2>Insufficient Staked Balance!</h2><h3>Desired Amount:</h3>${Number(_oamt)/1e18}<br><h3>Actual Staked Balance:</h3>${al[1]/1e18}<br><br><b>Please reduce the amount and retry again, or Stake some more ${WRAP_NAME}.`); return}
+	if(Number(_oamt)>Number(al[1])) {notice(`<h2>Insufficient Staked Balance!</h2><h3>Desired Amount:</h3>${Number(_oamt)/(10**DECIMAL)}<br><h3>Actual Staked Balance:</h3>${al[1]/(10**DECIMAL)}<br><br><b>Please reduce the amount and retry again, or Stake some more ${WRAP_NAME}.`); return}
 
 	notice(`
 		<h3>Order Summary</h3>
 		<b>Withdrawing ${WRAP_NAME}</b><br>
 
-		<img style='height:20px;position:relative;top:4px' src="${WRAP_LOGO}"> ${WRAP_NAME} to Redeem: <b>${fornum5(_oamt,18)}</b><br>
-		<img style='height:20px;position:relative;top:4px' src="${BASE_LOGO}"> ${BASE_NAME} Expected: <b>${fornum5(_oamt,18)}</b><br>
+		<img style='height:20px;position:relative;top:4px' src="${WRAP_LOGO}"> ${WRAP_NAME} to Redeem: <b>${fornum5(_oamt,DECIMAL)}</b><br>
+		<img style='height:20px;position:relative;top:4px' src="${BASE_LOGO}"> ${BASE_NAME} Expected: <b>${fornum5(_oamt,DECIMAL)}</b><br>
 
 		<h4><u><i>Please Confirm this transaction in your wallet!</i></u></h4>
 	`);
@@ -606,14 +630,14 @@ async function unstake(ismax) {
 	notice(`
 		<h3>Order Submitted!</h3>
 		<h4>Unstaking ${WRAP_NAME}</h4>
-		<img style='height:20px;position:relative;top:4px' src="${WRAP_LOGO}"> ${WRAP_NAME} Unstaking: <b>${fornum5(_oamt,18)}</b><br>
+		<img style='height:20px;position:relative;top:4px' src="${WRAP_LOGO}"> ${WRAP_NAME} Unstaking: <b>${fornum5(_oamt,DECIMAL)}</b><br>
 		<h4><a target="_blank" href="${EXPLORE}/tx/${_tr.hash}">View on Explorer</a></h4>
 	`);
 	_tw = await _tr.wait();
 	console.log(_tw)
 	notice(`
 		<h3>Order Completed!</h3>
-		<img style='height:20px;position:relative;top:4px' src="${WRAP_LOGO}"> ${WRAP_NAME} Unstaked: <b>${fornum5(_oamt,18)}</b><br>
+		<img style='height:20px;position:relative;top:4px' src="${WRAP_LOGO}"> ${WRAP_NAME} Unstaked: <b>${fornum5(_oamt,DECIMAL)}</b><br>
 		<br><br>
 		<h4><a target="_blank" href="${EXPLORE}/tx/${_tr.hash}">View on Explorer</a></h4>
 	`);
