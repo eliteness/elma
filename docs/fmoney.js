@@ -264,11 +264,7 @@ async function dexstats() {
 
 	ds_farmtvl = (Number(_ds[4])/1e18);
 	ds_farmapr = (Number(_ds[5])/1e18);
-<<<<<<< HEAD
 	ds_ctokenapr = (Number(_ds[6])/1e18) * 100;
-=======
-	ds_ctokenapr = (Number(_ds[6])/1e18);
->>>>>>> 5b3ec1e8ecc62ed854c09771bb347832d00ee301
 	ds_farmts = (Number(_ds[3])) / (10**DECIMAL);
 	ds_wrapts = (Number(_ds[2])) / (10**DECIMAL);
 	ds_wrapprice = ds_farmtvl / ds_farmts;
