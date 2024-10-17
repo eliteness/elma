@@ -306,8 +306,8 @@ async function dexstats() {
 		$("portfolio-area").style.display="";
 		$("portfolio").innerHTML = `
 			<div class="c2a90-row c2a90-row-port">
-				<div>Underlying</div>
-				<div>Market</div>
+				<div></div>
+				<div>ELMA Pool</div>
 				<div>UT in wallet</div>
 				<div>UT in LM</div>
 				<div>PT in Wallet</div>
@@ -383,8 +383,8 @@ async function dexstats() {
 
 			$("portfolio").innerHTML += `
 				<div class="c2a90-row c2a90-row-port" onclick="window.location='${POOLS[i].wrapname}'">
-					<div><img src="${LOGOS + POOLS[i].baseaddr.toLowerCase()}.png"> ${ POOLS[i].basename }</div>
-					<div><img src="${LOGOS + POOLS[i].marketlogo.toLowerCase()}.png"> ${ POOLS[i].marketname }</div>
+					<div><img src="${LOGOS + POOLS[i].wraplogo.toLowerCase()}.png"/> </div>
+					<div> ${ POOLS[i].wrapname }</div>
 					<div>$${ fornum6(ds_wrapprice * dsu_base, 2) }<br><span class="port-amt">${ fornum6(dsu_base, 2) }</span></div>
 					<div>$${ fornum6(ds_ctokprice * dsu_ctok, 2) }<br><span class="port-amt">${ fornum6(dsu_ctok, 2) }</span></div>
 					<div>$${ fornum6(ds_wrapprice * dsu_wrap, 2) }<br><span class="port-amt">${ fornum6(dsu_wrap, 2) }</span></div>

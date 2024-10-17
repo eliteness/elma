@@ -323,7 +323,7 @@ footer{
 }
 
 .c2a90-row-port {
-	grid-template-columns: repeat(8, 130px);
+	grid-template-columns: 40px 220px repeat(6, 130px);
 }
 .c2a90-row:hover{
 	cursor: pointer;
