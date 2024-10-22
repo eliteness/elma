@@ -332,6 +332,8 @@ async function dexstats() {
 
 
 	for(let i=0;i<POOLS.length;i++) {
+		// skip v0 from dash
+		//if(POOLS[i].v0) { continue; }
 
 		ds_farmtvl = (Number(_ds[i][4])/1e18);
 		ds_farmapr = (Number(_ds[i][5])/1e18);
@@ -340,13 +342,17 @@ async function dexstats() {
 		ds_wrapts = (Number(_ds[i][2])) / (10**POOLS[i].basedeci);
 		ds_farmts = (Number(_ds[i][3])) / (10**POOLS[i].basedeci);
 		ds_wrapprice = ds_farmtvl / ds_farmts;
+			if(isNaN(ds_wrapprice)) ds_wrapprice = 0;
 		ds_wrapmktcap = (ds_wrapts * ds_wrapprice )
 		ds_cash = (Number(_ds[i][8])) / 10**POOLS[i].basedeci;
 		ds_borrowed = (Number(_ds[i][9])) / 10**POOLS[i].basedeci;
 		ds_ctokprice = (ds_cash + ds_borrowed) * ds_wrapprice / ds_ctokts;
+			if(isNaN(ds_ctokprice)) ds_ctokprice = 0;
 
 		ds_totalwrapmktcap += ds_wrapmktcap;
 		ds_totaltxs += Number(_ds[i][7]);
+
+		//console.log({i,ds_wrapprice,ds_ctokprice})
 
 /*
 		$("topstat-tvl").innerHTML = "$" + (ds_wrapprice * ds_wrapts).toLocaleString(undefined,{maximumFractionDigits:0})
@@ -355,22 +361,23 @@ async function dexstats() {
 		$("topstat-borrowed").innerHTML = "$" + (ds_wrapprice * ds_borrowed).toLocaleString(undefined,{maximumFractionDigits:0})
 */
 
-		$("mainstage").innerHTML += `
-			<div class="c2a90-row" onclick="window.location='${POOLS[i].wrapname}'">
-				<div class="c2a90-row-item"><img src="${LOGOS + POOLS[i].baseaddr.toLowerCase()}.png"> ${ POOLS[i].basename }</div>
-				<div class="c2a90-row-item"><img src="${LOGOS + POOLS[i].marketlogo.toLowerCase()}.png"> ${ POOLS[i].marketname }</div>
-				<div class="c2a90-row-item">$${ fornum6(ds_wrapmktcap, 0) }</div>
-				<div class="c2a90-row-item">${ drawPie([ds_farmtvl,ds_wrapmktcap-ds_farmtvl],['#45e7e8','#6d05d7']) }</div>
-				<div class="c2a90-row-item main-amt">$${ fornum6(ds_farmtvl,0) }</div>
-				<div class="c2a90-row-item main-amt">${ fornum6(ds_farmapr, ds_farmapr>1?2:4)}% 🔥</div>
-				<div class="c2a90-row-item">$${ fornum6(ds_cash, 0) }</div>
-				<div class="c2a90-row-item">$${ fornum6((ds_cash+ds_borrowed), 0) }</div>
-				<div class="c2a90-row-item">${ drawPie([ds_borrowed,ds_cash],['#f0890b','#15c66b']  ) }</div>
-				<div class="c2a90-row-item">$${ fornum6(ds_borrowed, 0) }</div>
-				<div class="c2a90-row-item">${ fornum6(ds_ctokenapr, ds_ctokenapr>1?2:4)}%</div>
-			</div>
-		`;
-
+		if(!POOLS[i].v0) {
+			$("mainstage").innerHTML += `
+				<div class="c2a90-row" onclick="window.location='${POOLS[i].wrapname}'">
+					<div class="c2a90-row-item"><img src="${LOGOS + POOLS[i].baseaddr.toLowerCase()}.png"> ${ POOLS[i].basename }</div>
+					<div class="c2a90-row-item"><img src="${LOGOS + POOLS[i].marketlogo.toLowerCase()}.png"> ${ POOLS[i].marketname }</div>
+					<div class="c2a90-row-item">$${ fornum6(ds_wrapmktcap, 0) }</div>
+					<div class="c2a90-row-item">${ drawPie([ds_farmtvl,ds_wrapmktcap-ds_farmtvl],['#45e7e8','#6d05d7']) }</div>
+					<div class="c2a90-row-item main-amt">$${ fornum6(ds_farmtvl,0) }</div>
+					<div class="c2a90-row-item main-amt">${ fornum6(ds_farmapr, ds_farmapr>1?2:4)}% 🔥</div>
+					<div class="c2a90-row-item">$${ fornum6(ds_cash, 0) }</div>
+					<div class="c2a90-row-item">$${ fornum6((ds_cash+ds_borrowed), 0) }</div>
+					<div class="c2a90-row-item">${ drawPie([ds_borrowed,ds_cash],['#f0890b','#15c66b']  ) }</div>
+					<div class="c2a90-row-item">$${ fornum6(ds_borrowed, 0) }</div>
+					<div class="c2a90-row-item">${ fornum6(ds_ctokenapr, ds_ctokenapr>1?2:4)}%</div>
+				</div>
+			`;
+		}
 
 		if(Number(_user)>0x1234) {
 			dsu_base = (Number(_ds[i][11])) / (10**POOLS[i].basedeci);
@@ -381,27 +388,31 @@ async function dexstats() {
 			dsu_rew0 = (Number(_dsd[1][i][0][0])) / (10**18);
 			dsu_tre0 = ( (Number(_dsd[1][i][0][0])) + (Number(_dsd[1][i][1][0])) ) / (10**18);
 
-			$("portfolio").innerHTML += `
-				<div class="c2a90-row c2a90-row-port" onclick="window.location='${POOLS[i].wrapname}'">
-					<div><img src="${LOGOS + POOLS[i].wraplogo.toLowerCase()}.png"/> </div>
-					<div> ${ POOLS[i].wrapname }</div>
-					<div>$${ fornum6(ds_wrapprice * dsu_base, 2) }<br><span class="port-amt">${ fornum6(dsu_base, 2) }</span></div>
-					<div>$${ fornum6(ds_ctokprice * dsu_ctok, 2) }<br><span class="port-amt">${ fornum6(dsu_ctok, 2) }</span></div>
-					<div>$${ fornum6(ds_wrapprice * dsu_wrap, 2) }<br><span class="port-amt">${ fornum6(dsu_wrap, 2) }</span></div>
-					<div>$${ fornum6(ds_wrapprice * dsu_farm, 2) }<br><span class="port-amt">${ fornum6(dsu_farm, 2) }</span></div>
-					<div>$${ fornum6(ds_equalprice * dsu_rew0, 2) }<br><span class="port-amt">${ fornum6(dsu_rew0, 2) } <img src="${LOGOS+TEARNED[0].toLowerCase()}.png"></span></div>
-					<div>$${ fornum6(ds_equalprice * dsu_tre0, 2) }<br><span class="port-amt">${ fornum6(dsu_tre0, 2) } <img src="${LOGOS+TEARNED[0].toLowerCase()}.png"></span></div>
-				</div>
-			`;
+			if(dsu_rew0 > 0 || dsu_wrap > 0 || dsu_farm > 0) {
+				$("portfolio").innerHTML += `
+					<div class="c2a90-row c2a90-row-port" onclick="window.location='${POOLS[i].wrapname}'">
+						<div><img src="${LOGOS + POOLS[i].wraplogo.toLowerCase()}.png"/> </div>
+						<div> ${ POOLS[i].v0?"⛔ Deprecated Pool ":"" } ${ POOLS[i].wrapname }</div>
+						<div>$${ fornum6(ds_wrapprice * dsu_base, 2) }<br><span class="port-amt">${ fornum6(dsu_base, 2) }</span></div>
+						<div>$${ fornum6(ds_ctokprice * dsu_ctok, 2) }<br><span class="port-amt">${ fornum6(dsu_ctok, 2) }</span></div>
+						<div>$${ fornum6(ds_wrapprice * dsu_wrap, 2) }<br><span class="port-amt">${ fornum6(dsu_wrap, 2) }</span></div>
+						<div>$${ fornum6(ds_wrapprice * dsu_farm, 2) }<br><span class="port-amt">${ fornum6(dsu_farm, 2) }</span></div>
+						<div>$${ fornum6(ds_equalprice * dsu_rew0, 2) }<br><span class="port-amt">${ fornum6(dsu_rew0, 2) } <img src="${LOGOS+TEARNED[0].toLowerCase()}.png"></span></div>
+						<div>$${ fornum6(ds_equalprice * dsu_tre0, 2) }<br><span class="port-amt">${ fornum6(dsu_tre0, 2) } <img src="${LOGOS+TEARNED[0].toLowerCase()}.png"></span></div>
+					</div>
+				`;
 
+				dsu_totalbase += ds_wrapprice * dsu_base;
+				dsu_totalctok += ds_ctokprice * dsu_ctok;
+				dsu_totalwrap += ds_wrapprice * dsu_wrap;
+				dsu_totalfarm += ds_wrapprice * dsu_farm;
 
-			dsu_totalbase += ds_wrapprice * dsu_base;
-			dsu_totalctok += ds_ctokprice * dsu_ctok;
-			dsu_totalwrap += ds_wrapprice * dsu_wrap;
-			dsu_totalfarm += ds_wrapprice * dsu_farm;
+			}
+
 			dsu_totalrew0 += ds_equalprice * dsu_rew0;
 			dsu_totaltre0 += ds_equalprice * dsu_tre0;
 			dsu_annualrew += ds_wrapprice * dsu_farm * ds_farmapr / 100 ;
+
 
 		}
 
