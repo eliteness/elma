@@ -221,7 +221,8 @@ footer{
     font-family:bold;
 }
 
-.headline-props img {
+.headline-props img,
+#headline-props img {
     width: 24px;
     vertical-align: bottom;
 }
@@ -380,8 +381,10 @@ footer{
     text-align: right;
 }
 
-.c2a90-row div:nth-child(6),
-.c2a90-row div:nth-child(7) {
+#mainstage .c2a90-row div:nth-child(5),
+#mainstage .c2a90-row div:nth-child(6),
+#portfolio .c2a90-row div:nth-child(6),
+#portfolio .c2a90-row div:nth-child(8) {
 	text-shadow: 0px 0px 20px #f0f;
 	font-family: bold;
 }

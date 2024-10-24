@@ -307,13 +307,13 @@ async function dexstats() {
 		$("portfolio").innerHTML = `
 			<div class="c2a90-row c2a90-row-port">
 				<div></div>
-				<div>ELMA Pool</div>
-				<div>UT in wallet</div>
-				<div>UT in LM</div>
-				<div>PT in Wallet</div>
-				<div>PT Staked</div>
-				<div>Claimable</div>
-				<div>Total Earned</div>
+				<div onclick="sortit(0, 'portfolio', 'c2a90-row', 1, 'c2a90-row-item')">ELMA Pool</div>
+				<div onclick="sortit(1, 'portfolio', 'c2a90-row', 1, 'c2a90-row-item')">UT in wallet</div>
+				<div onclick="sortit(2, 'portfolio', 'c2a90-row', 1, 'c2a90-row-item')">UT in LM</div>
+				<div onclick="sortit(3, 'portfolio', 'c2a90-row', 1, 'c2a90-row-item')">PT in Wallet</div>
+				<div onclick="sortit(4, 'portfolio', 'c2a90-row', 1, 'c2a90-row-item')">PT Staked</div>
+				<div onclick="sortit(5, 'portfolio', 'c2a90-row', 1, 'c2a90-row-item')">Claimable</div>
+				<div onclick="sortit(6, 'portfolio', 'c2a90-row', 1, 'c2a90-row-item')">Total Earned</div>
 			</div>
 		`;
 	}
@@ -391,14 +391,14 @@ async function dexstats() {
 			if(dsu_rew0 > 0 || dsu_wrap > 0 || dsu_farm > 0) {
 				$("portfolio").innerHTML += `
 					<div class="c2a90-row c2a90-row-port" onclick="window.location='${POOLS[i].wrapname}'">
-						<div><img src="${LOGOS + POOLS[i].wraplogo.toLowerCase()}.png"/> </div>
-						<div> ${ POOLS[i].v0?"⛔ Deprecated Pool ":"" } ${ POOLS[i].wrapname }</div>
-						<div>$${ fornum6(ds_wrapprice * dsu_base, 2) }<br><span class="port-amt">${ fornum6(dsu_base, 2) }</span></div>
-						<div>$${ fornum6(ds_ctokprice * dsu_ctok, 2) }<br><span class="port-amt">${ fornum6(dsu_ctok, 2) }</span></div>
-						<div>$${ fornum6(ds_wrapprice * dsu_wrap, 2) }<br><span class="port-amt">${ fornum6(dsu_wrap, 2) }</span></div>
-						<div>$${ fornum6(ds_wrapprice * dsu_farm, 2) }<br><span class="port-amt">${ fornum6(dsu_farm, 2) }</span></div>
-						<div>$${ fornum6(ds_equalprice * dsu_rew0, 2) }<br><span class="port-amt">${ fornum6(dsu_rew0, 2) } <img src="${LOGOS+TEARNED[0].toLowerCase()}.png"></span></div>
-						<div>$${ fornum6(ds_equalprice * dsu_tre0, 2) }<br><span class="port-amt">${ fornum6(dsu_tre0, 2) } <img src="${LOGOS+TEARNED[0].toLowerCase()}.png"></span></div>
+						<div class="c2a90-row-item"><img src="${LOGOS + POOLS[i].wraplogo.toLowerCase()}.png"/> </div>
+						<div class="c2a90-row-item"> ${ POOLS[i].v0?"⛔ Deprecated Pool ":"" } ${ POOLS[i].wrapname }</div>
+						<div class="c2a90-row-item">$${ fornum6(ds_wrapprice * dsu_base, 2) }<br><span class="port-amt">${ fornum6(dsu_base, 2) }</span></div>
+						<div class="c2a90-row-item">$${ fornum6(ds_ctokprice * dsu_ctok, 2) }<br><span class="port-amt">${ fornum6(dsu_ctok, 2) }</span></div>
+						<div class="c2a90-row-item">$${ fornum6(ds_wrapprice * dsu_wrap, 2) }<br><span class="port-amt">${ fornum6(dsu_wrap, 2) }</span></div>
+						<div class="c2a90-row-item">$${ fornum6(ds_wrapprice * dsu_farm, 2) }<br><span class="port-amt">${ fornum6(dsu_farm, 2) }</span></div>
+						<div class="c2a90-row-item">$${ fornum6(ds_equalprice * dsu_rew0, 2) }<br><span class="port-amt">${ fornum6(dsu_rew0, 2) } <img src="${LOGOS+TEARNED[0].toLowerCase()}.png"></span></div>
+						<div class="c2a90-row-item">$${ fornum6(ds_equalprice * dsu_tre0, 2) }<br><span class="port-amt">${ fornum6(dsu_tre0, 2) } <img src="${LOGOS+TEARNED[0].toLowerCase()}.png"></span></div>
 					</div>
 				`;
 
@@ -445,7 +445,8 @@ async function dexstats() {
 		$("portstat-earnings").innerHTML = "$"+ fornum6( dsu_totaltre0, 2);
 	}
 
-	sortit(5, 'mainstage', 'c2a90-row', 1, 'c2a90-row-item', "d");
+	sortit(2, 'mainstage', 'c2a90-row', 1, 'c2a90-row-item', "d");
+	sortit(5, 'portfolio', 'c2a90-row', 1, 'c2a90-row-item', "d");
 
 	return;
 }

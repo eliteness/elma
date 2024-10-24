@@ -224,11 +224,11 @@ async function paintStatic() {
     document.getElementsByClassName('tablinks')[0].click();
 
 	$("headline-props").innerHTML = `
-		<img src="${BASE_LOGO}">
 		${BASE_NAME}
+		<img src="${BASE_LOGO}">
 		⇢
-		<img src="${MARKET_LOGO}">
 		${MARKET_NAME}
+		<img src="${MARKET_LOGO}">
 	`;
 
 	$("topstat-basename-1").innerHTML = BASE_NAME;
