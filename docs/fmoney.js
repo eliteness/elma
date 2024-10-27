@@ -426,7 +426,7 @@ async function mint(ismax) {
 
 		<h4><u><i>Please Confirm this transaction in your wallet!</i></u></h4>
 	`);
-	let _tr = await _DEPOSITOR.mint(_oamt);
+	let _tr = await _DEPOSITOR.mint(_oamt,{gasLimit:BigInt(1_200_000)});
 	console.log(_tr);
 	notice(`
 		<h3>Order Submitted!</h3>
@@ -501,7 +501,7 @@ async function redeem(ismax) {
 
 		<h4><u><i>Please Confirm this transaction in your wallet!</i></u></h4>
 	`);
-	let _tr = await _DEPOSITOR.redeem(_oamt);
+	let _tr = await _DEPOSITOR.redeem(_oamt,{gasLimit:BigInt(1_200_000)});
 	console.log(_tr);
 	notice(`
 		<h3>Order Submitted!</h3>
