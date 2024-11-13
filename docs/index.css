@@ -252,6 +252,7 @@ footer{
 .topstat {
     background: #4567;
     padding: 20px;
+    border: 1px solid #fff1;
     border-radius: 10px;
     margin: 10px;
     flex: 1;
@@ -272,8 +273,9 @@ footer{
 .c2a {
 	/*! max-width:500px; */
 	margin:auto auto;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 255, 0.25);
     padding: 20px;
+    border: 1px solid #fff7;
     border-radius: 10px;
     margin-bottom: 20px;
     text-align: center;
@@ -314,8 +316,8 @@ footer{
 
 .c2a90-row {
 	display: grid;
-	grid-template-columns: 150px 120px 120px 36px 120px 120px 120px 120px 36px 120px 120px;
-	grid-gap-columns:5px;[]]]
+	grid-template-columns: 150px 120px 120px 120px 24px 120px 24px 120px 24px 120px 24px 120px 120px 120px 120px ;
+	grid-gap-columns:5px;
     max-width: -moz-max-content;
     margin: 10px auto;
 	padding: 0 15px;
@@ -353,36 +355,33 @@ footer{
     font-family: bold !important;
     margin-bottom:10px;
 }
+.c2a90-table .c2a90-row:first-child div:nth-child(n+4):nth-child(-n+10){
+    margin-right: -15px;
+}
 
 .c2a90-row div {
-    text-align: center;
+    text-align: right;
 }
 .c2a90-row.c2a90-row-port div:nth-child(n+3) {
     text-align: right;
 }
 
 .c2a90-row div:nth-child(1),
-.c2a90-row div:nth-child(2),
-.c2a90-row div:nth-child(5),
-.c2a90-row div:nth-child(6),
-.c2a90-row div:nth-child(10),
-.c2a90-row div:nth-child(11) {
+.c2a90-row div:nth-child(2) {
     text-align: left;
 }
 
-.c2a90-row div:nth-child(4),
-.c2a90-row div:nth-child(9) {
+.c2a90-row div:nth-child(0) {
     text-align: center;
 }
 
-.c2a90-row div:nth-child(3),
 .c2a90-row div:nth-child(7),
 .c2a90-row div:nth-child(8) {
     text-align: right;
 }
 
-#mainstage .c2a90-row div:nth-child(5),
-#mainstage .c2a90-row div:nth-child(6),
+#mainstage .c2a90-row div:nth-child(3),
+#mainstage .c2a90-row div:nth-child(4),
 #portfolio .c2a90-row div:nth-child(6),
 #portfolio .c2a90-row div:nth-child(8) {
 	text-shadow: 0px 0px 20px #f0f;
@@ -390,8 +389,8 @@ footer{
 }
 
 .c2a90-table .c2a90-row:first-child .c2a90-row-byline {
-    font-family: light_italic !important;
-    font-size: 0.6em !important;
+    font-family:  !important;
+    font-size: 0.7em !important;
 }
 
 .main-amt {

@@ -290,15 +290,22 @@ async function dexstats() {
 		<div class="c2a90-row">
 			<div onclick="sortit(0, 'mainstage', 'c2a90-row', 1, 'c2a90-row-item')">Underlying		<br><span class="c2a90-row-byline">Base Asset</span></div>
 			<div onclick="sortit(1, 'mainstage', 'c2a90-row', 1, 'c2a90-row-item')">LM				<br><span class="c2a90-row-byline">Lending Market</span></div>
-			<div onclick="sortit(2, 'mainstage', 'c2a90-row', 1, 'c2a90-row-item')">PT Supply		<br><span class="c2a90-row-byline">Total Wrapped</span></div>
+			<div onclick="sortit(2, 'mainstage', 'c2a90-row', 1, 'c2a90-row-item')">PT APR			<br><span class="c2a90-row-byline">Boosted APR</span></div>
+
+			<div onclick="sortit(3, 'mainstage', 'c2a90-row', 1, 'c2a90-row-item')">PT Staked		<br><span class="c2a90-row-byline">In Elma Gauge</span></div>
 			<div onclick="sortit(3, 'mainstage', 'c2a90-row', 1, 'c2a90-row-item')"></div>
-			<div onclick="sortit(4, 'mainstage', 'c2a90-row', 1, 'c2a90-row-item')">PT Staked		<br><span class="c2a90-row-byline">In Elma Gauge</span></div>
-			<div onclick="sortit(5, 'mainstage', 'c2a90-row', 1, 'c2a90-row-item')">PT APR			<br><span class="c2a90-row-byline">Boosted APR</span></div>
-			<div onclick="sortit(6, 'mainstage', 'c2a90-row', 1, 'c2a90-row-item')">LM Cash		<br><span class="c2a90-row-byline">Exit Liquidity</span></div>
-			<div onclick="sortit(7, 'mainstage', 'c2a90-row', 1, 'c2a90-row-item')">LM Size		<br><span class="c2a90-row-byline">Underlying LM pool</span></div>
-			<div onclick="sortit(8, 'mainstage', 'c2a90-row', 1, 'c2a90-row-item')"></div>
+			<div onclick="sortit(5, 'mainstage', 'c2a90-row', 1, 'c2a90-row-item')">PT Supply		<br><span class="c2a90-row-byline">Total Wrapped</span></div>
+			<div onclick="sortit(5, 'mainstage', 'c2a90-row', 1, 'c2a90-row-item')"></div>
+			<div onclick="sortit(7, 'mainstage', 'c2a90-row', 1, 'c2a90-row-item')">LM Cash		<br><span class="c2a90-row-byline">Exit Liquidity</span></div>
+			<div onclick="sortit(7, 'mainstage', 'c2a90-row', 1, 'c2a90-row-item')"></div>
 			<div onclick="sortit(9, 'mainstage', 'c2a90-row', 1, 'c2a90-row-item')">LM Loans		<br><span class="c2a90-row-byline">Borrowed from LM</span></div>
+			<div onclick="sortit(9, 'mainstage', 'c2a90-row', 1, 'c2a90-row-item')"></div>
+
+			<div onclick="sortit(7, 'mainstage', 'c2a90-row', 1, 'c2a90-row-item')">LM Size		<br><span class="c2a90-row-byline">Underlying LM pool</span></div>
 			<div onclick="sortit(10,'mainstage', 'c2a90-row', 1, 'c2a90-row-item')">YT APR			<br><span class="c2a90-row-byline">LM Interest APR</span></div>
+
+			<div onclick="sortit(11,'mainstage', 'c2a90-row', 1, 'c2a90-row-item')">YT Yield			<br><span class="c2a90-row-byline">Per Week</span></div>
+			<div onclick="sortit(11,'mainstage', 'c2a90-row', 1, 'c2a90-row-item')">PT Yield			<br><span class="c2a90-row-byline">Per Week</span></div>
 		</div>
 	`;
 
@@ -366,15 +373,27 @@ async function dexstats() {
 				<div class="c2a90-row" onclick="window.location='${POOLS[i].wrapname}'">
 					<div class="c2a90-row-item"><img src="${LOGOS + POOLS[i].baseaddr.toLowerCase()}.png"> ${ POOLS[i].basename }</div>
 					<div class="c2a90-row-item"><img src="${LOGOS + POOLS[i].marketlogo.toLowerCase()}.png"> ${ POOLS[i].marketname }</div>
-					<div class="c2a90-row-item">$${ fornum6(ds_wrapmktcap, 0) }</div>
-					<div class="c2a90-row-item">${ drawPie([ds_farmtvl,ds_wrapmktcap-ds_farmtvl],['#45e7e8','#6d05d7']) }</div>
-					<div class="c2a90-row-item main-amt">$${ fornum6(ds_farmtvl,0) }</div>
 					<div class="c2a90-row-item main-amt">${ fornum6(ds_farmapr, ds_farmapr>1?2:4)}% 🔥</div>
+
+
+					<div class="c2a90-row-item main-amt">$${ fornum6(ds_farmtvl,0) }</div>
+					<div class="c2a90-row-item">${ drawPie([ds_farmtvl,(ds_wrapmktcap-ds_farmtvl)||0.01],['#45e7e8','#6d05d7']) }</div>
+
+					<div class="c2a90-row-item">$${ fornum6(ds_wrapmktcap, 0) }</div>
+					<div class="c2a90-row-item">${ drawPie((ds_cash>ds_wrapmktcap)?[ds_cash,1]:[ds_cash,ds_wrapmktcap-ds_cash],['#1ea','#f77']  ) }</div>
+
 					<div class="c2a90-row-item">$${ fornum6(ds_cash, 0) }</div>
-					<div class="c2a90-row-item">$${ fornum6((ds_cash+ds_borrowed), 0) }</div>
-					<div class="c2a90-row-item">${ drawPie([ds_borrowed,ds_cash],['#f0890b','#15c66b']  ) }</div>
+					<div class="c2a90-row-item">${ drawPie([ds_cash,ds_borrowed],['#15c66b','#f0890b']  ) }</div>
+
 					<div class="c2a90-row-item">$${ fornum6(ds_borrowed, 0) }</div>
+					<div class="c2a90-row-item">${ drawPie([ds_borrowed,ds_cash],['#f0890b','#15c66b']  ) }</div>
+
+
+					<div class="c2a90-row-item">$${ fornum6((ds_cash+ds_borrowed), 0) }</div>
 					<div class="c2a90-row-item">${ fornum6(ds_ctokenapr, ds_ctokenapr>1?2:4)}%</div>
+
+					<div class="c2a90-row-item">$${ fornum6(ds_ctokenapr*ds_wrapmktcap/100/52, 2)}</div>
+					<div class="c2a90-row-item">$${ fornum6(ds_farmapr*ds_farmtvl/100/52, 2)}</div>
 				</div>
 			`;
 		}
@@ -420,7 +439,7 @@ async function dexstats() {
 	}
 
 	dsu_totalport = dsu_totalbase + dsu_totalctok + dsu_totalwrap + dsu_totalfarm;
-	$("topstat-pools").innerHTML= POOLS.length;
+	$("topstat-pools").innerHTML= POOLS.length+"x";
 	$("topstat-tvl").innerHTML= "$"+fornum6(ds_totalwrapmktcap,0);
 	$("topstat-txs").innerHTML= fornum6(ds_totaltxs,0);
 
@@ -445,7 +464,7 @@ async function dexstats() {
 		$("portstat-earnings").innerHTML = "$"+ fornum6( dsu_totaltre0, 2);
 	}
 
-	sortit(2, 'mainstage', 'c2a90-row', 1, 'c2a90-row-item', "d");
+	//sortit(2, 'mainstage', 'c2a90-row', 1, 'c2a90-row-item', "d");
 	sortit(5, 'portfolio', 'c2a90-row', 1, 'c2a90-row-item', "d");
 
 	return;
@@ -476,6 +495,7 @@ async function gubs() {
 
 
 function drawPie(_pievals, _piecolors) {
+	console.log(_pievals)
 
 	function describeArc(x, y, radius, startAngle, endAngle) {
     	const startX = x + radius * Math.cos(startAngle);
