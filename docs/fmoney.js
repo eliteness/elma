@@ -278,14 +278,18 @@ async function dexstats() {
 	$("topstat-cash").innerHTML = "$" + fornum6(ds_cash, 0)
 	$("topstat-borrowed").innerHTML = "$" + fornum6(ds_borrowed, 0)
 
+	_sftmxapr = 0;
 
-	$("topstat-apr").innerHTML =
-		fornum6(ds_ctokenapr, ds_ctokenapr>10?2:4)
-		+ "%"
-		+ " ⇢ "
-		+ fornum6(ds_farmapr, ds_farmapr>10?2:4)
-		+ "%"
-	;
+	if(BASE_NAME == "SFTMX") {
+		$("topstat-apr-native-div").style.display="block";
+		_sftmxdata = await fetch("https://backend-v3.beets-ftm-node.com/", {"headers": { "content-type": "application/json",}, "body": "{\"query\":\"query {\\n  sftmxGetStakingData {\\n    exchangeRate\\n    stakingApr\\n  }\\n}\\n\"}", "method": "POST",});
+		_sftmxdata = await _sftmxdata.json()
+		_sftmxapr = Number(_sftmxdata.data.sftmxGetStakingData.stakingApr) * 100;
+		$("topstat-apr-native").innerHTML = "+"+fornum6(_sftmxapr, _sftmxapr>10?2:4) + "% 🎶"
+	}
+
+	$("topstat-apr-yt").innerHTML = fornum6(ds_ctokenapr, (ds_ctokenapr)>10?2:4) + "%"
+	$("topstat-apr-pt").innerHTML = fornum6(ds_farmapr, (ds_farmapr)>10?2:4) + "%"
 
 	//$("topstat-tvl").innerHTML = (Number(_ds[1])/(10**DECIMAL)).toLocaleString(undefined,{maximumFractionDigits:2})
 

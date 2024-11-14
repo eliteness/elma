@@ -234,6 +234,9 @@ async function dexstats() {
 	_user = window.ethereum?.selectedAddress ? window.ethereum?.selectedAddress : "0x0000000000000000000000000000000000001234"
 	_dsd = await _EL_30.getElmaCompoundFarms( POOLS.map(i=>i.farmaddr) , POOLS.map(i=>i.depositor) , _user );
 	_ds = _dsd[0];
+	_sftmxdata = await fetch("https://backend-v3.beets-ftm-node.com/", {"headers": { "content-type": "application/json",}, "body": "{\"query\":\"query {\\n  sftmxGetStakingData {\\n    exchangeRate\\n    stakingApr\\n  }\\n}\\n\"}", "method": "POST",});
+	_sftmxdata = await _sftmxdata.json()
+	_sftmxapr = Number(_sftmxdata.data.sftmxGetStakingData.stakingApr) * 100;
 	/*
 		ret[0] = base.totalSupply();
 		ret[1] = ctoken.totalSupply();
@@ -301,11 +304,12 @@ async function dexstats() {
 			<div onclick="sortit(9, 'mainstage', 'c2a90-row', 1, 'c2a90-row-item')">LM Loans		<br><span class="c2a90-row-byline">Borrowed from LM</span></div>
 			<div onclick="sortit(9, 'mainstage', 'c2a90-row', 1, 'c2a90-row-item')"></div>
 
-			<div onclick="sortit(7, 'mainstage', 'c2a90-row', 1, 'c2a90-row-item')">LM Size		<br><span class="c2a90-row-byline">Underlying LM pool</span></div>
-			<div onclick="sortit(10,'mainstage', 'c2a90-row', 1, 'c2a90-row-item')">YT APR			<br><span class="c2a90-row-byline">LM Interest APR</span></div>
+			<div onclick="sortit(11, 'mainstage', 'c2a90-row', 1, 'c2a90-row-item')">LM Size		<br><span class="c2a90-row-byline">Underlying LM pool</span></div>
+			<div onclick="sortit(12,'mainstage', 'c2a90-row', 1, 'c2a90-row-item')">YT APR			<br><span class="c2a90-row-byline">LM Interest APR</span></div>
+			<div onclick="sortit(13,'mainstage', 'c2a90-row', 1, 'c2a90-row-item')">Native APR			<br><span class="c2a90-row-byline">UT/LST/LRT/iB</span></div>
 
-			<div onclick="sortit(11,'mainstage', 'c2a90-row', 1, 'c2a90-row-item')">YT Yield			<br><span class="c2a90-row-byline">Per Week</span></div>
-			<div onclick="sortit(11,'mainstage', 'c2a90-row', 1, 'c2a90-row-item')">PT Yield			<br><span class="c2a90-row-byline">Per Week</span></div>
+			<div onclick="sortit(14,'mainstage', 'c2a90-row', 1, 'c2a90-row-item')">YT Yield			<br><span class="c2a90-row-byline">Per Week</span></div>
+			<div onclick="sortit(15,'mainstage', 'c2a90-row', 1, 'c2a90-row-item')">PT Yield			<br><span class="c2a90-row-byline">Per Week</span></div>
 		</div>
 	`;
 
@@ -373,14 +377,14 @@ async function dexstats() {
 				<div class="c2a90-row" onclick="window.location='${POOLS[i].wrapname}'">
 					<div class="c2a90-row-item"><img src="${LOGOS + POOLS[i].baseaddr.toLowerCase()}.png"> ${ POOLS[i].basename }</div>
 					<div class="c2a90-row-item"><img src="${LOGOS + POOLS[i].marketlogo.toLowerCase()}.png"> ${ POOLS[i].marketname }</div>
-					<div class="c2a90-row-item main-amt">${ fornum6(ds_farmapr, ds_farmapr>1?2:4)}% 🔥</div>
+					<div class="c2a90-row-item main-amt">${ fornum6(ds_farmapr+(POOLS[i].basename=="SFTMX"?_sftmxapr:0), ds_farmapr>1?2:4)}% ${"🔥"}${POOLS[i].basename=="SFTMX"?"🎶":""}</div>
 
 
 					<div class="c2a90-row-item main-amt">$${ fornum6(ds_farmtvl,0) }</div>
 					<div class="c2a90-row-item">${ drawPie([ds_farmtvl,(ds_wrapmktcap-ds_farmtvl)||0.01],['#45e7e8','#6d05d7']) }</div>
 
 					<div class="c2a90-row-item">$${ fornum6(ds_wrapmktcap, 0) }</div>
-					<div class="c2a90-row-item">${ drawPie((ds_cash>ds_wrapmktcap)?[ds_cash,1]:[ds_cash,ds_wrapmktcap-ds_cash],['#1ea','#f77']  ) }</div>
+					<div class="c2a90-row-item">${ drawPie((ds_cash>ds_wrapmktcap)?[ds_cash,1]:[ds_cash,ds_wrapmktcap-ds_cash],['#1ea','#f22']  ) }</div>
 
 					<div class="c2a90-row-item">$${ fornum6(ds_cash, 0) }</div>
 					<div class="c2a90-row-item">${ drawPie([ds_cash,ds_borrowed],['#15c66b','#f0890b']  ) }</div>
@@ -391,6 +395,8 @@ async function dexstats() {
 
 					<div class="c2a90-row-item">$${ fornum6((ds_cash+ds_borrowed), 0) }</div>
 					<div class="c2a90-row-item">${ fornum6(ds_ctokenapr, ds_ctokenapr>1?2:4)}%</div>
+
+					<div class="c2a90-row-item">${ POOLS[i].basename=="SFTMX"?(fornum6(_sftmxapr,2)+"% 🎶"):"."}</div>
 
 					<div class="c2a90-row-item">$${ fornum6(ds_ctokenapr*ds_wrapmktcap/100/52, 2)}</div>
 					<div class="c2a90-row-item">$${ fornum6(ds_farmapr*ds_farmtvl/100/52, 2)}</div>
@@ -603,9 +609,9 @@ function sortit(n,_maintable,_trName,_firstRow,_tdName,_dir) {
     r = t.getElementsByClassName(_trName);
     for (i = _firstRow; i < (r.length - 1); i++) {
       v = false;
-      x = (r[i].getElementsByClassName(_tdName)[n].textContent).replaceAll(/,| |\.|\$|%|🔥/g,'');
+      x = (r[i].getElementsByClassName(_tdName)[n].textContent).replaceAll(/,| |\.|\$|%|🔥|🎶|-/g,'');
       if(isFinite(x)){x=Number(x)}else{x=x.toLowerCase()}
-      y = (r[i + 1].getElementsByClassName(_tdName)[n].textContent).replaceAll(/,| |\.|\$|%|🔥/g,'');
+      y = (r[i + 1].getElementsByClassName(_tdName)[n].textContent).replaceAll(/,| |\.|\$|%|🔥|🎶|-/g,'');
       if(isFinite(y)){y=Number(y)}else{y=y.toLowerCase()}
       if (b == "a") {
         if ((x) > (y)) {

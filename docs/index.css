@@ -270,6 +270,10 @@ footer{
     font-size: 1em;
 }
 
+#topstat-apr-native-div {
+	display: none;
+}
+
 .c2a {
 	/*! max-width:500px; */
 	margin:auto auto;
@@ -316,7 +320,7 @@ footer{
 
 .c2a90-row {
 	display: grid;
-	grid-template-columns: 150px 120px 120px 120px 24px 120px 24px 120px 24px 120px 24px 120px 120px 120px 120px ;
+	grid-template-columns: 150px 120px 120px 120px 24px 120px 24px 120px 24px 120px 24px 120px 120px 120px 120px 120px;
 	grid-gap-columns:5px;
     max-width: -moz-max-content;
     margin: 10px auto;
@@ -371,7 +375,7 @@ footer{
     text-align: left;
 }
 
-.c2a90-row div:nth-child(0) {
+.c2a90-row div:nth-child(3) {
     text-align: center;
 }
 
