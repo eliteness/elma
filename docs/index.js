@@ -227,7 +227,12 @@ async function paintStatic() {
 }
 
 async function dexstats() {
-	ds_equalprice = Number(await (new ethers.Contract("0xA480DfB5c15BbF4FA74aC55397a53b3ae38c19E2",LPABI,provider)).getAssetPrice("0x3fd3a0c85b70754efc07ac9ac0cbbdce664865a6"))/10**18;
+	ds_rewprices = (await Promise.all([
+		(new ethers.Contract("0xb0816214fF6fd53cc20b4a17048fc2F61CA56BD1",LPABI,provider)).getAssetPrice("0x3fd3a0c85b70754efc07ac9ac0cbbdce664865a6"),
+		(new ethers.Contract("0xb0816214fF6fd53cc20b4a17048fc2F61CA56BD1",LPABI,provider)).getAssetPrice("0xf43Cc235E686d7BC513F53Fbffb61F760c3a1882"),
+	])).map(i=>Number(i)/10**18);
+	ds_rew0price = ds_rewprices[0];
+	ds_rew1price = ds_rewprices[1];
 	//_EL_27 = new ethers.Contract("0x1b1c9a41a96dE931c7508BD2C653C57C63cD32a4", EL_27_ABI, provider);
 	//_ds = await _EL_27.getElmaCompoundFarms( POOLS.map(i=>i.farmaddr) , POOLS.map(i=>i.depositor) , "0x0000000000000000000000000000000000001234" );
 	_EL_30 = new ethers.Contract("0x8C1C50fFa373f8C2b82A4Fc591c2c710e2982f01", EL_30_ABI, provider);
@@ -318,13 +323,14 @@ async function dexstats() {
 		$("portfolio").innerHTML = `
 			<div class="c2a90-row c2a90-row-port">
 				<div></div>
-				<div onclick="sortit(0, 'portfolio', 'c2a90-row', 1, 'c2a90-row-item')">ELMA Pool</div>
-				<div onclick="sortit(1, 'portfolio', 'c2a90-row', 1, 'c2a90-row-item')">UT in wallet</div>
-				<div onclick="sortit(2, 'portfolio', 'c2a90-row', 1, 'c2a90-row-item')">UT in LM</div>
-				<div onclick="sortit(3, 'portfolio', 'c2a90-row', 1, 'c2a90-row-item')">PT in Wallet</div>
-				<div onclick="sortit(4, 'portfolio', 'c2a90-row', 1, 'c2a90-row-item')">PT Staked</div>
-				<div onclick="sortit(5, 'portfolio', 'c2a90-row', 1, 'c2a90-row-item')">Claimable</div>
-				<div onclick="sortit(6, 'portfolio', 'c2a90-row', 1, 'c2a90-row-item')">Total Earned</div>
+				<div onclick="sortit(0, 'portfolio', 'c2a90-row', 1, 'c2a90-row-item-head')">ELMA Pool</div>
+				<div onclick="sortit(1, 'portfolio', 'c2a90-row', 1, 'c2a90-row-item-head')">UT in wallet</div>
+				<div onclick="sortit(2, 'portfolio', 'c2a90-row', 1, 'c2a90-row-item-head')">UT in LM</div>
+				<div onclick="sortit(3, 'portfolio', 'c2a90-row', 1, 'c2a90-row-item-head')">PT in Wallet</div>
+				<div onclick="sortit(4, 'portfolio', 'c2a90-row', 1, 'c2a90-row-item-head')">PT Staked</div>
+				<div onclick="sortit(5, 'portfolio', 'c2a90-row', 1, 'c2a90-row-item-head')">Claimable</div>
+				<div onclick="sortit(6, 'portfolio', 'c2a90-row', 1, 'c2a90-row-item-head')">Total Earned</div>
+				<div onclick="sortit(7, 'portfolio', 'c2a90-row', 1, 'c2a90-row-item-head')">Weekly Yield</div>
 			</div>
 		`;
 	}
@@ -337,9 +343,11 @@ async function dexstats() {
 	dsu_totalwrap =0;
 	dsu_totalfarm =0;
 	dsu_totalrew0 =0;
+	dsu_totalrew1 =0;
 	dsu_totaltre0 =0;
 	dsu_totalport =0;
-	dsu_annualrew =0;
+	dsu_totalr365 =0;
+	dsu_totalru7d =0;
 
 
 	for(let i=0;i<POOLS.length;i++) {
@@ -411,19 +419,46 @@ async function dexstats() {
 			dsu_farm = (Number(_ds[i][14])) / (10**POOLS[i].basedeci);
 
 			dsu_rew0 = (Number(_dsd[1][i][0][0])) / (10**18);
+			dsu_rew1 = (Number(_dsd[1][i][0][1]) ||0 ) / (10**18);
 			dsu_tre0 = ( (Number(_dsd[1][i][0][0])) + (Number(_dsd[1][i][1][0])) ) / (10**18);
+			dsu_tre1 = ( (Number(_dsd[1][i][0][1]) ||0 ) + (Number(_dsd[1][i][1][1]) ||0 ) ) / (10**18);
 
-			if(dsu_rew0 > 0 || dsu_wrap > 0 || dsu_farm > 0) {
+			if(dsu_rew0 > 0 || dsu_rew1 > 0 || dsu_wrap > 0 || dsu_farm > 0) {
 				$("portfolio").innerHTML += `
 					<div class="c2a90-row c2a90-row-port" onclick="window.location='${POOLS[i].wrapname}'">
 						<div class="c2a90-row-item"><img src="${LOGOS + POOLS[i].wraplogo.toLowerCase()}.png"/> </div>
 						<div class="c2a90-row-item"> ${ POOLS[i].v0?"⛔ Deprecated Pool ":"" } ${ POOLS[i].wrapname }</div>
-						<div class="c2a90-row-item">$${ fornum6(ds_wrapprice * dsu_base, 2) }<br><span class="port-amt">${ fornum6(dsu_base, 2) }</span></div>
-						<div class="c2a90-row-item">$${ fornum6(ds_ctokprice * dsu_ctok, 2) }<br><span class="port-amt">${ fornum6(dsu_ctok, 2) }</span></div>
-						<div class="c2a90-row-item">$${ fornum6(ds_wrapprice * dsu_wrap, 2) }<br><span class="port-amt">${ fornum6(dsu_wrap, 2) }</span></div>
-						<div class="c2a90-row-item">$${ fornum6(ds_wrapprice * dsu_farm, 2) }<br><span class="port-amt">${ fornum6(dsu_farm, 2) }</span></div>
-						<div class="c2a90-row-item">$${ fornum6(ds_equalprice * dsu_rew0, 2) }<br><span class="port-amt">${ fornum6(dsu_rew0, 2) } <img src="${LOGOS+TEARNED[0].toLowerCase()}.png"></span></div>
-						<div class="c2a90-row-item">$${ fornum6(ds_equalprice * dsu_tre0, 2) }<br><span class="port-amt">${ fornum6(dsu_tre0, 2) } <img src="${LOGOS+TEARNED[0].toLowerCase()}.png"></span></div>
+						<div class="c2a90-row-item">
+							<span class="c2a90-row-item-head">$${ fornum6(ds_wrapprice * dsu_base, 2) }</span>
+							<br><span class="port-amt">${ fornum6(dsu_base, 2) }</span>
+						</div>
+						<div class="c2a90-row-item">
+							<span class="c2a90-row-item-head">$${ fornum6(ds_ctokprice * dsu_ctok, 2) }
+							<br><span class="port-amt">${ fornum6(dsu_ctok, 2) }</span>
+						</div>
+						<div class="c2a90-row-item">
+							<span class="c2a90-row-item-head">$${ fornum6(ds_wrapprice * dsu_wrap, 2) }
+							<br><span class="port-amt">${ fornum6(dsu_wrap, 2) }</span>
+						</div>
+						<div class="c2a90-row-item">
+							<span class="c2a90-row-item-head">$${ fornum6(ds_wrapprice * dsu_farm, 2) }
+							<br><span class="port-amt">${ fornum6(dsu_farm, 2) }</span>
+						</div>
+						<div class="c2a90-row-item">
+							<span class="c2a90-row-item-head">$${ fornum6(ds_rew0price * dsu_rew0 + ds_rew1price * dsu_rew1 , 2) }</span>
+							<br><span class="port-amt">${ fornum6(dsu_rew0, 4) } <img src="${LOGOS+TEARNED[0].toLowerCase()}.png"></span>
+							<br><span class="port-amt">${ fornum6(dsu_rew1, 4) } <img src="${LOGOS+TEARNED[1].toLowerCase()}.png"></span>
+						</div>
+						<div class="c2a90-row-item">
+							<span class="c2a90-row-item-head">$${ fornum6(ds_rew0price * dsu_tre0 + ds_rew1price * dsu_rew1 , 2) }</span>
+							<br><span class="port-amt">${ fornum6(dsu_tre0, 4) } <img src="${LOGOS+TEARNED[0].toLowerCase()}.png"></span>
+							<br><span class="port-amt">${ fornum6(dsu_tre1, 4) } <img src="${LOGOS+TEARNED[1].toLowerCase()}.png"></span>
+						</div>
+						<div class="c2a90-row-item">
+							<span class="c2a90-row-item-head">$${ fornum6( ds_farmtvl * ds_farmapr / 5200, 2) }</span>${"/"}wk
+							<br><span class="port-amt"> +${ TEARNED_NAME[0] } <img src="${LOGOS+TEARNED[0].toLowerCase()}.png"></span>
+							<br><span class="port-amt"> +${ TEARNED_NAME[1] } <img src="${LOGOS+TEARNED[1].toLowerCase()}.png"></span>
+						</div>
 					</div>
 				`;
 
@@ -431,12 +466,13 @@ async function dexstats() {
 				dsu_totalctok += ds_ctokprice * dsu_ctok;
 				dsu_totalwrap += ds_wrapprice * dsu_wrap;
 				dsu_totalfarm += ds_wrapprice * dsu_farm;
+				dsu_totalru7d += ds_farmapr/5200 * dsu_farm;
 
 			}
 
-			dsu_totalrew0 += ds_equalprice * dsu_rew0;
-			dsu_totaltre0 += ds_equalprice * dsu_tre0;
-			dsu_annualrew += ds_wrapprice * dsu_farm * ds_farmapr / 100 ;
+			dsu_totalrew0 += ds_rew0price * dsu_rew0;
+			dsu_totaltre0 += ds_rew0price * dsu_tre0;
+			dsu_totalr365 += ds_wrapprice * dsu_farm * ds_farmapr / 100 ;
 
 
 		}
@@ -461,17 +497,18 @@ async function dexstats() {
 				<div><br>$${ fornum6(dsu_totalfarm, 2) }</div>
 				<div><br>$${ fornum6(dsu_totalrew0, 2) }</div>
 				<div><br>$${ fornum6(dsu_totaltre0, 2) }</div>
+				<div><br>$${ fornum6(dsu_totalru7d, 2) }/wk</div>
 			</div>
 		`;
 
 		$("portstat-total").innerHTML = "$"+ fornum6( dsu_totalport, 2);
 		$("portstat-staked").innerHTML = "$"+ fornum6( dsu_totalfarm, 2);
-		$("portstat-netapr").innerHTML = fornum6( dsu_annualrew / dsu_totalfarm * 100, 2) + "%";
+		$("portstat-netapr").innerHTML = fornum6( dsu_totalr365 / dsu_totalfarm * 100, 2) + "%";
 		$("portstat-earnings").innerHTML = "$"+ fornum6( dsu_totaltre0, 2);
 	}
 
-	//sortit(2, 'mainstage', 'c2a90-row', 1, 'c2a90-row-item', "d");
-	sortit(5, 'portfolio', 'c2a90-row', 1, 'c2a90-row-item', "d");
+	sortit(2, 'mainstage', 'c2a90-row', 1, 'c2a90-row-item', "d");
+	sortit(5, 'portfolio', 'c2a90-row', 1, 'c2a90-row-item-head', "d");
 
 	return;
 }
@@ -501,7 +538,7 @@ async function gubs() {
 
 
 function drawPie(_pievals, _piecolors) {
-	console.log(_pievals)
+	//console.log(_pievals)
 
 	function describeArc(x, y, radius, startAngle, endAngle) {
     	const startX = x + radius * Math.cos(startAngle);

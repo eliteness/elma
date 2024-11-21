@@ -330,7 +330,7 @@ footer{
 }
 
 .c2a90-row-port {
-	grid-template-columns: 40px 220px repeat(6, 130px);
+	grid-template-columns: 40px 220px repeat(7, 130px);
 }
 .c2a90-row:hover{
 	cursor: pointer;
@@ -386,8 +386,10 @@ footer{
 
 #mainstage .c2a90-row div:nth-child(3),
 #mainstage .c2a90-row div:nth-child(4),
-#portfolio .c2a90-row div:nth-child(6),
-#portfolio .c2a90-row div:nth-child(8) {
+#portfolio .c2a90-row div:nth-child(6) *,
+#portfolio .c2a90-row div:nth-child(7) *,
+#portfolio .c2a90-row div:nth-child(8) *,
+#portfolio .c2a90-row div:nth-child(9) * {
 	text-shadow: 0px 0px 20px #f0f;
 	font-family: bold;
 }
@@ -404,6 +406,7 @@ footer{
 .port-amt {
     font-family: light_italic;
     font-size: 0.8em;
+    color: #ddd;
 }
 
 .port-total div {
