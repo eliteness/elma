@@ -296,25 +296,25 @@ async function dexstats() {
 
 	$("mainstage").innerHTML = `
 		<div class="c2a90-row">
-			<div onclick="sortit(0, 'mainstage', 'c2a90-row', 1, 'c2a90-row-item')">Underlying		<br><span class="c2a90-row-byline">Base Asset</span></div>
-			<div onclick="sortit(1, 'mainstage', 'c2a90-row', 1, 'c2a90-row-item')">LM				<br><span class="c2a90-row-byline">Lending Market</span></div>
-			<div onclick="sortit(2, 'mainstage', 'c2a90-row', 1, 'c2a90-row-item')">PT APR			<br><span class="c2a90-row-byline">Boosted APR</span></div>
+			<div onclick="sortit(0, 'mainstage', 'c2a90-row', 'c2a90-row-item, null, 1, 0')">Underlying		<br><span class="c2a90-row-byline">Base Asset</span></div>
+			<div onclick="sortit(1, 'mainstage', 'c2a90-row', 'c2a90-row-item, null, 1, 0')">LM				<br><span class="c2a90-row-byline">Lending Market</span></div>
+			<div onclick="sortit(2, 'mainstage', 'c2a90-row', 'c2a90-row-item, null, 1, 0')">PT APR			<br><span class="c2a90-row-byline">Boosted APR</span></div>
 
-			<div onclick="sortit(3, 'mainstage', 'c2a90-row', 1, 'c2a90-row-item')">PT Staked		<br><span class="c2a90-row-byline">In Elma Gauge</span></div>
-			<div onclick="sortit(3, 'mainstage', 'c2a90-row', 1, 'c2a90-row-item')"></div>
-			<div onclick="sortit(5, 'mainstage', 'c2a90-row', 1, 'c2a90-row-item')">PT Supply		<br><span class="c2a90-row-byline">Total Wrapped</span></div>
-			<div onclick="sortit(5, 'mainstage', 'c2a90-row', 1, 'c2a90-row-item')"></div>
-			<div onclick="sortit(7, 'mainstage', 'c2a90-row', 1, 'c2a90-row-item')">LM Cash		<br><span class="c2a90-row-byline">Exit Liquidity</span></div>
-			<div onclick="sortit(7, 'mainstage', 'c2a90-row', 1, 'c2a90-row-item')"></div>
-			<div onclick="sortit(9, 'mainstage', 'c2a90-row', 1, 'c2a90-row-item')">LM Loans		<br><span class="c2a90-row-byline">Borrowed from LM</span></div>
-			<div onclick="sortit(9, 'mainstage', 'c2a90-row', 1, 'c2a90-row-item')"></div>
+			<div onclick="sortit(3, 'mainstage', 'c2a90-row', 'c2a90-row-item, null, 1, 0')">PT Staked		<br><span class="c2a90-row-byline">In Elma Gauge</span></div>
+			<div onclick="sortit(3, 'mainstage', 'c2a90-row', 'c2a90-row-item, null, 1, 0')"></div>
+			<div onclick="sortit(5, 'mainstage', 'c2a90-row', 'c2a90-row-item, null, 1, 0')">PT Supply		<br><span class="c2a90-row-byline">Total Wrapped</span></div>
+			<div onclick="sortit(5, 'mainstage', 'c2a90-row', 'c2a90-row-item, null, 1, 0')"></div>
+			<div onclick="sortit(7, 'mainstage', 'c2a90-row', 'c2a90-row-item, null, 1, 0')">LM Cash		<br><span class="c2a90-row-byline">Exit Liquidity</span></div>
+			<div onclick="sortit(7, 'mainstage', 'c2a90-row', 'c2a90-row-item, null, 1, 0')"></div>
+			<div onclick="sortit(9, 'mainstage', 'c2a90-row', 'c2a90-row-item, null, 1, 0')">LM Loans		<br><span class="c2a90-row-byline">Borrowed from LM</span></div>
+			<div onclick="sortit(9, 'mainstage', 'c2a90-row', 'c2a90-row-item, null, 1, 0')"></div>
 
-			<div onclick="sortit(11, 'mainstage', 'c2a90-row', 1, 'c2a90-row-item')">LM Size		<br><span class="c2a90-row-byline">Underlying LM pool</span></div>
-			<div onclick="sortit(12,'mainstage', 'c2a90-row', 1, 'c2a90-row-item')">YT APR			<br><span class="c2a90-row-byline">LM Interest APR</span></div>
-			<div onclick="sortit(13,'mainstage', 'c2a90-row', 1, 'c2a90-row-item')">Native APR			<br><span class="c2a90-row-byline">UT/LST/LRT/iB</span></div>
+			<div onclick="sortit(11, 'mainstage', 'c2a90-row', 'c2a90-row-item, null, 1, 0')">LM Size		<br><span class="c2a90-row-byline">Underlying LM pool</span></div>
+			<div onclick="sortit(12,'mainstage', 'c2a90-row', 'c2a90-row-item, null, 1, 0')">YT APR			<br><span class="c2a90-row-byline">LM Interest APR</span></div>
+			<div onclick="sortit(13,'mainstage', 'c2a90-row', 'c2a90-row-item, null, 1, 0')">Native APR			<br><span class="c2a90-row-byline">UT/LST/LRT/iB</span></div>
 
-			<div onclick="sortit(14,'mainstage', 'c2a90-row', 1, 'c2a90-row-item')">YT Yield			<br><span class="c2a90-row-byline">Per Week</span></div>
-			<div onclick="sortit(15,'mainstage', 'c2a90-row', 1, 'c2a90-row-item')">PT Yield			<br><span class="c2a90-row-byline">Per Week</span></div>
+			<div onclick="sortit(14,'mainstage', 'c2a90-row', 'c2a90-row-item, null, 1, 0')">YT Yield			<br><span class="c2a90-row-byline">Per Week</span></div>
+			<div onclick="sortit(15,'mainstage', 'c2a90-row', 'c2a90-row-item, null, 1, 0')">PT Yield			<br><span class="c2a90-row-byline">Per Week</span></div>
 		</div>
 	`;
 
@@ -323,14 +323,14 @@ async function dexstats() {
 		$("portfolio").innerHTML = `
 			<div class="c2a90-row c2a90-row-port">
 				<div></div>
-				<div onclick="sortit(0, 'portfolio', 'c2a90-row', 1, 'c2a90-row-item-head')">ELMA Pool</div>
-				<div onclick="sortit(1, 'portfolio', 'c2a90-row', 1, 'c2a90-row-item-head')">UT in wallet</div>
-				<div onclick="sortit(2, 'portfolio', 'c2a90-row', 1, 'c2a90-row-item-head')">UT in LM</div>
-				<div onclick="sortit(3, 'portfolio', 'c2a90-row', 1, 'c2a90-row-item-head')">PT in Wallet</div>
-				<div onclick="sortit(4, 'portfolio', 'c2a90-row', 1, 'c2a90-row-item-head')">PT Staked</div>
-				<div onclick="sortit(5, 'portfolio', 'c2a90-row', 1, 'c2a90-row-item-head')">Claimable</div>
-				<div onclick="sortit(6, 'portfolio', 'c2a90-row', 1, 'c2a90-row-item-head')">Total Earned</div>
-				<div onclick="sortit(7, 'portfolio', 'c2a90-row', 1, 'c2a90-row-item-head')">Weekly Yield</div>
+				<div onclick="sortit(0, 'portfolio', 'c2a90-row', 'c2a90-row-item-head, null, 1, 1')">ELMA Pool</div>
+				<div onclick="sortit(1, 'portfolio', 'c2a90-row', 'c2a90-row-item-head, null, 1, 1')">UT in wallet</div>
+				<div onclick="sortit(2, 'portfolio', 'c2a90-row', 'c2a90-row-item-head, null, 1, 1')">UT in LM</div>
+				<div onclick="sortit(3, 'portfolio', 'c2a90-row', 'c2a90-row-item-head, null, 1, 1')">PT in Wallet</div>
+				<div onclick="sortit(4, 'portfolio', 'c2a90-row', 'c2a90-row-item-head, null, 1, 1')">PT Staked</div>
+				<div onclick="sortit(5, 'portfolio', 'c2a90-row', 'c2a90-row-item-head, null, 1, 1')">Claimable</div>
+				<div onclick="sortit(6, 'portfolio', 'c2a90-row', 'c2a90-row-item-head, null, 1, 1')">Total Earned</div>
+				<div onclick="sortit(7, 'portfolio', 'c2a90-row', 'c2a90-row-item-head, null, 1, 1')">Weekly Yield</div>
 			</div>
 		`;
 	}
@@ -455,7 +455,7 @@ async function dexstats() {
 							<br><span class="port-amt">${ fornum6(dsu_tre1, 4) } <img src="${LOGOS+TEARNED[1].toLowerCase()}.png"></span>
 						</div>
 						<div class="c2a90-row-item">
-							<span class="c2a90-row-item-head">$${ fornum6( ds_farmtvl * ds_farmapr / 5200, 2) }</span>${"/"}wk
+							<span class="c2a90-row-item-head">$${ fornum6( dsu_farm * ds_farmapr / 5200, 2) }</span>${"/"}wk
 							<br><span class="port-amt"> +${ TEARNED_NAME[0] } <img src="${LOGOS+TEARNED[0].toLowerCase()}.png"></span>
 							<br><span class="port-amt"> +${ TEARNED_NAME[1] } <img src="${LOGOS+TEARNED[1].toLowerCase()}.png"></span>
 						</div>
@@ -507,8 +507,8 @@ async function dexstats() {
 		$("portstat-earnings").innerHTML = "$"+ fornum6( dsu_totaltre0, 2);
 	}
 
-	sortit(2, 'mainstage', 'c2a90-row', 1, 'c2a90-row-item', "d");
-	sortit(5, 'portfolio', 'c2a90-row', 1, 'c2a90-row-item-head', "d");
+	sortit(2, 'mainstage', 'c2a90-row', 'c2a90-row-item', "d", 1, 1);
+	sortit(5, 'portfolio', 'c2a90-row', 'c2a90-row-item-head', "d", 1, 1);
 
 	return;
 }
@@ -636,7 +636,7 @@ async function claimAllRewards() {
 
 
 
-function sortit(n,_maintable,_trName,_firstRow,_tdName,_dir) {
+function sortit(n,_maintable,_trName,_tdName,_dir,_firstRow,_extraRows) {
   var t, r, z, i, x, y, v, b, c = 0;
   t = document.getElementById(_maintable);//.getElementsByTagName("tbody")[0];
   z = true;
@@ -644,7 +644,9 @@ function sortit(n,_maintable,_trName,_firstRow,_tdName,_dir) {
   while (z) {
     z = false;
     r = t.getElementsByClassName(_trName);
-    for (i = _firstRow; i < (r.length - 1); i++) {
+    _firstRow = _firstRow?_firstRow:0;
+    _lastRow = (r.length - 1) - (_extraRows ? _extraRows : 0);
+    for (i = _firstRow; i < _lastRow; i++) {
       v = false;
       x = (r[i].getElementsByClassName(_tdName)[n].textContent).replaceAll(/,| |\.|\$|%|🔥|🎶|-/g,'');
       if(isFinite(x)){x=Number(x)}else{x=x.toLowerCase()}
