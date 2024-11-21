@@ -434,7 +434,7 @@ async function dexstats() {
 						</div>
 						<div class="c2a90-row-item">
 							<span class="c2a90-row-item-head">${ POOLS[i].v0?"⛔ Deprecated Pool ":"" } ${ POOLS[i].wrapname }</span>
-							<br><span class="port-amt">${ CHAINS[POOLS[i].chainslug].fullname }</span>
+							<br><span class="port-amt">Using ${ POOLS[i].marketname } on ${ CHAINS[POOLS[i].chainslug].fullname }</span>
 						</div>
 						<div class="c2a90-row-item">
 							<span class="c2a90-row-item-head">$${ fornum6(ds_wrapprice * dsu_base, 2) }</span>
