@@ -212,12 +212,26 @@
 
 		SENTINEL_FMONEY = "0xFcb442B641CcdeA1A904EAA4cCA1B4d18510C7C6";
 
+		CHAINS = {
+			"fantom" : {
+				fullname: "Fantom",
+				logo: "https://ftm.guru/icons/ftm.svg",
+				RPC: "https://rpc.ftm.tools",
+			},
+			"base" : {
+				fullname: "Base",
+				logo: "https://ftm.guru/icons/base.svg",
+				RPC: "https://rpc.ankr.com/base",
+			},
+		}
+
 		POOLS = [
 			{
 				wrapname: "v0-eliteFmoneyWFTM",
 				basename: "WFTM",
 				basedeci: 18,
 				marketname: "fMoney",
+				chainslug: "fantom",
 				marketlogo: "0x1e2ea3f3209d66647f959cf00627107e079b870d",
 				wrapaddr: "0x85fb1081a0354f8e80a2743f74399bfaf5df328a",
 				wraplogo: "0x5c0ba306c7baec543a8ea1ec57d95057bf9b7302",
@@ -232,6 +246,7 @@
 				basename: "SFTMX",
 				basedeci: 18,
 				marketname: "fMoney",
+				chainslug: "fantom",
 				marketlogo: "0x1e2ea3f3209d66647f959cf00627107e079b870d",
 				wrapaddr: "0xe391719869890aD91Ee6076565111fBE942c3073",
 				wraplogo: "0x276e3aa96a2eee972bcf8ed2808cf74ba7dbb169",
@@ -246,6 +261,7 @@
 				basename: "wormUSDC.e",
 				basedeci: 6,
 				marketname: "fMoney",
+				chainslug: "fantom",
 				marketlogo: "0x1e2ea3f3209d66647f959cf00627107e079b870d",
 				wrapaddr: "0xED49B19afd8D2EEfD183691AedBA3b9ef8eB5f4E",
 				wraplogo: "0x236f62b64a600ce72c2a6d4a15cf65dddfae1b11",
@@ -260,6 +276,7 @@
 				basename: "axlUSDC",
 				basedeci: 6,
 				marketname: "fMoney",
+				chainslug: "fantom",
 				marketlogo: "0x1e2ea3f3209d66647f959cf00627107e079b870d",
 				wrapaddr: "0x37109a61CDa9bfE6d49F19E4911080b250cc52e0",
 				wraplogo: "0x6ad7564d3ac62dd01c02e3dc49b50e81cd018710",
@@ -274,6 +291,7 @@
 				basename: "WFTM",
 				basedeci: 18,
 				marketname: "fMoney",
+				chainslug: "fantom",
 				marketlogo: "0x1e2ea3f3209d66647f959cf00627107e079b870d",
 				wrapaddr: "0x85fb1081a0354f8e80a2743f74399bfaf5df328a",
 				wraplogo: "0x5c0ba306c7baec543a8ea1ec57d95057bf9b7302",
@@ -287,6 +305,7 @@
 				basename: "SFTMX",
 				basedeci: 18,
 				marketname: "fMoney",
+				chainslug: "fantom",
 				marketlogo: "0x1e2ea3f3209d66647f959cf00627107e079b870d",
 				wrapaddr: "0xe391719869890aD91Ee6076565111fBE942c3073",
 				wraplogo: "0x276e3aa96a2eee972bcf8ed2808cf74ba7dbb169",
@@ -300,6 +319,7 @@
 				basename: "wormUSDC.e",
 				basedeci: 6,
 				marketname: "fMoney",
+				chainslug: "fantom",
 				marketlogo: "0x1e2ea3f3209d66647f959cf00627107e079b870d",
 				wrapaddr: "0xed49b19afd8d2eefd183691aedba3b9ef8eb5f4e",
 				wraplogo: "0x236f62b64a600ce72c2a6d4a15cf65dddfae1b11",
@@ -313,6 +333,7 @@
 				basename: "axlUSDC",
 				basedeci: 6,
 				marketname: "fMoney",
+				chainslug: "fantom",
 				marketlogo: "0x1e2ea3f3209d66647f959cf00627107e079b870d",
 				wrapaddr: "0x37109a61CDa9bfE6d49F19E4911080b250cc52e0",
 				wraplogo: "0x6ad7564d3ac62dd01c02e3dc49b50e81cd018710",
@@ -321,6 +342,38 @@
 				depositor: "0xfaa22e721924fa57d042f6e2c793997aa9287b27",
 				farmaddr: "0x6f5A708ac53Af703dcd66998de5E27700BF1d6c1",
 			},
+			/*
+			{
+				wrapname: "eliteCompoundv2USDC",
+				basename: "USDC",
+				basedeci: 6,
+				prelaunch: true,
+				marketname: "Compound v2",
+				chainslug: "base",
+				marketlogo: "",
+				wrapaddr: "",
+				wraplogo: "",
+				baseaddr: "",
+				ctokeaddr: "",
+				depositor: "",
+				farmaddr: "",
+			},
+			{
+				wrapname: "eliteMoonwellUSDC",
+				basename: "USDC",
+				basedeci: 6,
+				prelaunch: true,
+				marketname: "Moonwell",
+				chainslug: "base",
+				marketlogo: "",
+				wrapaddr: "",
+				wraplogo: "",
+				baseaddr: "",
+				ctokeaddr: "",
+				depositor: "",
+				farmaddr: "",
+			},
+			*/
 		]
 		TEARNED = ["0x3fd3a0c85b70754efc07ac9ac0cbbdce664865a6","0xf43Cc235E686d7BC513F53Fbffb61F760c3a1882",];
 		TEARNED_LOGO = TEARNED.map(i=>LOGOS+i.toLowerCase()+".png");

@@ -320,7 +320,7 @@ footer{
 
 .c2a90-row {
 	display: grid;
-	grid-template-columns: 150px 120px 120px 120px 24px 120px 24px 120px 24px 120px 24px 120px 120px 120px 120px 120px;
+	grid-template-columns: 150px 120px 120px 120px 120px 24px 120px 24px 120px 24px 120px 24px 120px 120px 120px 120px 120px;
 	grid-gap-columns:5px;
     max-width: -moz-max-content;
     margin: 10px auto;
@@ -371,25 +371,26 @@ footer{
 }
 
 .c2a90-row div:nth-child(1),
-.c2a90-row div:nth-child(2) {
+.c2a90-row div:nth-child(2),
+.c2a90-row div:nth-child(3) {
     text-align: left;
 }
 
-.c2a90-row div:nth-child(3) {
+.c2a90-row div:nth-child(4) {
     text-align: center;
 }
 
-.c2a90-row div:nth-child(7),
-.c2a90-row div:nth-child(8) {
+.c2a90-row div:nth-child(8),
+.c2a90-row div:nth-child(9) {
     text-align: right;
 }
 
-#mainstage .c2a90-row div:nth-child(3),
 #mainstage .c2a90-row div:nth-child(4),
-#portfolio .c2a90-row div:nth-child(6) *,
+#mainstage .c2a90-row div:nth-child(5),
 #portfolio .c2a90-row div:nth-child(7) *,
 #portfolio .c2a90-row div:nth-child(8) *,
-#portfolio .c2a90-row div:nth-child(9) * {
+#portfolio .c2a90-row div:nth-child(9) *,
+#portfolio .c2a90-row div:nth-child(10) * {
 	text-shadow: 0px 0px 20px #f0f;
 	font-family: bold;
 }
